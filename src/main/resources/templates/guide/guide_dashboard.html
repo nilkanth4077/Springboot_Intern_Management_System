@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>IMS Guide Panel</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+<style>
+.lgout {
+	padding: 10px;
+	list-style-type: none;
+	border: 2px solid;
+	border-radius: 10px;
+}
+
+.icon {
+	font-size: 40px;
+	border: solid;
+	border-radius: 50%;
+	/* Make the border-radius 50% to create a circle */
+	width: 80px;
+	/* Adjust the width and height to fit your content */
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	/* Set your desired background color */
+}
+</style>
+</head>
+
+<body>
+
+
+	<!-- Include the header fragment -->
+	<div th:replace="fragments/guideHeaderFragment :: header"></div>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/guideAsideFragment :: aside"></div>
+
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Profile</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Profile</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section profile">
+			<div class="row">
+				<div class="col-xl-4">
+
+					<div class="card">
+						<div
+							class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+							<span class="icon"><i class="fa-solid fa-user"></i></span>
+							<h2>
+								<span th:text="${guide.name}"></span>
+							</h2>
+							<h3>Guide</h3>
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<div class="col-xl-8">
+
+					<div class="card">
+						<div class="card-body pt-3">
+							<!-- Bordered Tabs -->
+							<ul class="nav nav-tabs nav-tabs-bordered">
+
+								<li class="nav-item">
+									<button class="nav-link active" data-bs-toggle="tab"
+										data-bs-target="#profile-overview">Overview</button>
+								</li>
+
+								<li class="nav-item">
+									<button class="nav-link" data-bs-toggle="tab"
+										data-bs-target="#profile-edit">Edit Profile</button>
+								</li>
+
+								<li class="nav-item">
+									<button class="nav-link" data-bs-toggle="tab"
+										data-bs-target="#profile-change-password">Change
+										Password</button>
+								</li>
+
+							</ul>
+							<div class="tab-content pt-2">
+
+								<div class="tab-pane fade show active profile-overview"
+									id="profile-overview">
+									<h5 class="card-title">About</h5>
+									<p class="small fst-italic">A guide responsible for
+										managing interns plays a pivotal role in fostering a positive
+										learning environment. They provide guidance, support, and
+										mentorship to ensure interns gain valuable experiences,
+										develop essential skills, and successfully contribute to
+										projects. This role involves effective communication, task
+										delegation, and cultivating a collaborative atmosphere for
+										mutual growth.</p>
+
+									<h5 class="card-title">Profile Details</h5>
+
+									<div class="row">
+										<div class="col-lg-3 col-md-4 label ">Name</div>
+										<div class="col-lg-9 col-md-8">
+											<span th:text="${guide.name}"></span>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-3 col-md-4 label">Location</div>
+										<div class="col-lg-9 col-md-8">
+											<span th:text="${guide.location}"></span>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-3 col-md-4 label">Email ID</div>
+										<div class="col-lg-9 col-md-8">
+											<span th:text="${guide.emailId}"></span>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-3 col-md-4 label">floor</div>
+										<div class="col-lg-9 col-md-8">
+											<span th:text="${guide.floor}"></span>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-3 col-md-4 label">Lab No</div>
+										<div class="col-lg-9 col-md-8">
+											<span th:text="${guide.labNo}"></span>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-3 col-md-4 label">Contact No</div>
+										<div class="col-lg-9 col-md-8">
+											<span th:text="${guide.contactNo}"></span>
+										</div>
+									</div>
+
+
+								</div>
+
+								<div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+									<!-- Profile Edit Form -->
+									<form
+										th:action="@{'/bisag/guide/update_guide/' + ${guide.guideId}}"
+										th:object="${guide}" method="post">
+										<input type="hidden" th:field="*{guideId}">
+										<div class="row mb-3">
+											<label for="name" class="col-md-4 col-lg-3 col-form-label">
+												Name</label>
+											<div class="col-md-8 col-lg-9">
+												<input name="name" type="text" class="form-control"
+													id="name" th:value="${guide.name}">
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<label for="fullName"
+												class="col-md-4 col-lg-3 col-form-label"> Location</label>
+											<div class="col-md-8 col-lg-9">
+												<input name="location" type="text" class="form-control"
+													id="location" th:value="${guide.location}">
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<label for="company" class="col-md-4 col-lg-3 col-form-label">Email</label>
+											<div class="col-md-8 col-lg-9">
+												<input name="emailId" type="email" class="form-control"
+													id="emailId" th:value="${guide.emailId}">
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<label for="Job" class="col-md-4 col-lg-3 col-form-label">Contact
+												No</label>
+											<div class="col-md-8 col-lg-9">
+												<input name="contactNo" type="tel" class="form-control"
+													id="contactNo" th:value="${guide.contactNo}">
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<label for="company" class="col-md-4 col-lg-3 col-form-label">Floor</label>
+											<div class="col-md-8 col-lg-9">
+												<input name="floor" type="text" class="form-control"
+													id="floor" th:value="${guide.floor}">
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<label for="company" class="col-md-4 col-lg-3 col-form-label">Lab
+												No</label>
+											<div class="col-md-8 col-lg-9">
+												<input name="labNo" type="text" class="form-control"
+													id="labNo" th:value="${guide.labNo}">
+											</div>
+										</div>
+
+										<div class="modal fade" id="confirmationModal" tabindex="-1"
+											role="dialog" aria-labelledby="confirmationModalLabel"
+											aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="confirmationModalLabel">Admin
+															Says</h5>
+														<a th:href="@{/bisag/guide/guide_dashboard}" type="button"
+															class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true" style="color: red;"><b>X</b></span>
+														</a>
+													</div>
+
+													<div class="modal-body">
+														Are you sure you want to update the details? </br> You must
+														login again
+													</div>
+													<div class="modal-footer">
+														<a class="btn btn-danger"
+															th:href="@{/bisag/guide/guide_dashboard}">Cancel</a>
+														<button type="submit" class="btn btn-primary"
+															onclick="showConfirmationModal()">Save Changes</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="text-center">
+											<button type="button" class="btn btn-primary"
+												onclick="showConfirmationModal()">Save Changes</button>
+
+										</div>
+									</form>
+									<!-- End Profile Edit Form -->
+								</div>
+
+								<div class="tab-pane fade pt-3" id="profile-change-password">
+									<!-- Change Password Form -->
+									<form th:action="@{'/bisag/guide/change_password'}"
+										method="post" onsubmit="return validatePasswords()">
+
+										<div class="row mb-3">
+											<label for="newPassword"
+												class="col-md-4 col-lg-3 col-form-label">New
+												Password</label>
+											<div class="col-md-8 col-lg-9">
+												<div class="input-group">
+													<input name="newPassword" type="password"
+														class="form-control" id="newPassword" required
+														oninput="checkPasswordStrength(this.value)">
+													<!-- Eye icon to toggle password visibility -->
+													<div class="input-group-append">
+														<span class="input-group-text"
+															onclick="togglePasswordVisibility('newPassword')">
+															<i class="fa fa-eye" aria-hidden="true" style="font-size: 1.5rem; height: 100%;"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<label for="renewPassword"
+												class="col-md-4 col-lg-3 col-form-label">Re-enter
+												New Password</label>
+											<div class="col-md-8 col-lg-9">
+												<input name="renewPassword" type="password"
+													class="form-control" id="renewPassword" required>
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<div class="col-md-8 offset-md-4 col-lg-9 offset-lg-3">
+												<small id="passwordStrengthMessage" class="text-muted">Password
+													strength: <span id="passwordStrength">Weak</span>
+												</small>
+											</div>
+										</div>
+
+										<div class="text-center">
+											<button type="submit" class="btn btn-primary">Change
+												Password</button>
+										</div>
+									</form>
+									<!-- End Change Password Form -->
+
+								</div>
+
+							</div>
+							<!-- End Bordered Tabs -->
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+	<!-- End #main -->
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+		crossorigin="anonymous"></script>
+	<script th:inline="javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">
+		
+	</script>
+
+	<script>
+		function showConfirmationModal() {
+			$('#confirmationModal').modal('show');
+		}
+	</script>
+	<script th:inline="javascript">
+		function validatePasswords() {
+			var newPassword = document.getElementById('newPassword').value;
+			var renewPassword = document.getElementById('renewPassword').value;
+
+			if (newPassword !== renewPassword) {
+				alert("Passwords do not match!");
+				return false; // Prevent form submission
+			}
+			return true; // Allow form submission
+		}
+	</script>
+	<script>
+		function checkPasswordStrength(password) {
+			var strengthContainer = document
+					.getElementById('passwordStrengthMessage');
+			var strengthIndicator = document.getElementById('passwordStrength');
+
+			if (password.length === 0) {
+				// Hide the strength indicator if password is empty
+				strengthContainer.style.display = 'none';
+			} else {
+				// Show the strength indicator
+				strengthContainer.style.display = 'block';
+
+				// Evaluate password strength based on conditions
+				var strength = 'Weak';
+				if (password.length >= 6) {
+					if (/[a-z]/.test(password)) {
+						if (/[A-Z]/.test(password)
+								&& /\d/.test(password)
+								&& /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/
+										.test(password)) {
+							strength = 'Strong';
+						} else if (/\d/.test(password)) {
+							strength = 'Medium';
+						}
+					}
+				}
+
+				// Update the password strength indicator
+				strengthIndicator.textContent = strength;
+			}
+		}
+
+		// Initially hide the strength indicator
+		document.getElementById('passwordStrengthMessage').style.display = 'none';
+
+		function togglePasswordVisibility(inputId) {
+	        var passwordInput = document.getElementById(inputId);
+	        var icon = document.querySelector('#' + inputId + ' + .input-group-append i');
+
+	        if (passwordInput.type === 'password') {
+	            passwordInput.type = 'text';
+	            icon.classList.remove('fa-eye-slash');
+	            icon.classList.add('fa-eye');
+	        } else {
+	            passwordInput.type = 'password';
+	            icon.classList.remove('fa-eye');
+	            icon.classList.add('fa-eye-slash');
+	        }
+	    }
+	</script>
+
+</body>
+
+</html>

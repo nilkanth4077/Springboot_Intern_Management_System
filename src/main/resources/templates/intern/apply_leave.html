@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply for Leave</title>
+<!-- Include any necessary styles or scripts -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Bootstrap CSS is used for the card layout in this example -->
+</head>
+
+<body>
+
+	<!-- Include the header fragment -->
+	<div th:replace="fragments/internHeaderFragment :: header"></div>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/internAsideFragment :: aside"></div>
+
+	<main id="main" class="main">
+
+		<section class="section dashboard">
+			<div class="container">
+				<div class="row">
+
+					<!-- Second Sales Card -->
+					<div class="col-xxl-6 col-md-6">
+						<div class="card info-card sales-card">
+
+							<div class="card-body">
+
+								<div class="d-flex align-items-center">
+									<div
+										class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+										<i class="bi bi-people"></i>
+									</div>
+									<div class="ps-3">
+										<h4>
+											<span>Your Last Leave</span>
+										</h4>
+										<h5>
+											<span class="text-success small pt-1 fw-bold">Submitted
+												on: DD/MM/YYYY - HH:MM PM</span>
+										</h5>
+										<h5>
+											<span class="text-success small pt-1 fw-bold">Subject:
+												Abc</span>
+										</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- First Sales Card -->
+					<div class="col-xxl-6 col-md-6">
+						<div class="card info-card sales-card">
+
+							<div class="card-body">
+
+								<div class="d-flex align-items-center">
+									<div
+										class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+										<i class="bi bi-people"></i>
+									</div>
+									<div class="ps-3">
+										<h4>
+											<span>Your Attandance</span>
+										</h4>
+										<h5>
+											<span class="text-success small pt-1 fw-bold">95%</span>
+										</h5>
+										<h5>
+											<span class="text-success small pt-1 fw-bold">Some
+												Message</span>
+										</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="container mt-2">
+			<div class="card">
+
+				<div class="card-header">
+					<h3 class="text-dark">Apply for Leave</h3>
+				</div>
+				<div class="card-body">
+
+					<form action="project_definition_submition" method="post"
+						enctype="multipart/form-data">
+
+						<div class="form-group">
+							<label for="internId">Intern ID:</label> <input type="text"
+								id="internId" name="internId" th:value="${intern.internId}"
+								class="form-control" readonly>
+						</div>
+
+						<div class="form-group">
+							<label for="projectDefinition">Subject:</label> <input
+								type="text" id="projectDefinition" name="projectDefinition" placeholder="Full Day Leave for XYZ Reason"
+								class="form-control" required>
+						</div>
+
+						<div class="form-group">
+							<label for="description">Body:</label>
+							<textarea id="emailBody" name="emailBody" class="form-control"
+								rows="12"
+								placeholder="Respected [Recipient's Name],
+								
+[Body Paragraph 1].
+								
+[Body Paragraph 1].
+								
+[Body Paragraph 1].
+
+Your Sincerely,
+[Your Name]
+[Your Roll No]
+[Your Group ID]"></textarea>
+
+						</div>
+
+						<div class="form-group row">
+							<label for="internId" class="col-md-2 col-form-label">Duration:</label>
+							<div class="col-md-2">
+								<label for="fromDate" class="col-form-label">From:</label> <input
+									type="date" id="fromDate" name="fromDate" class="form-control"
+									required> <input type="time" id="fromTime"
+									name="fromTime" class="form-control" required>
+							</div>
+							<div class="col-md-2">
+								<label for="toDate" class="col-form-label">To:</label> <input
+									type="date" id="toDate" name="toDate" class="form-control"
+									required> <input type="time" id="toTime" name="toTime"
+									class="form-control" required>
+							</div>
+						</div>
+
+
+
+						<div class="form-group">
+							<label for="projectDefinitionDocument" class="form-label">Proof
+								Doc (If Any):</label> <input type="file" class="form-control"
+								id="projectDefinitionDocument" name="projectDefinitionDocument">
+						</div>
+						<div class="form-group mt-5">
+							<p>
+								<span><b>Note: </b></span><span class="text-danger">"For each
+									instance of leave taken, it is mandatory to obtain a physical
+									signature on paper as part of the documentation process."</span>
+							</p>
+						</div>
+
+
+						<!-- Repeat the above block for other fields -->
+
+						<div class="form-group text-center">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="container mt-2">
+			<div class="card">
+
+				<div class="card-header">
+					<h3 class="text-dark">History</h3>
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Leave ID</th>
+								<th>Subject</th>
+								<th>Submitted On</th>
+								<th>From</th>
+								<th>To</th>
+								<th>Considered As</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>XYZ</td>
+								<td>DD/MM/YYYY</td>
+								<td>DD/MM/YYYY - HH:MM PM</td>
+								<td>DD/MM/YYYY - HH:MM PM</td>
+								<td>Half Day</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>ABC</td>
+								<td>DD/MM/YYYY</td>
+								<td>DD/MM/YYYY - HH:MM PM</td>
+								<td>DD/MM/YYYY - HH:MM PM</td>
+								<td>Full Day</td>
+							</tr>
+							<!-- Add more rows as needed -->
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- Bootstrap JS is used for the card layout in this example -->
+
+</body>
+
+</html>

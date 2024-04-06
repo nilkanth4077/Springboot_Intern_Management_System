@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information Form</title>
+</head>
+<body>
+
+<form action="register_intern" method="post">
+    <!-- Name -->
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+
+    <!-- Permanent Address -->
+    <label for="address">Permanent Address:</label>
+    <input type="text" name="permanentAddress" required>
+
+    <!-- Date of Birth -->
+    <label for="dob">Date of Birth (DD-MM-YYYY):</label>
+    <input type="text" id="dob" name="dateOfBirth"  pattern="\d{2}-\d{2}-\d{4}" placeholder="DD-MM-YYYY" required>
+
+    <!-- Gender -->
+    <label>Gender:</label>
+    <input type="radio" id="male" name="gender" value="M" required>
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="F" required>
+    <label for="female">Female</label>
+
+    <!-- Contact No -->
+    <label for="contact">Contact No:</label>
+    <input type="tel" id="contact" name="contactNo" required>
+
+    <!-- Email ID -->
+    <label for="email">Email ID:</label>
+    <input type="email" id="email" name="emailId" required>
+
+    <!-- College Information -->
+    <label for="college">College Name:</label>
+    <input type="text" id="college" name="collegeName"  required>
+
+    <label for="guide">College Guide/HOD Name:</label>
+    <input type="text" id="guide" name="collegeGuideHodName"  required>
+
+    <label for="reference">Reference (University Name):</label>
+    <input type="text" id="reference" name="universityName" required>
+
+    <!-- Degree Information -->
+    <label for="degree">Degree with Branch Name:</label>
+    <input type="text" id="degree" name="degree" required>
+
+    <label for="percentage">Aggregate Percentage:</label>
+    <input type="text" id="percentage" name="aggregatePercentage" required>
+	
+	<!-- branchname -->
+    <label for="branchName">branchname</label>
+    <input type="text" id="branchName"  name="branchName">
+	
+    <!-- Project Information -->
+    <label for="project">Project Definition Name:</label>
+    <input type="text" id="project" name="projectDefinitionName" required>
+
+    <label for="projectGuide">BISAG-N' Project Guide Name:</label>
+    <input type="text" id="projectGuide" name="guideName" required>
+
+    <label for="programmingLanguage">Programming Language Name:</label>
+    <input type="text" id="programmingLanguage" name="programmingLangName"  required>
+
+    <!-- Dates -->
+    <label for="joiningDate">Joining Date (DD-MM-YYYY):</label>
+    <input type="text" id="joiningDate" name="joiningDate" pattern="\d{2}-\d{2}-\d{4}" placeholder="DD-MM-YYYY" required>
+
+    <label for="completionDate">Completion Date (DD-MM-YYYY):</label>
+    <input type="text" id="completionDate" name="completionDate"  pattern="\d{2}-\d{2}-\d{4}" placeholder="DD-MM-YYYY" required>
+
+    <!-- Used Resource -->
+    <label>Used Resource (BISAG-N PC/Laptop):</label>
+    <input type="radio" id="pc" name="usedResource" value="BISAG-N PC" required>
+    <label for="pc">BISAG-N PC</label>
+    <input type="radio" id="laptop" name="usedResource"  value="Laptop" required>
+    <label for="laptop">Laptop</label>
+
+    <!-- Submit Button -->
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

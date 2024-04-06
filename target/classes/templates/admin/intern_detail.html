@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Details</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 20px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+iframe {
+	width: 100%;
+	height: 300px;
+}
+
+.status-dropdown {
+	width: 100%;
+	padding: 8px;
+}
+
+#mysubmitbutton {
+	padding: 10px 15px;
+	background-color: #2196F3;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.no-border {
+	border: none;
+}
+</style>
+</head>
+<body>
+
+	<!-- Include the header fragment -->
+	<div th:replace="fragments/headerFragment :: header"></div>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/asideFragment :: aside"></div>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Intern Details<span th:text="${' - ' + intern.get().firstName + ' ' + intern.get().lastName}"></span></h1>
+		</div>
+		<div th:if="${intern.isPresent()}">
+
+			<form action="update" method="post" class="needs-validation"
+				enctype="multipart/form-data">
+				<table class="table table-bordered">
+					<tr>
+						<th>Intern ID</th>
+						<td><input type="text" name="internId"
+							th:value="${intern.get().internId}" class="no-border" readonly></td>
+					</tr>
+					<tr>
+						<th>First Name</th>
+						<td><input type="text" name="firstName"
+							th:value="${intern.get().firstName}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Last Name</th>
+						<td><input type="text" name="lastName"
+							th:value="${intern.get().lastName}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Contact No</th>
+						<td><input type="text" name="contactNo"
+							th:value="${intern.get().contactNo}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Email ID</th>
+						<td><input type="email" name="email"
+							th:value="${intern.get().email}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>College Name</th>
+						<td><select class="form-select" id="collegeName"
+							name="collegeName">
+								<option th:each="college : ${colleges}"
+									th:text="${college.name}" th:value="${college.name}"
+									th:selected="${college.name == intern.get().collegeName}"></option>
+
+						</select></td>
+					</tr>
+					<tr>
+						<th>Branch</th>
+						<td><select class="form-select" id="branch" name="branch">
+								<option th:each="branch : ${branches}" th:text="${branch.name}"
+									th:value="${branch.name}"
+									th:selected="${branch.name == intern.get().branch}"></option>
+
+						</select></td>
+					</tr>
+
+					<tr>
+						<th>Domain</th>
+						<td><select class="form-select" id="programmingLangName"
+							name="programmingLangName">
+								<option th:each="domain : ${domains}" th:text="${domain.name}"
+									th:value="${domain.name}"
+									th:selected="${domain.name == intern.get().programmingLangName}"></option>
+
+						</select></td>
+					</tr>
+					<tr>
+						<th>Group ID</th>
+						<td><select class="form-select" id="groupId"
+							name="groupId">
+								<option value="createOwnGroup">Create Own Group</option>
+								<option th:each="group : ${groups}" th:text="${group.groupId}"
+									th:value="${group.groupId}"
+									th:selected="${group.groupId eq intern.get().group.groupId}"></option>
+
+						</select></td>
+					</tr>
+					<tr>
+						<th>Semester</th>
+						<td><input type="number" name="semester"
+							th:value="${intern.get().semester}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td><input type="text" name="permanentAddress"
+							th:value="${intern.get().permanentAddress}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Date of Birth</th>
+						<td><input type="date" name="dateOfBirth"
+							th:value="${intern.get().dateOfBirth}"
+							class="no-border" required></td>
+					</tr>
+					<tr>
+						<th>Gender</th>
+						<td><input type="text" name="gender"
+							th:value="${intern.get().gender}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>College Guide HOD Name</th>
+						<td><input type="text" name="collegeGuideHodName"
+							th:value="${intern.get().collegeGuideHodName}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Degree</th>
+						<td><input type="text" name="degree"
+							th:value="${intern.get().degree}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Percentage</th>
+						<td><input type="text" name="aggregatePercentage"
+							th:value="${intern.get().aggregatePercentage}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Project Definition</th>
+						<td><input type="text" name="projectDefinitionName"
+							th:value="${intern.get().projectDefinitionName}"
+							class="no-border" readonly></td>
+					</tr>
+					<tr>
+						<th>Joining Date</th>
+						<td><input type="date" name="joiningDate"
+							th:value="${intern.get().joiningDate}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>Completion Date</th>
+						<td><input type="date" name="completionDate"
+							th:value="${intern.get().completionDate}" class="no-border"></td>
+					</tr>
+
+					<tr>
+						<th>Used Resources</th>
+						<td><input type="text" name="usedResource"
+							th:value="${intern.get().usedResource}" class="no-border"></td>
+					</tr>
+					<tr>
+						<th>College ID Image</th>
+						<td><iframe
+								th:src="@{'/files/icard/' + ${intern.get().icardImage}}"
+								frameborder="0"></iframe></td>
+					</tr>
+					<tr>
+						<th>NOC Image</th>
+						<td><iframe
+								th:src="@{'/files/noc/' + ${intern.get().nocPdf}}"
+								frameborder="0" width="100%" height="50%" style="border: none;"></iframe></td>
+					</tr>
+					<tr>
+						<th>Resume</th>
+						<td><iframe
+								th:src="@{'/files/resume/' + ${intern.get().resumePdf}}"
+								frameborder="0"></iframe></td>
+					</tr>
+					<tr>
+						<th>Passport Size Photo</th>
+						<td><iframe
+								th:src="@{'/files/image/' + ${intern.get().passportSizeImage}}"
+								frameborder="0"></iframe></td>
+					</tr>
+					<tr>
+						<th>Registration Form</th>
+						<td><iframe
+								th:src="@{'/files/forms/' + ${intern.get().group.groupId} + '/' + ${intern.get().internId} + '/' + ${intern.get().registrationForm}}"
+								frameborder="0"></iframe></td>
+					</tr>
+					<tr>
+						<th>Security Form</th>
+						<td><iframe
+								th:src="@{'/files/forms/' + ${intern.get().group.groupId} + '/' + ${intern.get().internId} + '/' + ${intern.get().securityForm}}"
+								frameborder="0"></iframe></td>
+					</tr>
+					<tr>
+						<th>ICard Form</th>
+						<td><iframe
+								th:src="@{'/files/forms/' + ${intern.get().group.groupId} + '/' + ${intern.get().internId} + '/' + ${intern.get().icardForm}}"
+								frameborder="0"></iframe></td>
+					</tr>
+					<tr>
+						<th>Cancellation Status</th>
+						<td><input type="text" name="cancellationStatus"
+							th:value="${intern.get().cancellationStatus != null ? intern.get().cancellationStatus : 'null'}" class="no-border" readonly></td>
+					</tr>
+					<tr>
+						<th>Is Active</th>
+						<td><label><input type="radio" name="isActive"
+								value="true" th:checked="${intern.get().isActive}"
+								class="no-border" readonly> True</label> <label><input
+								type="radio" name="isActive" value="false"
+								th:checked="${!intern.get().isActive}" class="no-border"
+								readonly> False</label></td>
+					</tr>
+					<tr class="d-none">
+						<td><input type="text" name="id"
+							th:value="${intern.get().internId}" hidden></td>
+					</tr>
+				</table>
+				<div class="text-center mb-3">
+					<button id="mysubmitbutton" type="submit" class="btn btn-success">Update
+					</button>
+					<button id="mysubmitbutton" type="submit">
+						<a th:href="@{/bisag/admin/intern_application/new_interns}"
+							class="text-white">Back to List</a>
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<div th:unless="${intern.isPresent()}">
+			<!-- Handle the case when Optional is empty -->
+			<p class="alert alert-warning">Intern not found</p>
+		</div>
+
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+</body>
+</html>

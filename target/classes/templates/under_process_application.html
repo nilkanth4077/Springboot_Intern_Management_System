@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>IMS Intern Panel</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Vendor CSS Files -->
+<link th:href="@{../../assets/vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{../../assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../../assets/vendor/remixicon/remixicon.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../../assets/vendor/simple-datatables/style.css}"
+	rel="stylesheet" type="text/css">
+
+<!-- Template Main CSS File -->
+<link th:href="@{../../assets/css/style.css}" rel="stylesheet"
+	type="text/css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+.lgout {
+	padding: 10px;
+	list-style-type: none;
+	border: 2px solid;
+	border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header id="header" class="header fixed-top d-flex align-items-center">
+		<!--   style="background-color: #008080"-->
+
+		<div class="d-flex align-items-center justify-content-between">
+			<a th:href="@{/bisag/super_admin/super_admin_dashboard}"
+				class="logo d-flex align-items-center"> <img
+				th:src="@{../../assets/img/bisag_logo.png}" alt=""> <span
+				class="d-none d-lg-block">BISAG-N</span>
+			</a> <i class="bi bi-list toggle-sidebar-btn"></i>
+		</div>
+		<!-- End Logo -->
+
+		<div class="search-bar">
+			<form class="search-form d-flex align-items-center" method="POST"
+				action="#">
+				<input type="text" name="query" placeholder="Search"
+					title="Enter search keyword">
+				<button type="submit" title="Search">
+					<i class="bi bi-search"></i>
+				</button>
+			</form>
+		</div>
+		<!-- End Search Bar -->
+
+		<nav class="header-nav ms-auto">
+			<ul class="d-flex align-items-center">
+
+				<li class="nav-item d-block d-lg-none"><a
+					class="nav-link nav-icon search-bar-toggle " href="#"> <i
+						class="bi bi-search"></i>
+				</a></li>
+				<!-- End Profile Nav -->
+
+				<li><a class="text-white bg-danger lgout mx-4"
+					th:href="@{/logout}"> <i class="fa fa-sign-out"
+						aria-hidden="true"></i> <span class="px-3 fw-bold">Logout</span>
+				</a></li>
+			</ul>
+		</nav>
+		<!-- End Icons Navigation -->
+
+	</header>
+	<!-- End Header -->
+
+	<!-- End Header -->
+
+	<!-- ======= Sidebar ======= -->
+	<aside id="sidebar" class="sidebar">
+
+
+		<ul class="sidebar-nav" id="interns-nav">
+			<li class="nav-item"><a class="nav-link "
+				th:href="@{/under_process_intern}"> <i class="bi bi-grid"></i> <span>Profile</span>
+			</a></li>
+		</ul>
+	</aside>
+
+
+
+	<!-- End Sidebar-->
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Dashboard</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Dashboard</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section dashboard">
+
+			<div class="row">
+
+				<!-- Left side columns -->
+				<div class="col-lg-12">
+					<div class="row">
+
+						<!-- Sales Card -->
+						<div class="col-xxl-12 col-md-10">
+							<div class="card info-card sales-card interactive-card">
+								<!--  style="background-color: #4056A1;"-->
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<table class="table">
+											<tr>
+												<td>
+													<h2>Status</h2>
+												</td>
+											</tr>
+											<tr>
+												<td><span
+													th:if="${internApplication.status eq 'pending' and internApplication.isActive}">Your
+														application not approved yet.</span> <span
+													th:if="${internApplication.status eq 'approved' and internApplication.finalStatus eq 'pending' and internApplication.isActive}">You
+														are selected for the interview. Our team will contact you soon.</span> <span
+													th:if="${internApplication.status eq 'rejected' and internApplication.isActive}">Sorry,
+														not approved.</span> <span
+													th:unless="${internApplication.status eq 'pending' or internApplication.status eq 'approved' or internApplication.status eq 'rejected' and internApplication.isActive}">Unknown
+														status, Contact Admin.</span> <span
+													th:if="${internApplication.finalStatus eq 'passed' and internApplication.isActive}">You are selected for BISAG internship. Once your group will be finalized then you can login as an official Intern.</span> <span
+													th:if="${internApplication.finalStatus eq 'failed' and internApplication.isActive}">You
+														are not selected.</span> <span
+													th:if="${!internApplication.isActive}">You are being
+														cancelled from bisag internship.</span></td>
+											</tr>
+											<tr>
+												<td><a
+													th:href="@{'/cancel/' + ${internApplication.id}}"
+													class="btn btn-danger">Withdraw Application</a></td>
+											</tr>
+
+										</table>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- End Sales Card -->
+						<!-- End Customers Card -->
+					</div>
+					<!-- End Recent Sales -->
+
+				</div>
+			</div>
+			<!-- End Left side columns -->
+
+
+		</section>
+		<!-- ======= Footer ======= -->
+		<footer id="footer" class="footer">
+			<div class="credits">
+				Designed by <a href="https://bootstrapmade.com/">Group-24RH4</a>
+			</div>
+		</footer>
+		<!-- End Footer -->
+	</main>
+	<!-- End #main -->
+
+
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Vendor JS Files -->
+	<script th:src="@{../../assets/vendor/apexcharts/apexcharts.min.js}"></script>
+	<script
+		th:src="@{../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{../../assets/vendor/chart.js/chart.umd.js}"></script>
+	<script th:src="@{../../assets/vendor/echarts/echarts.min.js}"></script>
+	<script th:src="@{../../assets/vendor/quill/quill.min.js}"></script>
+	<script
+		th:src="@{../../assets/vendor/simple-datatables/simple-datatables.js}"></script>
+	<script th:src="@{../../assets/vendor/tinymce/tinymce.min.js}"></script>
+	<script th:src="@{../../assets/vendor/php-email-form/validate.js}"></script>
+
+	<!-- Template Main JS File -->
+	<script th:src="@{../../assets/js/main.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Forms</title>
+<!-- Include any necessary styles or scripts -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Bootstrap CSS is used for the card layout in this example -->
+
+<style>
+.model-lg {
+	width: 60%;
+}
+
+.hover-element {
+	cursor: pointer;
+}
+
+.fa-ellipsis-vertical:hover {
+	background-color: grey; /* Dark color for the circle on hover */
+	border-radius: 40px;
+	padding-inline: 8px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	transition: background-color 0.1s ease, border-radius 0.1s ease, padding
+		0.1s ease;
+}
+
+.icon-container:hover .fa-ellipsis-vertical, .icon-container:hover .dropdown
+	{
+	background-color: grey;
+	border-radius: 40px;
+	padding-inline: 8px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	transition: background-color 0.1s ease, border-radius 0.1s ease, padding
+		0.1s ease;
+}
+
+/* Reset styles when not hovering */
+.icon-container .fa-ellipsis-vertical, .icon-container .dropdown {
+	background-color: initial;
+	border-radius: initial;
+	padding-inline: initial;
+	padding-top: initial;
+	padding-bottom: initial;
+	transition: background-color 0.1s ease, border-radius 0.1s ease, padding
+		0.1s ease;
+}
+
+.table th {
+	cursor: pointer;
+	background-image: url('default-icon.png'); /* Default icon image */
+	background-size: 16px 16px; /* Adjust the size of the icon */
+	background-repeat: no-repeat;
+	background-position: right center;
+	/* Position the icon to the right center */
+	padding-right: 20px; /* Add some padding to accommodate the icon */
+}
+</style>
+
+</head>
+
+<body>
+
+	<!-- Include the header fragment -->
+	<div th:replace="fragments/headerFragment :: header"></div>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/asideFragment :: aside"></div>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Manage Forms</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Intern</a></li>
+					<li class="breadcrumb-item active">Manage Forms</li>
+				</ol>
+			</nav>
+		</div>
+		<div class="container">
+			<input type="text" class="mb-4" id="searchInput"
+				placeholder="Search...">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th><i class="fa-solid fa-sort mx-2"></i>ID</th>
+						<th><i class="fa-solid fa-sort mx-2"></i>First Name</th>
+						<th><i class="fa-solid fa-sort mx-2"></i>Last Name</th>
+						<th><i class="fa-solid fa-sort mx-2"></i>Email</th>
+						<th>Registration Form</th>
+						<th>Security Form</th>
+						<th>ICard Form</th>
+						<th>College NOC</th>
+						<th>Resume</th>
+						<th>College ICard</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Iterate over interns and display those associated with the current group -->
+					<tr th:each="intern : ${interns}">
+						<td><a
+							th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"><span
+								th:text="${intern.internId}"></span></a></td>
+						<td th:text="${intern.firstName}"></td>
+						<td th:text="${intern.lastName}"></td>
+						<td th:text="${intern.email}"></td>
+						<td><a href="#"
+							th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.registrationForm} + '\');'">Open</a></td>
+						<td><a href="#"
+							th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.securityForm} + '\');'">Open</a></td>
+						<td><a href="#"
+							th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.icardForm} + '\');'">Open</a></td>
+						<td><a href="#"
+							th:attr="onclick='openPdfPopup(\'/files/noc/' + ${intern.nocPdf} + '\');'">Open</a></td>
+						<td><a href="#"
+							th:attr="onclick='openPdfPopup(\'/files/resume/' + ${intern.resumePdf} + '\');'">Open</a></td>
+						<td><a href="#"
+							th:attr="onclick='openPdfPopup(\'/files/icard/' + ${intern.icardImage} + '\');'">Open</a></td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							// Add click event listener to table headers for sorting
+							$('.table th').click(
+									function() {
+										var table = $(this).parents('table')
+												.eq(0);
+										var rows = table.find('tr:gt(0)')
+												.toArray().sort(
+														comparer($(this)
+																.index()));
+										this.asc = !this.asc;
+										if (!this.asc) {
+											rows = rows.reverse();
+										}
+										for (var i = 0; i < rows.length; i++) {
+											table.append(rows[i]);
+										}
+									});
+
+							// Function to compare rows based on the selected column
+							function comparer(index) {
+								return function(a, b) {
+									var valA = getCellValue(a, index), valB = getCellValue(
+											b, index);
+									return $.isNumeric(valA)
+											&& $.isNumeric(valB) ? valA - valB
+											: valA.toString().localeCompare(
+													valB);
+								};
+							}
+
+							// Function to get the value of a cell
+							function getCellValue(row, index) {
+								return $(row).children('td').eq(index).text();
+							}
+						});
+	</script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var searchInput = document.getElementById('searchInput');
+			var tableRows = document.querySelectorAll('.table tbody tr');
+
+			searchInput.addEventListener('input', function(event) {
+				var searchText = event.target.value.toLowerCase().trim();
+
+				tableRows.forEach(function(row) {
+					var isVisible = false;
+					row.querySelectorAll('td').forEach(function(cell) {
+						var cellText = cell.textContent.toLowerCase();
+						if (cellText.includes(searchText)) {
+							isVisible = true;
+						}
+					});
+
+					if (isVisible) {
+						row.style.display = '';
+					} else {
+						row.style.display = 'none';
+					}
+				});
+			});
+		});
+	</script>
+	<script>
+		function openPdfPopup(pdfUrl) {
+			window.open(pdfUrl, 'PDFViewer', 'width=600,height=780');
+			return false; // To prevent the default behavior of the anchor tag
+		}
+	</script>
+
+
+</body>
+
+</html>

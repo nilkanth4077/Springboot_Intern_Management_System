@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>IMS SuperAdmin Panel</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Vendor CSS Files -->
+<link th:href="@{../../assets/vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{../../assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../../assets/vendor/remixicon/remixicon.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../../assets/vendor/simple-datatables/style.css}"
+	rel="stylesheet" type="text/css">
+
+<!-- Template Main CSS File -->
+<link th:href="@{../../assets/css/style.css}" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/superHeaderFragment :: header"></div>
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/superAsideFragment :: aside"></div>
+
+	<!-- End Sidebar-->
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Dashboard</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Dashboard</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section dashboard">
+			<div class="row">
+
+				<!-- Left side columns -->
+				<div class="col-lg-12">
+					<div class="row">
+
+						<!-- Sales Card -->
+						<div class="col-xxl-3 col-md-4">
+							<a th:href="@{/bisag/super_admin/admin_list}">
+							<div class="card info-card sales-card">
+
+								<div class="card-body">
+
+									<div class="d-flex align-items-center">
+										<div
+											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											<i class="bi bi-people"></i>
+										</div>
+										<div class="ps-3">
+											<h6 th:text="${adminCount}"></h6>
+											<span class="text-success small pt-1 fw-bold">Admins</span>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							</a>
+						</div>
+						<!-- End Sales Card -->
+					</div>
+				</div>
+				<!-- End Left side columns -->
+
+
+			</div>
+		</section>
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+	<!-- End #main -->
+
+
+</body>
+
+</html>

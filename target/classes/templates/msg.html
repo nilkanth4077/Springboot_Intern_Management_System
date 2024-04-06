@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat</title>
+</head>
+<body>
+
+<h1>WebSocket Chat</h1>
+
+<div>
+    <label for="userId">User ID: </label>
+    <input type="text" id="userId" placeholder="Enter User ID">
+    <button onclick="connect()">Connect</button>
+    <div id="chat" style="display: none;">
+        <h3>Chat</h3>
+        <div id="messages"></div>
+        <label for="message">Message: </label>
+        <input type="text" id="message">
+        <button onclick="sendMessage()">Send Message</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script>
+let stompClient;
+
+function connect() {
+    const userId = document.getElementById('userId').value;
+
+    if (userId.trim() !== '') {
+        stompClient = connectWebSocket(userId);
+        document.getElementById('chat').style.display = 'block';
+    }
+}
+
+function connectWebSocket(userId) {
+    const socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        const topic = userId.startsWith('001') ? '/topic/projectdef' : '/topic/reply';
+        stompClient.subscribe(topic, function (message) {
+            showMessage(JSON.parse(message.body).content, userId);
+        });
+    });
+
+    return stompClient;
+}
+
+function showMessage(message, userId) {
+    const messagesDiv = document.getElementById('messages');
+    messagesDiv.innerHTML += '<p>' + userId + ': ' + message + '</p>';
+}
+
+function sendMessage() {
+    const messageContent = document.getElementById('message').value;
+    const userId = document.getElementById('userId').value;
+
+    const message = {
+        content: messageContent
+    };
+
+    stompClient.send('/app/message/' + userId + '/projectdef', {}, JSON.stringify(message));
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allocate Guide</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+.form-container {
+	display: none;
+}
+
+.active {
+	display: block;
+}
+
+.hover-element:hover {
+	cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Style for the dropdown container */
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+/* Style for the dropdown button */
+.dropdown button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+/* Style for the dropdown content (hidden by default) */
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+/* Style for each dropdown item */
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+/* Show the dropdown content when the dropdown button is hovered over */
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* Exclude hover effect for elements with "exclude-hover" class */
+tr.hover-element th div.dropdown .rounded button.btn-primary:hover {
+	background-color: transparent; /* or any other styling you want */
+	color: inherit; /* or any other styling you want */
+}
+
+.hover-element th, .hover-element td {
+	text-align: center; /* Center the text horizontally */
+	padding: 10px; /* Add padding for better appearance */
+}
+
+.hover-element th:first-child, .hover-element td:first-child,
+	.hover-element th:last-child, .hover-element td:last-child {
+	width: 20px; /* Set a smaller width for the first and last columns */
+}
+
+.hover-element th:not(:first-child):not(:last-child), .hover-element td:not(:first-child):not(:last-child)
+	{
+	width: 150px; /* Set a fixed width for other columns */
+}
+</style>
+</head>
+<body>
+
+	<!-- Include the header fragment -->
+	<div th:replace="fragments/headerFragment :: header"></div>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/asideFragment :: aside"></div>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Manage Group</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Group
+							Management</a></li>
+					<li class="breadcrumb-item active">Manage Group</li>
+				</ol>
+			</nav>
+			<input type="text" class="mb-3 mt-2 pr-5" id="searchInput"
+				placeholder="Start typing...">
+		</div>
+
+		<ul class="nav nav-tabs nav-justified">
+			<li class="nav-item"><a class="nav-link active" id="tab1"
+				href="javascript:void(0)" onclick="switchTab('form1', 'tab1')">Guide
+					Allocated Groups</a></li>
+			<li class="nav-item"><a class="nav-link" id="tab2"
+				href="javascript:void(0)" onclick="switchTab('form2', 'tab2')">Guide
+					Not Allocated Groups</a></li>
+
+		</ul>
+
+		<div class="form-container active" id="form1">
+			<div class="container mt-3 mb-5 p-5 border shadow">
+				<!-- Iterate over groups to generate collapsible sections -->
+				<div th:each="groups : ${alloactedGroups}">
+					<div class="collapsible bg-primary text-white"
+						data-toggle="collapse" th:data-target="'#group_' + ${groups.id}">
+						<table class="table table-striped table-bordered">
+							<tr class="hover-element">
+								<th><i class="fa-solid fa-chevron-down"></i></th>
+								<th>Group ID: <a
+									th:href="@{'/bisag/admin/allocate_guide/' + ${groups.groupId}}"><span
+										th:text="${groups.groupId}"></span></a></th>
+								<th>Domain: <span th:text="${groups.programmingLangName}"></span></th>
+								<th>Guide: <span th:text="${groups.guide.name}"></span></th>
+								<th>
+									<div>
+										<a
+											th:href="@{'/bisag/admin/allocate_guide/' + ${groups.groupId}}"
+											class="btn"> <i class="fa-solid fa-circle-info"></i>
+										</a>
+									</div>
+								</th>
+							</tr>
+						</table>
+
+					</div>
+
+
+
+
+					<div class="content collapse" th:id="'group_' + ${groups.id}">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Email</th>
+									<th>Details</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Iterate over interns and display those associated with the current group -->
+								<tr th:each="intern : ${interns}"
+									th:if="${intern.group.id == groups.id}">
+									<td><a
+										th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"><span
+											th:text="${intern.internId}"></span></a></td>
+									<td th:text="${intern.firstName}"></td>
+									<td th:text="${intern.lastName}"></td>
+									<td th:text="${intern.email}"></td>
+									<td><div>
+											<a th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"
+												class="btn"><i class="fa-solid fa-circle-info"></i></a>
+										</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-container" id="form2">
+			<div class="container mt-3 mb-5 p-5 border shadow">
+				<!-- Iterate over groups to generate collapsible sections -->
+				<div th:each="groups : ${notAllocatedGroups}">
+					<div class="collapsible text-white rounded" data-toggle="collapse"
+						th:data-target="'#group_' + ${groups.id}">
+
+						<table class="table table-striped table-bordered">
+							<tr class="hover-element">
+								<th><i class="fa-solid fa-chevron-down"></i></th>
+								<th>Group ID: <a
+									th:href="@{'/bisag/admin/allocate_guide/' + ${groups.groupId}}"><span
+										th:text="${groups.groupId}"></span></a></th>
+								<th>Domain: <span th:text="${groups.programmingLangName}"></span></th>
+								<th>
+									<div>
+										<a
+											th:href="@{'/bisag/admin/allocate_guide/' + ${groups.groupId}}"
+											class="btn"><i class="fa-solid fa-circle-info"></i></a>
+									</div>
+								</th>
+							</tr>
+						</table>
+					</div>
+
+					<div class="content collapse" th:id="'group_' + ${groups.id}">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Iterate over interns and display those associated with the current group -->
+								<tr th:each="intern : ${interns}"
+									th:if="${intern.group.id == groups.id}">
+									<td><a
+										th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"><span
+											th:text="${intern.internId}"></span></a></td>
+									<td th:text="${intern.firstName}"></td>
+									<td th:text="${intern.lastName}"></td>
+									<td th:text="${intern.email}"></td>
+									<td><div>
+											<a th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"
+												class="btn"><i class="fa-solid fa-circle-info"></i></a>
+										</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script>
+		function nextForm(currentForm, nextForm, nextTab) {
+			$('#' + currentForm).removeClass('active');
+			$('#' + nextForm).addClass('active');
+			$('.nav-link').removeClass('active');
+			$('#' + nextTab).addClass('active');
+		}
+
+		function prevForm(currentForm, prevForm, prevTab) {
+			$('#' + currentForm).removeClass('active');
+			$('#' + prevForm).addClass('active');
+			$('.nav-link').removeClass('active');
+			$('#' + prevTab).addClass('active');
+		}
+
+		function switchTab(formId, tabId) {
+			$('.form-container').removeClass('active');
+			$('#' + formId).addClass('active');
+			$('.nav-link').removeClass('active');
+			$('#' + tabId).addClass('active');
+		}
+	</script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							// Function to filter table rows based on user input
+							$('#searchInput')
+									.on(
+											'keyup',
+											function() {
+												var value = $(this).val()
+														.toLowerCase();
+												$('.hover-element')
+														.filter(
+																function() {
+																	$(this)
+																			.toggle(
+																					$(
+																							this)
+																							.text()
+																							.toLowerCase()
+																							.indexOf(
+																									value) > -1)
+																});
+											});
+						});
+	</script>
+
+</body>
+</html>

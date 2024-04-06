@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Leave Applications</title>
+<!-- Include any necessary styles or scripts -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Bootstrap CSS is used for the card layout in this example -->
+
+<style>
+.model-lg {
+	width: 60%;
+}
+
+.hover-element {
+	cursor: pointer;
+}
+
+.fa-ellipsis-vertical:hover {
+	background-color: grey; /* Dark color for the circle on hover */
+	border-radius: 40px;
+	padding-inline: 8px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	transition: background-color 0.1s ease, border-radius 0.1s ease, padding
+		0.1s ease;
+}
+
+.icon-container:hover .fa-ellipsis-vertical, .icon-container:hover .dropdown
+	{
+	background-color: grey;
+	border-radius: 40px;
+	padding-inline: 8px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	transition: background-color 0.1s ease, border-radius 0.1s ease, padding
+		0.1s ease;
+}
+
+/* Reset styles when not hovering */
+.icon-container .fa-ellipsis-vertical, .icon-container .dropdown {
+	background-color: initial;
+	border-radius: initial;
+	padding-inline: initial;
+	padding-top: initial;
+	padding-bottom: initial;
+	transition: background-color 0.1s ease, border-radius 0.1s ease, padding
+		0.1s ease;
+}
+</style>
+
+</head>
+
+<body>
+
+	<!-- Include the header fragment -->
+	<div th:replace="fragments/headerFragment :: header"></div>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/asideFragment :: aside"></div>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Manage Leave Applications</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Intern</a></li>
+					<li class="breadcrumb-item active">Manage Leave Applications</li>
+				</ol>
+			</nav>
+		</div>
+		<div class="container">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Intern ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Group ID</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Iterate over interns and display those associated with the current group -->
+					<tr th:each="intern : ${interns}">
+						<td><a
+											th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"><span
+												th:text="${intern.internId}"></span></a></td>
+						<td th:text="${intern.firstName}"></td>
+						<td th:text="${intern.email}"></td>
+						<td><a
+											th:href="@{'/bisag/admin/allocate_guide/' + ${intern.group.groupId}}"><span
+												th:text="${intern.group.groupId}"></span></a></td>
+						<td><a
+							th:href="@{'/bisag/admin/manage_leave_applications_details/' + ${intern.internId}}"
+							class="btn"><i class="fa-solid fa-circle-info"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

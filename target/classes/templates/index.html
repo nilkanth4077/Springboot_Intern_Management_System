@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>Welcome To BISAG-N</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link href="assets/img/logo.jpg" rel="icon">
+<link href="assets/img/logo.jpg" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="assets/vendor/boxicons/css/boxicons.min.css"
+	rel="stylesheet">
+<link href="assets/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link href="assets/css/style2.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header id="header">
+		<div class="container mx-5">
+
+			<h1>
+				<a href="index.html">BISAG-N</a>
+			</h1>
+
+			<div class="typing-container">
+				<h2 id="typing-text">Bhaskaracharya National Institute for
+					Space Applications and Geo-informatics</h2>
+			</div>
+
+			<div class="mt-4 social-links">
+				<a th:href="@{/login}" class="btn btn-primary" target="_blank">Login</a>
+				<a th:href="@{/bisag_internship}" class="btn btn-primary mx-2"
+					target="_blank">Apply For Internship</a>
+			</div>
+
+			<nav id="navbar" class="navbar">
+				<ul>
+					<li><a class="nav-link active" href="#header">Home</a></li>
+					<li><a class="nav-link" href="#about">About</a></li>
+					<li><a class="nav-link" href="#contact">Contact</a></li>
+					<li><a class="nav-link" href="https://bisag-n.gov.in/"
+						target="_blank">Portfolio</a></li>
+					<li><a class="nav-link" th:href="@{/login}" target="_blank">Login</a></li>
+					<li><a class="nav-link" th:href="@{/bisag_internship}"
+						target="_blank">Apply</a></li>
+				</ul>
+				<i class="bi bi-list mobile-nav-toggle"></i>
+			</nav>
+			<!-- .navbar -->
+
+
+
+		</div>
+	</header>
+	<!-- End Header -->
+
+	<!-- ======= About Section ======= -->
+	<section id="about" class="about">
+
+		<!-- ======= About Me ======= -->
+		<div class="about-me container">
+
+			<div class="section-title">
+				<h2>About</h2>
+				<p>Learn more about bisag</p>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-4 mt-3" data-aos="fade-right">
+					<img src="assets/img/slides-1.jpg" class="img-fluid" alt="">
+					<img src="assets/img/slides-2.jpg" class="img-fluid" alt="">
+				</div>
+				<div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+					<h3>Visions</h3>
+					<p class="fst-italic">To empower and serve the Nation through
+						development of Space and Geo-spatial Technologies, its
+						applications/solutions/services in accordance to governance
+						principles for socio-economic welfare of the Society.</p>
+					<div class="row">
+						<h3>Role of BISAG-N</h3>
+						<p class="fst-italic">The Institute works in close
+							co-ordination with GoI Ministries and State Government
+							departments/agencies and has thus emerged as a National level
+							agency to use satellite communication and Space & Geo-spatial
+							technologies for the planning and development activities in
+							various sectors of the Government.</p>
+					</div>
+					<div class="row mt-2">
+						<h3>Profile</h3>
+						<p class="fst-italic">BISAG-N provides specialized services
+							and solutions in implementing map-based Geographic Information
+							Systems. BISAG-N undertakes all services for the entire process
+							of implementing an enterprise level GIS system. These services
+							include GIS database design and development, map
+							creation/updation and finishing, data migration/conversion and
+							format translation, software development and customization,
+							systems integration and technical consulting. BISAG-N also
+							provides complete GIS solutions, which bundle hardware and
+							software with GIS systems development services.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- End About Me -->
+
+		<!-- ======= Counts ======= -->
+		<div class="counts container">
+
+			<div class="row">
+
+				<div class="col-lg-3 col-md-6">
+					<div class="count-box">
+						<i class="bi bi-emoji-smile"></i> <span data-purecounter-start="0"
+							data-purecounter-end="200" data-purecounter-duration="1"
+							class="purecounter"></span>
+						<p>Happy Interns</p>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+					<div class="count-box">
+						<i class="bi bi-journal-richtext"></i> <span
+							data-purecounter-start="0" data-purecounter-end="50"
+							data-purecounter-duration="1" class="purecounter"></span>
+						<p>Projects</p>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+					<div class="count-box">
+						<i class="bi bi-headset"></i> <span data-purecounter-start="0"
+							data-purecounter-end="1200" data-purecounter-duration="1"
+							class="purecounter"></span>
+						<p>Staff Support</p>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+					<div class="count-box">
+						<i class="bi bi-award"></i> <span data-purecounter-start="0"
+							data-purecounter-end="20" data-purecounter-duration="1"
+							class="purecounter"></span>
+						<p>Awards</p>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- End Counts -->
+
+		<!-- ======= Skills  ======= -->
+		<div class="skills container">
+
+			<div class="section-title">
+				<h2>Training Domains</h2>
+			</div>
+
+			<div class="row skills-content">
+
+				<div class="col-lg-6">
+
+					<div class="progress">
+						<span class="skill">JAVA <i class="val">100%</i></span>
+						<div class="progress-bar-wrap">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+
+					<div class="progress">
+						<span class="skill">Data Science <i class="val">90%</i></span>
+						<div class="progress-bar-wrap">
+							<div class="progress-bar" role="progressbar" aria-valuenow="90"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+
+					<div class="progress">
+						<span class="skill">MERN <i class="val">75%</i></span>
+						<div class="progress-bar-wrap">
+							<div class="progress-bar" role="progressbar" aria-valuenow="75"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-lg-6">
+
+					<div class="progress">
+						<span class="skill">DJango <i class="val">80%</i></span>
+						<div class="progress-bar-wrap">
+							<div class="progress-bar" role="progressbar" aria-valuenow="80"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+
+					<div class="progress">
+						<span class="skill">UI/UX <i class="val">90%</i></span>
+						<div class="progress-bar-wrap">
+							<div class="progress-bar" role="progressbar" aria-valuenow="90"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+
+					<div class="progress">
+						<span class="skill">Image Processing <i class="val">55%</i></span>
+						<div class="progress-bar-wrap">
+							<div class="progress-bar" role="progressbar" aria-valuenow="55"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<!-- End Skills -->
+
+		<!-- ======= Interests ======= -->
+		<div class="interests container">
+
+			<div class="section-title">
+				<h2>Activities</h2>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-3 col-md-4">
+					<div class="icon-box">
+						<i class="ri-store-line" style="color: #ffbb2c;"></i>
+						<h3>Satelite Communication</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+					<div class="icon-box">
+						<i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+						<h3>Remote Sensing Applications</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+					<div class="icon-box">
+						<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+						<h3>Geo-informatics System</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+					<div class="icon-box">
+						<i class="ri-paint-brush-line" style="color: #e361ff;"></i>
+						<h3>Photogrammetry</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-database-2-line" style="color: #47aeff;"></i>
+						<h3>Global Navigation Satellite System</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
+						<h3>Land Survey</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
+						<h3>Disaster Management</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
+						<h3>Software Development</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-anchor-line" style="color: #b2904f;"></i>
+						<h3>Technology Transfer</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-disc-line" style="color: #b20969;"></i>
+						<h3>Value Added Services</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-base-station-line" style="color: #ff5828;"></i>
+						<h3>Education, Research and Training</h3>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 mt-4">
+					<div class="icon-box">
+						<i class="ri-fingerprint-line" style="color: #29cc61;"></i>
+						<h3>Top Level Management</h3>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- End Interests -->
+
+	</section>
+	<!-- End About Section -->
+
+
+
+	<!-- ======= Portfolio Section ======= -->
+	<section id="portfolio" class="portfolio">
+		<div class="container">
+
+			<div class="section-title">
+				<h2>Portfolio</h2>
+				<p>My Works</p>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12 d-flex justify-content-center">
+					<ul id="portfolio-flters">
+						<li data-filter="*" class="filter-active">All</li>
+						<li data-filter=".filter-app">App</li>
+						<li data-filter=".filter-card">Card</li>
+						<li data-filter=".filter-web">Web</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row portfolio-container">
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>App 1</h4>
+							<p>App</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-1.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="App 1"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-web">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>Web 3</h4>
+							<p>Web</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-2.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="Web 3"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>App 2</h4>
+							<p>App</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-3.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="App 2"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-card">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>Card 2</h4>
+							<p>Card</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-4.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="Card 2"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-web">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>Web 2</h4>
+							<p>Web</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-5.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="Web 2"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>App 3</h4>
+							<p>App</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-6.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="App 3"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-card">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>Card 1</h4>
+							<p>Card</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-7.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="Card 1"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-card">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>Card 3</h4>
+							<p>Card</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-8.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="Card 3"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 portfolio-item filter-web">
+					<div class="portfolio-wrap">
+						<img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid"
+							alt="">
+						<div class="portfolio-info">
+							<h4>Web 3</h4>
+							<p>Web</p>
+							<div class="portfolio-links">
+								<a href="assets/img/portfolio/portfolio-9.jpg"
+									data-gallery="portfolioGallery" class="portfolio-lightbox"
+									title="Web 3"><i class="bx bx-plus"></i></a> <a
+									href="portfolio-details.html"
+									data-gallery="portfolioDetailsGallery"
+									data-glightbox="type: external"
+									class="portfolio-details-lightbox" title="Portfolio Details"><i
+									class="bx bx-link"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+	<!-- End Portfolio Section -->
+
+	<!-- ======= Contact Section ======= -->
+	<section id="contact" class="contact">
+		<div class="container">
+
+			<div class="section-title">
+				<h2>Contact</h2>
+				<p>Feel Free To Enquire</p>
+			</div>
+
+			<div class="row mt-2">
+
+				<div class="col-md-6 d-flex align-items-stretch">
+					<div class="info-box">
+						<i class="bx bx-map"></i>
+						<h3>My Address</h3>
+						<p>Near CH '0' Circle, Highway, Indulal Yagnik Marg,
+							Gandhinagar - Ahmedabad Rd, Gandhinagar, Gujarat 382007</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 d-flex align-items-stretch">
+					<div class="info-box">
+						<i class="bx bx-envelope"></i>
+						<h3>Contact</h3>
+						<p>info@bisag.gujarat.gov.in</p>
+						<p>+91 79232 13091</p>
+					</div>
+				</div>
+			</div>
+
+			<form action="forms/contact.php" method="post" role="form"
+				class="php-email-form mt-4">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<input type="text" name="name" class="form-control" id="name"
+							placeholder="Your Name" required>
+					</div>
+					<div class="col-md-6 form-group mt-3 mt-md-0">
+						<input type="email" class="form-control" name="email" id="email"
+							placeholder="Your Email" required>
+					</div>
+				</div>
+				<div class="form-group mt-3">
+					<input type="text" class="form-control" name="subject" id="subject"
+						placeholder="Subject" required>
+				</div>
+				<div class="form-group mt-3">
+					<textarea class="form-control" name="message" rows="5"
+						placeholder="Message" required></textarea>
+				</div>
+				<div class="my-3">
+					<div class="loading">Loading</div>
+					<div class="error-message"></div>
+					<div class="sent-message">Your message has been sent. Thank
+						you!</div>
+				</div>
+				<div class="text-center">
+					<button type="submit">Send Message</button>
+				</div>
+			</form>
+
+		</div>
+	</section>
+	<!-- End Contact Section -->
+
+	<div class="credits">Designed by Group-24RH4</div>
+
+	<!-- Vendor JS Files -->
+	<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+	<script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+	<script src="assets/vendor/php-email-form/validate.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="assets/js/main2.js"></script>
+
+	<script>
+		// Optional: You can add a delay before starting the typing animation
+		// setTimeout(startTypingAnimation, 1000);
+
+		// Start the typing animation
+		startTypingAnimation();
+
+		function startTypingAnimation() {
+			const typingText = document.getElementById('typing-text');
+			typingText.style.animation = 'none'; // Reset animation
+			void typingText.offsetWidth; // Trigger reflow
+			typingText.style.animation = 'typing 5s steps(40) infinite';
+		}
+	</script>
+
+</body>
+
+</html>
