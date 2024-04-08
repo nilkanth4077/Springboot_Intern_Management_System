@@ -261,7 +261,7 @@ public class InternController {
 			weeklyReportDisable1="false";
 		}
 		
-		// Retrieve the last weekly report
+//		// Retrieve the last weekly report
 	    WeeklyReport lastWeeklyReport = null;
 	    if (!weeklyReports.isEmpty()) {
 	        lastWeeklyReport = weeklyReports.get(weeklyReports.size() - 1);
@@ -269,42 +269,47 @@ public class InternController {
 
 	    // Extract deadline of the last weekly report if it exists
 	    Date deadlineOfLastWeeklyReport = null;
+	    String weeklyReportDisable2;
 	    if (lastWeeklyReport != null) {
 	        deadlineOfLastWeeklyReport = lastWeeklyReport.getDeadline();
-	    }
-	    
-	    System.out.println(deadlineOfLastWeeklyReport);
-	    System.out.println(checkLastWeeklyReportSubmissionDate(nextSubmissionDate));
-	    
-	   //Convert deadlineOfLastWeeklyReport to LocalDate
-	    LocalDate localDate = deadlineOfLastWeeklyReport.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-	    //Format the LocalDate as a string with the desired format
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	    String formattedDate = localDate.format(formatter);
-
-	    System.out.println(formattedDate); // Print the formatted date
-
-
-	  String weeklyReportDisable2;
-	
-	  String checkWithFormattedDate =  checkLastWeeklyReportSubmissionDate(nextSubmissionDate).toString();
-	  System.out.println(checkWithFormattedDate);
-	    if(formattedDate.equals(checkWithFormattedDate))
-	    {
-	    	weeklyReportDisable2 = "true";
+	        LocalDate localDate = deadlineOfLastWeeklyReport.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        String formattedDate = localDate.format(formatter);
+//	    System.out.println(deadlineOfLastWeeklyReport);
+//	    System.out.println(checkLastWeeklyReportSubmissionDate(nextSubmissionDate));
+	        
+	        //Convert deadlineOfLastWeeklyReport to LocalDate
+	        
+	        //Format the LocalDate as a string with the desired format
+	        
+	        System.out.println(formattedDate); // Print the formatted date
+	    	
+		    String checkWithFormattedDate =  checkLastWeeklyReportSubmissionDate(nextSubmissionDate).toString();
+		    System.out.println(checkWithFormattedDate);
+		    if(formattedDate.equals(checkWithFormattedDate))
+		    {
+		    	weeklyReportDisable2 = "true";
+		    }
+		    else
+		    {
+		    	weeklyReportDisable2 = "false";
+		    }
+		    mv.addObject("weeklyReportDisable2",weeklyReportDisable2);
 	    }
 	    else
 	    {
-	    	weeklyReportDisable2 = "false";
+	    	weeklyReportDisable2 = "true";
 	    }
+	    
+
+
+	    
 		mv.addObject("nextSubmissionDate", checkLastWeeklyReportSubmissionDate(nextSubmissionDate));
 		mv.addObject("nextSubmissionWeekNo", nextSubmissionWeekNo);
 		mv.addObject("weeklyReports", weeklyReports);
 		mv.addObject("intern", intern);
 		mv.addObject("group", group);
 		mv.addObject("weeklyReportDisable1",weeklyReportDisable1);
-		mv.addObject("weeklyReportDisable2",weeklyReportDisable2);
 		return mv;
 	}
 
