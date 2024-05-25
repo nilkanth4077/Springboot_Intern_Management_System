@@ -362,7 +362,7 @@ html, body {
 
 	</div>
 
-	<div class="modal fade" id="messageModal" tabindex="-1" role="dialog"
+	<div class="modal fade" th:if="${session.msg}" id="messageModal" tabindex="-1" role="dialog"
 		aria-labelledby="messageModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -373,7 +373,7 @@ html, body {
 				</div>
 				<div class="modal-body">
 					<!-- Display the session message here -->
-					<th:block th:if="${session.msg}">
+					<th:block>
 						<p class="text-center text-success" th:text="${session.msg}"></p>
 					</th:block>
 

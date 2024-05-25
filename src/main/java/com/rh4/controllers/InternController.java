@@ -298,7 +298,7 @@ public class InternController {
 	    }
 	    else
 	    {
-	    	weeklyReportDisable2 = "true";
+	    	weeklyReportDisable2 = "false";
 	    }
 	    
 

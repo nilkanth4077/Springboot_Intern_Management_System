@@ -95,14 +95,14 @@ public class SecurityConfig {
 //        	
 //        	SuperAdmin s1 = new SuperAdmin();
 //        	s1.setName("superadmin");
-//        	s1.setEmailId("superadmin2.bisag@gmail.com");
+//        	s1.setEmailId("superadmin.bisag@gmail.com");
 //        	s1.setContactNo((long)23123466);
 //        	s1.setLocation("bharuch");
 //        	s1.setPassword(passwordEncoder().encode("123"));
 //        	s1.setCreatedAt(null);
 //        	srepo.save(s1);
 //            MyUser user3 = new MyUser();
-//            user3.setUsername("superadmin2.bisag@gmail.com");
+//            user3.setUsername("superadmin.bisag@gmail.com");
 //            user3.setPassword(passwordEncoder().encode("123"));
 //            user3.setRole("SUPERADMIN");
 //            user3.setUserId(Long.toString(s1.getSuperAdminId()));
