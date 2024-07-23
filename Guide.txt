@@ -1,0 +1,44 @@
+# Clone project
+
+1. git clone https://github.com/nilkanth4077/Springboot_Intern_Management_System.git
+
+
+# Changes in application.properties:
+
+2.
+- Schema name, username, password, database_url (If any other relational database)
+- File paths of your local system's directory. (Where you want to store all files provided by the interns)
+- After cloning make sure all folders should be empty in the 'static' folder. (Otherwise filename generation can lead to conflicts)
+
+3.
+- Add email, so you can send emails from that particular email.
+- Go to that email's Google account.
+- 'Manage Your Google Account' -> 'Security' -> '2-step Verification'.
+- After login, go to 'App Passwords'.
+- Add name and create.
+- Copy password to 'application.properties'. (Without spaces)
+
+# Create Super Admin & other roles:
+
+3.
+- Project should run successfully.
+- Go to 'SecurityConfig', Uncomment 'loadInitialUsersInDB' method
+- Change details of super admin as your requirement. (In 's1' and 'user3' details has to be same, otherwise access issues will occur)
+- Rerun the project. Your super admin is created.
+- Comment that 'loadInitialUsersInDB' section again
+
+# Moving forward:
+
+4.
+- Use those credentials and login as super admin.
+- Create admin and using admin credentials login to admin then create guides and so on.
+- For new intern registration there are dynamic dropdown fields. (In registration form)
+- Login as admin, go to 'Interns -> Add Fields' and create those fields.
+- Register some interns.
+
+5.
+- Explore the project.
+- There are some pages with only frontend (No APIs from backend for those).
+- Admin Dashboard -> 'Queries', 'Manage Leave Applications'
+- Intern Dashboard -> 'Queries', 'Apply for leave'
+- Guide Dashboard -> 'Queries'
