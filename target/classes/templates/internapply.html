@@ -265,9 +265,9 @@ html, body {
                                                            placeholder="Email*" id="email" name="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="passportSizeImage" class="form-label text-white mt-1">Upload
+                                    <label for="nocPdf" class="form-label text-white mt-1">Upload
                                         NOC:</label> <input type="file" class="form-control" id="nocPdf"
-                                                            name="nocPdfone" accept=".pdf" required>
+                                                            name="nocPdf" accept=".pdf" required>
                                 </div>
                             </div>
 
@@ -291,7 +291,7 @@ html, body {
                                 </div>
                                 <div class="form-group">
                                     <select class="form-select" id="domain"
-                                            name="programmingLangName" required>
+                                            name="domain" required>
                                         <option value="" disabled selected>Select Domain</option>
                                         <option th:each="domain : ${domains}"
                                                 th:text="${domain.name}" th:value="${domain.name}"></option>
@@ -310,9 +310,9 @@ html, body {
                                            placeholder="Password*" name="password" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="passportSizeImage" class="form-label text-white mt-0">Upload
+                                    <label for="resumePdf" class="form-label text-white mt-0">Upload
                                         Resume:</label> <input type="file" class="form-control"
-                                                               id="resumePdf" name="resumePdfone" accept=".pdf"
+                                                               id="resumePdf" name="resumePdf" accept=".pdf"
                                                                required>
                                 </div>
                             </div>
@@ -339,13 +339,13 @@ html, body {
                                 <div class="form-group  my-4">
                                     <label for="passportSizeImage" class="form-label text-white">Passport
                                         Size Image:</label> <input type="file" class="form-control"
-                                                                   id="passportSizeImage" name="passportSizeImageone"
-                                                                   accept=".pdf" required>
+                                                                   id="passportSizeImage" name="passportSizeImage"
+                                                                   accept=".jpg, .jpeg, .png" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="passportSizeImage" class="form-label text-white mt-1">College
+                                    <label for="icardImage" class="form-label text-white mt-1">College
                                         ICard Image:</label> <input type="file" class="form-control"
-                                                                    id="icardImage" name="icardImageone" accept=".pdf"
+                                                                    id="icardImage" name="icardImage" accept=".jpg, .jpeg, .png"
                                                                     required>
                                 </div>
                             </div>

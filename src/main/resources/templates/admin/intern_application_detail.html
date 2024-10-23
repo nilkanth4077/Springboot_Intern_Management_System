@@ -111,43 +111,13 @@ iframe {
 					</tr>
 					<tr>
 						<th>Domain</th>
-						<td><select class="form-select" id="programmingLangName"
-							name="programmingLangName">
+						<td><select class="form-select" id="domain"
+							name="domain">
 								<option th:each="domain : ${domains}" th:text="${domain.name}"
 									th:value="${domain.name}"
-									th:selected="${domain.name == intern.get().programmingLangName}"></option>
+									th:selected="${domain.name == intern.get().domain}"></option>
 
 						</select></td>
-					</tr>
-					<tr>
-						<th>College ID Image</th>
-						<td><iframe
-								th:src="@{'/files/icard/' + ${intern.get().icardImage}}"
-								frameborder="0"></iframe> <input type="file"
-							class="form-control" id="icardImage" name="icardImageone"></td>
-					</tr>
-					<tr>
-						<th>NOC Image</th>
-						<td><iframe
-								th:src="@{'/files/noc/' + ${intern.get().nocPdf}}"
-								frameborder="0" width="100%" height="50%" style="border: none;"></iframe>
-							<input type="file" class="form-control" id="nocPdf"
-							name="nocPdfone"></td>
-					</tr>
-					<tr>
-						<th>Resume</th>
-						<td><iframe
-								th:src="@{'/files/resume/' + ${intern.get().resumePdf}}"
-								frameborder="0"></iframe> <input type="file"
-							class="form-control" id="resumePdf" name="resumePdfone"></td>
-					</tr>
-					<tr>
-						<th>Passport Size Image</th>
-						<td><iframe
-								th:src="@{'/files/image/' + ${intern.get().passportSizeImage}}"
-								frameborder="0"></iframe> <input type="file"
-							class="form-control" id="passportSizeImage"
-							name="passportSizeImageone"></td>
 					</tr>
 					<tr>
 						<th>Semester</th>

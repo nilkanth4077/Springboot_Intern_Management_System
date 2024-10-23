@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.rh4.entities.*;
-import com.rh4.models.ReportFilter;
 import com.rh4.repositories.*;
 
 import java.sql.Date;

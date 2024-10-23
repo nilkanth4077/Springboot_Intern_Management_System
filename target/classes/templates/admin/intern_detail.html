@@ -119,11 +119,11 @@ iframe {
 
 					<tr>
 						<th>Domain</th>
-						<td><select class="form-select" id="programmingLangName"
-							name="programmingLangName">
+						<td><select class="form-select" id="domain"
+							name="domain">
 								<option th:each="domain : ${domains}" th:text="${domain.name}"
 									th:value="${domain.name}"
-									th:selected="${domain.name == intern.get().programmingLangName}"></option>
+									th:selected="${domain.name == intern.get().domain}"></option>
 
 						</select></td>
 					</tr>

@@ -124,7 +124,7 @@ button {
 										<th><i class="fa-solid fa-sort mx-2"></i>Email ID</th>
 										<th><i class="fa-solid fa-sort mx-2"></i>College</th>
 										<th><i class="fa-solid fa-sort mx-2"></i>Is Active</th>
-										<th>Actions</th>
+										<th>Documents</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -138,7 +138,7 @@ button {
 										<td th:text="${intern.collegeName}"></td>
 										<td th:text="${intern.isActive}"></td>
 										<td><a
-											th:href="@{'/bisag/admin/intern_application/' + ${intern.id}}"
+											th:href="@{'/bisag/admin/intern_application_docs/' + ${intern.id}}"
 											class="btn"><i class="fa-solid fa-circle-info"></i></a></td>
 									</tr>
 								</tbody>

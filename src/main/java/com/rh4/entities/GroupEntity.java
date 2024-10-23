@@ -42,8 +42,8 @@ public class GroupEntity {
 	@Column(name = "final_report")
     private String finalReport;
 	
-	@Column(name = "programming_lang_name")
-    private String programmingLangName;
+	@Column(name = "domain")
+    private String domain;
 	
 	@JoinColumn(name = "guide_id")
 	@ManyToOne
@@ -55,7 +55,7 @@ public class GroupEntity {
 		}
   	
 	public GroupEntity(long id, String groupId, String projectDefinition, String description, String finalReport, String finalReportStatus,
-		String projectDefinitionStatus, String projectDefinitionDocument, String programmingLangName, Guide guide) {
+		String projectDefinitionStatus, String projectDefinitionDocument, String domain, Guide guide) {
 	super();
 	this.id = id;
 	this.groupId = groupId;
@@ -63,7 +63,7 @@ public class GroupEntity {
 	this.description = description;
 	this.finalReport = finalReport;
 	this.finalReport = finalReport;
-	this.programmingLangName = programmingLangName;
+	this.domain = domain;
 	this.projectDefinitionStatus = projectDefinitionStatus;
 	this.projectDefinitionDocument = projectDefinitionDocument;
 	this.guide = guide;
@@ -100,13 +100,13 @@ public class GroupEntity {
 		this.id = id;
 	}
 
-	
-	public String getProgrammingLangName() {
-		return programmingLangName;
+
+	public String getDomain() {
+		return domain;
 	}
 
-	public void setProgrammingLangName(String programmingLangName) {
-		this.programmingLangName = programmingLangName;
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 
 	public String getGroupId() {

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Documents</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 20px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+iframe {
+	width: 100%;
+	height: 300px;
+}
+
+.status-dropdown {
+	width: 100%;
+	padding: 8px;
+}
+
+#mysubmitbutton {
+	padding: 10px 15px;
+	background-color: #2196F3;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.no-border {
+	border: none;
+}
+</style>
+</head>
+<body>
+	<!-- Include the header fragment -->
+	<div th:replace="fragments/headerFragment :: header"></div>
+
+	<!-- Include the aside fragment -->
+	<div th:replace="fragments/asideFragment :: aside"></div>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Intern Application Documents</h1>
+		</div>
+
+		<div th:if="${error}">
+			<p th:text="${error}"></p>
+		</div>
+
+		<h2>Passport Size Image</h2>
+		<iframe th:src="@{/bisag/admin/documents/passport/{id}(id=${id})}" width="300" height="200"></iframe>
+
+		<h2>College ID Card Image</h2>
+		<iframe th:src="@{/bisag/admin/documents/icard/{id}(id=${id})}" width="300" height="200"></iframe>
+
+		<h2>NOC PDF</h2>
+		<iframe th:src="@{/bisag/admin/documents/noc/{id}(id=${id})}" width="100%" height="500"></iframe>
+
+		<h2>Resume PDF</h2>
+		<iframe th:src="@{/bisag/admin/documents/resume/{id}(id=${id})}" width="100%" height="500"></iframe>
+
+		<!-- Include the footer fragment -->
+		<div th:replace="fragments/footerFragment :: footer"></div>
+	</main>
+<!--	<div th:unless="${intern.isPresent()}">-->
+<!--		&lt;!&ndash; Handle the case when Optional is empty &ndash;&gt;-->
+<!--		<p class="alert alert-warning">Intern not found</p>-->
+<!--	</div>-->
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+
+
+
+	<!-- Include Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+			// Initially hide the loading spinner
+			$('.spinner-border').addClass('visually-hidden');
+
+			$('form').submit(function() {
+				// Show the loading spinner
+				$('.spinner-border').removeClass('visually-hidden');
+
+				// You can also perform additional actions or AJAX requests here
+
+				// For demonstration purposes, let's simulate a delay
+				setTimeout(function() {
+					// After some delay, you may want to reset the loading spinner or perform other actions
+					$('.spinner-border').addClass('visually-hidden');
+				}, 200000); // Simulated delay of 2 seconds (adjust as needed)
+			});
+		});
+	</script>
+</body>
+
+</html>
