@@ -576,7 +576,6 @@ public class AdminController {
 			if(req.getFile("icardImageone")!=null)
 			{
 				intern.get().setIcardImage(uploadfile(req.getFile("icardImageone"),"icard",Long.toString(intern.get().getId())));
-				
 			}
 			if(req.getFile("nocPdfone")!=null)
 			{

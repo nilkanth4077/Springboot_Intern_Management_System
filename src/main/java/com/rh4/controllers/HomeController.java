@@ -29,11 +29,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -175,6 +171,12 @@ public class HomeController {
 
 	        return "redirect:/bisag_internship";
 	    }
+	}
+
+	@PostMapping("/remove-session-msg")
+	@ResponseBody
+	public void removeSessionMsg(HttpSession session) {
+		session.removeAttribute("msg");  // Remove the 'msg' attribute from the session
 	}
 
 	public String uploadfile(MultipartFile file, String object, long id) throws Exception, IllegalStateException, IOException {

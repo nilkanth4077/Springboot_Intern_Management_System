@@ -1,5 +1,7 @@
 package com.rh4.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailSenderService {
+
+	Logger logger = LoggerFactory.getLogger(EmailSenderService.class);
 
 	@Autowired
 	private JavaMailSender mailSender;
@@ -32,11 +36,8 @@ public class EmailSenderService {
 		try {
 			mailSender.send(message);
 		} catch (MailException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("Error while sending the email: " + e.getMessage());
 		}
-		
-		//System.out.println("mail sent");
 	}
 	
 }

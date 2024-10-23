@@ -48,6 +48,9 @@ public class InternService {
 	{
 		return internApplicationRepo.findById(id);
 	}
+	public InternApplication save(InternApplication internApplication) {
+		return internApplicationRepo.save(internApplication);
+	}
 	public void addInternApplication(InternApplication intern)
 	{
 		internApplicationRepo.save(intern);

@@ -2,24 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Apply for the Internship</title>
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apply for the Internship</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+    <link
+            href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+            rel="stylesheet" id="bootstrap-css">
+    <script
+            src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
 </head>
 <style>
 html, body {
@@ -202,217 +202,230 @@ html, body {
 	transform: translateY(-100%);
 }
 }
+
 </style>
 
 <body>
 
-	<div class="container-fluid register">
-		<div class="row">
-			<div class="col-md-3 register-left">
-				<div style="position: relative; display: inline-block;">
-					<div
-						style="position: absolute; border-radius: 50%; background-color: white; width: 100px; height: 100px; top: 20px;"></div>
-					<img th:src="@{/assets/img/bisag_logo.png}" alt=""
-						style="position: relative; z-index: 1; width: 100px; height: 100px;">
-				</div>
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <div style="position: relative; display: inline-block;">
+                <div
+                        style="position: absolute; border-radius: 50%; background-color: white; width: 100px; height: 100px; top: 20px;"></div>
+                <img th:src="@{/assets/img/bisag_logo.png}" alt=""
+                     style="position: relative; z-index: 1; width: 100px; height: 100px;">
+            </div>
 
 
-				<h3 class="mt-4">Welcome</h3>
-				<p>If you have previously submitted an application, kindly
-					verify your application status by logging into your account</p>
-				<div class="scrolling-text">
-					<p>Name: Only characters are allowed</p>
-					<p>Contact: Only digits</p>
-					<p>Semester: Must Between 1 to 8</p>
-					<p>Passport Size image must be in 'JPG' format</p>
-					<p>Rest three documents must be in 'PDF' format</p>
-				</div>
-				<a th:href="@{/login}"><input type="submit" name=""
-					value="Login" /></a><br />
-			</div>
-			<div class="col-md-9 register-right">
-				<div class="tab-content" id="myTabContent">
-					<!-- ... Existing code ... -->
+            <h3 class="mt-4">Welcome</h3>
+            <p>If you have previously submitted an application, kindly
+                verify your application status by logging into your account</p>
+            <div class="scrolling-text">
+                <p>Name: Only characters are allowed</p>
+                <p>Contact: Only digits</p>
+                <p>Semester: Must Between 1 to 8</p>
+                <p>Passport Size image must be in 'JPG' format</p>
+                <p>Rest three documents must be in 'PDF' format</p>
+            </div>
+            <a th:href="@{/login}"><input type="submit" name=""
+                                          value="Login"/></a><br/>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <!-- ... Existing code ... -->
 
-					<div class="tab-pane fade show active" id="home" role="tabpanel"
-						aria-labelledby="home-tab">
-						<h3 class="register-heading text-white">Apply for the
-							Internship</h3>
-						<form action="bisag_internship" method="post"
-							enctype="multipart/form-data">
-							<div class="row register-form">
-								<!-- Column 1 -->
-								<div class="col-md-4">
-									<div class="form-group">
-										<input type="text" class="form-control"
-											placeholder="First Name*" id="firstName" name="firstName"
-											required>
-									</div>
-									<div class="form-group">
-										<input type="text" class="form-control"
-											placeholder="Last Name*" id="lastName" name="lastName"
-											required>
-									</div>
-									<div class="form-group">
-										<input type="tel" class="form-control"
-											placeholder="Contact Number*" id="contactNo" name="contactNo"
-											required>
-									</div>
-									<div class="form-group my-4">
-										<label for="email" class="form-label text-white">Email
-											ID:</label> <input type="email" class="form-control"
-											placeholder="Email*" id="email" name="email" required>
-									</div>
-									<div class="form-group">
-										<label for="passportSizeImage" class="form-label text-white mt-1">Upload
-											NOC:</label> <input type="file" class="form-control" id="nocPdf"
-											name="nocPdfone" accept=".pdf" required>
-									</div>
-								</div>
+                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                     aria-labelledby="home-tab">
+                    <h3 class="register-heading text-white">Apply for the
+                        Internship</h3>
+                    <form action="bisag_internship" method="post"
+                          enctype="multipart/form-data">
+                        <div class="row register-form">
+                            <!-- Column 1 -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control"
+                                           placeholder="First Name*" id="firstName" name="firstName"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control"
+                                           placeholder="Last Name*" id="lastName" name="lastName"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control"
+                                           placeholder="Contact Number*" id="contactNo" name="contactNo"
+                                           required>
+                                </div>
+                                <div class="form-group my-4">
+                                    <label for="email" class="form-label text-white">Email
+                                        ID:</label> <input type="email" class="form-control"
+                                                           placeholder="Email*" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passportSizeImage" class="form-label text-white mt-1">Upload
+                                        NOC:</label> <input type="file" class="form-control" id="nocPdf"
+                                                            name="nocPdfone" accept=".pdf" required>
+                                </div>
+                            </div>
 
-								<!-- Column 2 -->
-								<div class="col-md-4">
-									<!-- Additional fields -->
-									<div class="form-group">
-										<select class="form-select" id="collegeName"
-											name="collegeName" required>
-											<option value="" disabled selected>Select College</option>
-											<option th:each="college : ${colleges}"
-												th:text="${college.name}" th:value="${college.name}"></option>
-										</select>
-									</div>
-									<div class="form-group">
-										<select class="form-select" id="branch" name="branch" required>
-											<option value="" disabled selected>Select Branch</option>
-											<option th:each="branch : ${branches}"
-												th:text="${branch.name}" th:value="${branch.name}"></option>
-										</select>
-									</div>
-									<div class="form-group">
-										<select class="form-select" id="domain"
-											name="programmingLangName" required>
-											<option value="" disabled selected>Select Domain</option>
-											<option th:each="domain : ${domains}"
-												th:text="${domain.name}" th:value="${domain.name}"></option>
-										</select>
-									</div>
-									<div class="form-group">
-										<select class="form-select" id="degree"
-											name="degree" required>
-											<option value="" disabled selected>Select Degree</option>
-											<option th:each="degree : ${degrees}"
-												th:text="${degree.name}" th:value="${degree.name}"></option>
-										</select>
-									</div>
-									<div class="form-group">
-										<input type="password" class="form-control"
-											placeholder="Password*" name="password" required>
-									</div>
-									<div class="form-group">
-										<label for="passportSizeImage" class="form-label text-white mt-0">Upload
-											Resume:</label> <input type="file" class="form-control"
-											id="resumePdf" name="resumePdfone" accept=".pdf" required>
-									</div>
-								</div>
+                            <!-- Column 2 -->
+                            <div class="col-md-4">
+                                <!-- Additional fields -->
+                                <div class="form-group">
+                                    <select class="form-select" id="collegeName"
+                                            name="collegeName" required>
+                                        <option value="" disabled selected>Select College</option>
+                                        <option th:each="college : ${colleges}"
+                                                th:text="${college.name}" th:value="${college.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-select" id="branch" name="branch" required>
+                                        <option value="" disabled selected>Select Branch</option>
+                                        <option th:each="branch : ${branches}"
+                                                th:text="${branch.name}" th:value="${branch.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-select" id="domain"
+                                            name="programmingLangName" required>
+                                        <option value="" disabled selected>Select Domain</option>
+                                        <option th:each="domain : ${domains}"
+                                                th:text="${domain.name}" th:value="${domain.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-select" id="degree"
+                                            name="degree" required>
+                                        <option value="" disabled selected>Select Degree</option>
+                                        <option th:each="degree : ${degrees}"
+                                                th:text="${degree.name}" th:value="${degree.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control"
+                                           placeholder="Password*" name="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passportSizeImage" class="form-label text-white mt-0">Upload
+                                        Resume:</label> <input type="file" class="form-control"
+                                                               id="resumePdf" name="resumePdfone" accept=".pdf"
+                                                               required>
+                                </div>
+                            </div>
 
-								<!-- Column 3 -->
-								<div class="col-md-4">
-									<div class="form-group">
-										<input type="number" class="form-control"
-											placeholder="Semester*" id="semester" name="semester"
-											required>
-									</div>
-									<div class="form-group">
-										<input type="date" class="form-control" id="joiningDate"
-											placeholder="Joining Date*" name="joiningDate"
-											onfocus="(this.type='date')" onblur="(this.type='text')"
-											required>
-									</div>
-									<div class="form-group">
-										<input type="date" class="form-control" id="completionDate"
-											placeholder="Completion Date*" name="completionDate"
-											onfocus="(this.type='date')" onblur="(this.type='text')"
-											required>
-									</div>
-									<div class="form-group  my-4">
-										<label for="passportSizeImage" class="form-label text-white">Passport
-											Size Image:</label> <input type="file" class="form-control"
-											id="passportSizeImage" name="passportSizeImageone" accept=".pdf" required>
-									</div>
-									<div class="form-group">
-										<label for="passportSizeImage" class="form-label text-white mt-1">College
-											ICard Image:</label> <input type="file" class="form-control"
-											id="icardImage" name="icardImageone" accept=".pdf" required>
-									</div>
-								</div>
-								<div class="text-center py-4">
-									<button type="submit" class="btnRegister">
+                            <!-- Column 3 -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="number" class="form-control"
+                                           placeholder="Semester*" id="semester" name="semester"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" id="joiningDate"
+                                           placeholder="Joining Date*" name="joiningDate"
+                                           onfocus="(this.type='date')" onblur="(this.type='text')"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" id="completionDate"
+                                           placeholder="Completion Date*" name="completionDate"
+                                           onfocus="(this.type='date')" onblur="(this.type='text')"
+                                           required>
+                                </div>
+                                <div class="form-group  my-4">
+                                    <label for="passportSizeImage" class="form-label text-white">Passport
+                                        Size Image:</label> <input type="file" class="form-control"
+                                                                   id="passportSizeImage" name="passportSizeImageone"
+                                                                   accept=".pdf" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passportSizeImage" class="form-label text-white mt-1">College
+                                        ICard Image:</label> <input type="file" class="form-control"
+                                                                    id="icardImage" name="icardImageone" accept=".pdf"
+                                                                    required>
+                                </div>
+                            </div>
+                            <div class="text-center py-4">
+                                <button type="submit" class="btnRegister">
 										<span class="spinner-border spinner-border-sm visually-hidden"
-											role="status" aria-hidden="true"></span> <span
-											class="visually-hidden">Loading...</span>Submit
-									</button>
-									<a th:href="@{/}" type="button" class="btnRegister">Home</a>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+                                              role="status" aria-hidden="true"></span> <span
+                                        class="visually-hidden">Loading...</span>Submit
+                                </button>
+                                <a th:href="@{/}" type="button" class="btnRegister">Home</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	</div>
+</div>
 
-	<div class="modal fade" th:if="${session.msg}" id="messageModal" tabindex="-1" role="dialog"
-		aria-labelledby="messageModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="messageModalLabel">Message</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<!-- Display the session message here -->
-					<th:block>
-						<p class="text-center text-success" th:text="${session.msg}"></p>
-					</th:block>
+<div class="modal fade" th:if="${session.msg}" id="messageModal" tabindex="-1" role="dialog"
+     aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <th:block>
+                    <p class="text-center text-success" th:text="${session.msg}"></p>
+                </th:block>
 
-				</div>
-			</div>
-		</div>
-	</div>
-
+            </div>
+        </div>
+    </div>
+</div>
 
 
-	<!-- Include jQuery -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-		crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 
 
+<!-- Include Bootstrap JS -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 
-	<!-- Include Bootstrap JS -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-		crossorigin="anonymous"></script>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof sessionStorage !== 'undefined' && '${session.msg}' !== '') {
+            // Show the modal
+            $('#messageModal').modal('show');
 
-	<script th:inline="javascript">
-		document.addEventListener('DOMContentLoaded', function() {
-			// Check if sessionStorage is supported and if session.msg is not empty
-			if (typeof sessionStorage !== 'undefined'
-					&& '${session.msg}' !== '') {
-				// Show the modal
-				$('#messageModal').modal('show');
-				// Remove the 'msg' attribute from sessionStorage after showing the modal
-				sessionStorage.removeItem('msg');
-			}
-		});
-	</script>
-	<script>
+            // Remove the session attribute after showing the modal
+            fetch('/remove-session-msg', {
+                method: 'POST'
+            }).then(response => {
+                console.log("Session message removed");
+            }).catch(error => {
+                console.error("Failed to remove session message", error);
+            });
+
+            // Set timeout to hide the modal after 1 minute
+            setTimeout(function() {
+                $('#messageModal').modal('hide');
+            }, 60000);  // 1 minute = 60000 milliseconds
+        }
+    });
+
+</script>
+
+<script>
 		$(document).ready(function() {
 			// Initially hide the loading spinner
 			$('.spinner-border').addClass('visually-hidden');
@@ -430,7 +443,8 @@ html, body {
 				}, 200000); // Simulated delay of 2 seconds (adjust as needed)
 			});
 		});
-	</script>
+
+</script>
 </body>
 
 </html>

@@ -50,7 +50,7 @@ public class InternApplication {
 	
 	@Column(name = "passport_size_image", length = 1000)
     private String passportSizeImage;
-	
+
 	@Column(name = "icard_image", length = 1000)
     private String icardImage;
     
