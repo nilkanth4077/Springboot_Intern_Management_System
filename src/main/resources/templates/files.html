@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>File Upload</title>
+</head>
+<body>
+<h1>Upload a File</h1>
+<form method="POST" enctype="multipart/form-data" action="/uploadFile">
+  <input type="file" name="file" accept="application/pdf" />
+  <button type="submit">Upload</button>
+</form>
+
+<p th:text="${message}"></p>
+
+<h2>Files:</h2>
+<ul>
+  <li th:each="file : ${files}">
+    <!-- Fixing the onclick attribute to prevent malformed markup -->
+    <a href="#"
+       th:onclick="'showPdf(\'' + @{/viewFile/{id}(id=${file.id})} + '\')'"
+       th:text="${file.name}"></a>
+  </li>
+</ul>
+
+<!-- PDF viewer -->
+<h2>PDF Preview:</h2>
+<iframe id="pdfViewer" width="600" height="400" style="border:1px solid #000;"></iframe>
+
+<script>
+  // JavaScript to load the PDF in the iframe
+  function showPdf(pdfUrl) {
+    document.getElementById('pdfViewer').src = pdfUrl;
+  }
+</script>
+
+</body>
+</html>
