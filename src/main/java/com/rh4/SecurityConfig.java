@@ -83,7 +83,7 @@ public class SecurityConfig {
                         .permitAll());
         http.headers(headers -> headers.frameOptions(frameOptions ->
                 frameOptions.sameOrigin()
-                        .contentSecurityPolicy(cps -> cps.policyDirectives("script-src 'self' ....."))));
+                        .contentSecurityPolicy(cps -> cps.policyDirectives("script-src 'self'"))));
         http.logout(logout ->
                 logout
                         .logoutUrl("/logout")
