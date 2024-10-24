@@ -63,20 +63,20 @@
 					<td th:text="${intern.internId}"></td>
 					<td th:text="${intern.firstName}"></td>
 					<td th:text="${intern.lastName}"></td>
-					<td><a href="#" th:if="${intern.registrationForm != null}"
-						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.registrationForm} + '\');'">Open</a></td>
-					<td><a href="#" th:if="${intern.securityForm != null}"
-						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.securityForm} + '\');'">Open</a></td>
-					<td><a href="#" th:if="${intern.icardForm != null}"
-						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.icardForm} + '\');'">Open</a></td>
+<!--					<td><a href="#" th:if="${intern.registrationForm != null}"-->
+<!--						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.registrationForm} + '\');'">Open</a></td>-->
+<!--					<td><a href="#" th:if="${intern.securityForm != null}"-->
+<!--						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.securityForm} + '\');'">Open</a></td>-->
+<!--					<td><a href="#" th:if="${intern.icardForm != null}"-->
+<!--						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.icardForm} + '\');'">Open</a></td>-->
+<!--					<td><a href="#"-->
+<!--						th:attr="onclick='openPdfPopup(\'/files/noc/' + ${intern.nocPdf} + '\');'">Open</a></td>-->
+<!--					<td><a href="#"-->
+<!--						th:attr="onclick='openPdfPopup(\'/files/resume/' + ${intern.resumePdf} + '\');'">Open</a></td>-->
+<!--					<td><a href="#"-->
+<!--						th:attr="onclick='openPdfPopup(\'/files/icard/' + ${intern.icardImage} + '\');'">Open</a></td>-->
 					<td><a href="#"
-						th:attr="onclick='openPdfPopup(\'/files/noc/' + ${intern.nocPdf} + '\');'">Open</a></td>
-					<td><a href="#"
-						th:attr="onclick='openPdfPopup(\'/files/resume/' + ${intern.resumePdf} + '\');'">Open</a></td>
-					<td><a href="#"
-						th:attr="onclick='openPdfPopup(\'/files/icard/' + ${intern.icardImage} + '\');'">Open</a></td>
-					<td><a href="#"
-						th:attr="onclick='openPdfPopup(\'/files/image/' + ${intern.passportSizeImage} + '\');'">Open</a></td>
+						th:attr="onclick='openPdfPopup(\'/files/Intern Docs/' + ${intern.email} + '/' + ${passportSizeImage} + '\');'">Open</a></td>
 
 				</tr>
 			</tbody>

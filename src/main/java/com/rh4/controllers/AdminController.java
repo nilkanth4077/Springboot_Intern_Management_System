@@ -460,6 +460,16 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "passportSizeImage.jpg";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "passportSizeImage.jpg";
+            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setPassportSizeImage(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_application_docs/" + id;
@@ -472,6 +482,16 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "collegeIcardImage.jpg";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "collegeIcardImage.jpg";
+            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setCollegeIcardImage(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_application_docs/" + id;
@@ -484,6 +504,16 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "nocPdf.pdf";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "nocPdf.pdf";
+            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setNocPdf(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_application_docs/" + id;
@@ -496,8 +526,21 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
+
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "resumePdf.pdf";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "resumePdf.pdf";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+
             application.setResumePdf(file.getBytes());
             internService.save(application);
+
             return "redirect:/bisag/admin/intern_application_docs/" + id;
         }
         return "redirect:/bisag/admin/intern_application_docs/" + id;
@@ -529,7 +572,7 @@ public class AdminController {
         } else
             emailService.sendSimpleEmail(intern.get().getEmail(), message + "your unique id is " + intern.get().getId(),
                     "BISAG INTERNSHIP RESULT");
-        return "redirect:/bisag/admin/intern_application_detail/" + id;
+        return "redirect:/bisag/admin/intern_application";
     }
 
 
@@ -727,7 +770,7 @@ public class AdminController {
                     + intern.get().getId();
             emailService.sendSimpleEmail(intern.get().getEmail(), finalmessage, "BISAG INTERNSHIP RESULT");
         }
-        return "redirect:/bisag/admin/intern_application_detail/" + id;
+        return "redirect:/bisag/admin/intern_application/approved_interns";
     }
 
     @GetMapping("/intern_application/new_interns")
