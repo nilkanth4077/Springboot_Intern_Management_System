@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -454,19 +455,64 @@ public class AdminController {
         }
     }
 
+    @PostMapping("/documents/passport/{id}")
+    public String updatePassportSizeImage(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
+        if (optionalApplication.isPresent()) {
+            InternApplication application = optionalApplication.get();
+            application.setPassportSizeImage(file.getBytes());
+            internService.save(application);
+            return "redirect:/bisag/admin/intern_application_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_application_docs/" + id;
+    }
+
+    @PostMapping("/documents/icard/{id}")
+    public String updateICardImage(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
+        if (optionalApplication.isPresent()) {
+            InternApplication application = optionalApplication.get();
+            application.setCollegeIcardImage(file.getBytes());
+            internService.save(application);
+            return "redirect:/bisag/admin/intern_application_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_application_docs/" + id;
+    }
+
+    @PostMapping("/documents/noc/{id}")
+    public String updateNocPdf(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
+        if (optionalApplication.isPresent()) {
+            InternApplication application = optionalApplication.get();
+            application.setNocPdf(file.getBytes());
+            internService.save(application);
+            return "redirect:/bisag/admin/intern_application_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_application_docs/" + id;
+    }
+
+    @PostMapping("/documents/resume/{id}")
+    public String updateResumePdf(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
+        if (optionalApplication.isPresent()) {
+            InternApplication application = optionalApplication.get();
+            application.setResumePdf(file.getBytes());
+            internService.save(application);
+            return "redirect:/bisag/admin/intern_application_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_application_docs/" + id;
+    }
 
     @PostMapping("/intern_application/ans")
     public String internApplicationSubmission(@RequestParam String message, @RequestParam long id,
                                               @RequestParam String status, @RequestParam String finalStatus) {
-        System.out.println("iddd" + id + status);
+        System.out.println("id: " + id + ", status: " + status);
         // Long ID = Long.parseLong(id);
         Optional<InternApplication> intern = internService.getInternApplication(id);
         intern.get().setStatus(status);
         intern.get().setFinalStatus(finalStatus);
         internService.addInternApplication(intern.get());
         if (status.equals("rejected")) {
-            // emailService.sendSimpleEmail(intern.get().getEmail(),"You are rejected",
-            // "BISAG INTERNSHIP RESULT");
             emailService.sendSimpleEmail(intern.get().getEmail(),
                     "Notification: Rejection of BISAG Internship Application\r\n" + "\r\n" + "Dear "
                             + intern.get().getFirstName() + ",\r\n" + "\r\n"
@@ -483,7 +529,7 @@ public class AdminController {
         } else
             emailService.sendSimpleEmail(intern.get().getEmail(), message + "your unique id is " + intern.get().getId(),
                     "BISAG INTERNSHIP RESULT");
-        return "redirect:/bisag/admin/intern_application";
+        return "redirect:/bisag/admin/intern_application_detail/" + id;
     }
 
 
@@ -681,7 +727,7 @@ public class AdminController {
                     + intern.get().getId();
             emailService.sendSimpleEmail(intern.get().getEmail(), finalmessage, "BISAG INTERNSHIP RESULT");
         }
-        return "redirect:/bisag/admin/intern_application/approved_interns";
+        return "redirect:/bisag/admin/intern_application_detail/" + id;
     }
 
     @GetMapping("/intern_application/new_interns")

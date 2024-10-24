@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
@@ -122,6 +125,32 @@ public class HomeController {
                                   @RequestParam("completionDate") Date completionDate, HttpSession session) {
 
         try {
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + email + "/";
+            File directory = new File(storageDir);
+
+            // Create directory if it doesn't exist
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            // Save files to local storage
+            String passportFileName = storageDir + "passportSizeImage.jpg";
+            String icardFileName = storageDir + "collegeIcardImage.jpg";
+            String nocFileName = storageDir + "nocPdf.pdf";
+            String resumeFileName = storageDir + "resumePdf.pdf";
+
+            // Save Passport Size Image
+            Files.write(Paths.get(passportFileName), passportSizeImage.getBytes());
+
+            // Save College Icard Image
+            Files.write(Paths.get(icardFileName), icardImage.getBytes());
+
+            // Save NOC PDF
+            Files.write(Paths.get(nocFileName), nocPdf.getBytes());
+
+            // Save Resume PDF
+            Files.write(Paths.get(resumeFileName), resumePdf.getBytes());
+
             InternApplication internApplication = new InternApplication();
             internApplication.setFirstName(firstName);
             internApplication.setLastName(lastName);
