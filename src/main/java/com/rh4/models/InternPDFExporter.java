@@ -95,7 +95,7 @@ public class InternPDFExporter {
             table.addCell(getCellValue(intern.getFirstName()));
             table.addCell(getCellValue(intern.getLastName()));
             table.addCell(getCellValue(intern.getGender()));
-            table.addCell(getCellValue(intern.getProgrammingLangName()));
+            table.addCell(getCellValue(intern.getDomain()));
             table.addCell(getCellValue(intern.getProjectDefinitionName()));
             table.addCell(getCellValue(String.valueOf(intern.getJoiningDate())));
             table.addCell(getCellValue(String.valueOf(intern.getCompletionDate())));

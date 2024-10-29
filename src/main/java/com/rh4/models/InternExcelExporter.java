@@ -96,7 +96,7 @@ public class InternExcelExporter {
             createCell(row, columnCount++,intern.getFirstName(), style);
             createCell(row, columnCount++,intern.getLastName(), style);
             createCell(row, columnCount++,intern.getGender(), style);
-            createCell(row, columnCount++,intern.getProgrammingLangName(), style);
+            createCell(row, columnCount++,intern.getDomain(), style);
             createCell(row, columnCount++,intern.getProjectDefinitionName(), style);
             createCell(row, columnCount++,String.valueOf(intern.getJoiningDate()), style);
             createCell(row, columnCount++,String.valueOf(intern.getCompletionDate()), style);

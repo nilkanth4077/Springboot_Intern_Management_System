@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +19,7 @@ import com.rh4.models.MyUserDetails;
 import com.rh4.repositories.SuperAdminRepo;
 import com.rh4.repositories.UserRepo;
 import org.springframework.security.core.userdetails.User;
+
 import static org.springframework.security.config.Customizer.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,21 +29,23 @@ import org.springframework.boot.CommandLineRunner;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	
-	@Autowired
+
+    @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-	@Autowired
-	public SuperAdminRepo srepo;
-	@Bean
+    @Autowired
+    public SuperAdminRepo srepo;
+
+    @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-	@Bean
+
+    @Bean
     public AuthenticationSuccessHandler successHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
 
-	@Bean
+    @Bean
     public UserDetailsService userDetailsService(UserRepo repo) {
         return (String username) -> {
             MyUser dbUser = repo.findByUsername(username);
@@ -57,36 +61,47 @@ public class SecurityConfig {
             System.out.println("springUser = " + springUser);
             return springUser;
         };
-	}
-	@Bean
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(
                 request -> request
-                        .requestMatchers("/","/assets/**","/message","/app/message/**","/bisag_internship/**").permitAll()
+                        .requestMatchers("/", "/assets/**", "/message", "/app/message/**", "/bisag_internship/**").permitAll()
                         .requestMatchers("/bisag/admin/**").hasRole("ADMIN")
                         .requestMatchers("/bisag/guide/**").hasRole("GUIDE")
                         .requestMatchers("/bisag/intern/**").hasRole("INTERN")
                         .requestMatchers("/bisag/super_admin/**").hasRole("SUPERADMIN")
                         .requestMatchers("/under_process_intern/**").hasRole("UNDERPROCESSINTERN")
                         .anyRequest().authenticated()
-        ).formLogin()
-        .loginPage("/login") // Specify custom login page URL
-        .successHandler(successHandler())
-        .permitAll().and()
-        .headers()
-        .contentSecurityPolicy("frame-ancestors 'self'")
-        .and().and()
-        .logout()
-        .logoutUrl("/logout")
-        .logoutSuccessUrl("/login?logout") // Redirect to the login page after successful logout
-        .permitAll()
-        .and()
-        .csrf().disable();
+        );
+        http.formLogin(formLogin ->
+                formLogin
+                        .loginPage("/login")
+                        .successHandler(successHandler())
+                        .permitAll());
+        http.headers(headers -> headers.frameOptions(frameOptions ->
+                frameOptions.sameOrigin()
+                        .contentSecurityPolicy(cps -> cps
+                                .policyDirectives("default-src 'self'; " +
+                                        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
+                                        "script-src 'self' 'unsafe-inline' 'unsafe-eval' " +
+                                        "https://cdnjs.cloudflare.com " +
+                                        "https://cdn.jsdelivr.net " +
+                                        "https://ajax.googleapis.com; " +
+                                        "font-src 'self' https://cdnjs.cloudflare.com;")))
+        );
+        http.logout(logout ->
+                logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll());
+        http.csrf(AbstractHttpConfigurer::disable);
         //.csrf().ignoringRequestMatchers("/bisag/register_admin","/app/message/**");
 
         return http.build();
-	}
+    }
 
 //	@Bean
 //    CommandLineRunner loadInitialUsersInDB(UserRepo repo) 
