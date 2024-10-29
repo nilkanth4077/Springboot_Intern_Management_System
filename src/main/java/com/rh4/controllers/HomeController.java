@@ -20,6 +20,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,17 +43,9 @@ public class HomeController {
     private InternApplicationRepo internApplicationRepo;
     private EmailSenderService emailService;
 
+    @Value("${app.storage.base-dir}")
+    private String baseDir;
 
-    @org.springframework.beans.factory.annotation.Value("${icard.filepath}")
-    private String icardfolderpath;
-    @org.springframework.beans.factory.annotation.Value("${noc.filepath}")
-    private String nocfolderpath;
-    @org.springframework.beans.factory.annotation.Value("${resume.filepath}")
-    private String resumefolderpath;
-    @org.springframework.beans.factory.annotation.Value("${psimage.filepath}")
-    private String psimagefolderpath;
-    @Autowired
-    private AdminService adminService;
     @Autowired
     private InternService internService;
     @Autowired
@@ -125,7 +118,7 @@ public class HomeController {
                                   @RequestParam("completionDate") Date completionDate, HttpSession session) {
 
         try {
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + email + "/";
+            String storageDir = baseDir + email + "/";
             File directory = new File(storageDir);
 
             // Create directory if it doesn't exist
