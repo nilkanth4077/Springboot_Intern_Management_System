@@ -24,7 +24,6 @@ public class College {
 
 	public College() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public long getCollegeId() {

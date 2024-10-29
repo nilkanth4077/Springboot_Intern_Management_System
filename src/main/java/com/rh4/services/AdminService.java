@@ -53,13 +53,10 @@ public class AdminService {
 	}
 
 	public Optional<Admin> getAdmin(long id) {
-		// TODO Auto-generated method stub
-//		return AdminListRepo.findById(id);
 		return adminRepo.findById(id);
 	}
 
 	public void deleteAdmin(long id) {
-		// TODO Auto-generated method stub
 		adminRepo.deleteById(id);
 	}
 

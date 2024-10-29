@@ -51,7 +51,6 @@ public class GroupEntity {
 		
    public GroupEntity() {
 			super();
-			// TODO Auto-generated constructor stub
 		}
   	
 	public GroupEntity(long id, String groupId, String projectDefinition, String description, String finalReport, String finalReportStatus,

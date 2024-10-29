@@ -20,7 +20,6 @@ public class Degree {
     private String name;
 	public Degree() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public long getDegreeId() {

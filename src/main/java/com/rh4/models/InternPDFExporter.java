@@ -115,7 +115,7 @@ public class InternPDFExporter {
     }
 
     public void export(HttpServletResponse response) throws DocumentException, IOException {
-        Document document = new Document(PageSize.A0); // Landscape orientation
+        Document document = new Document(PageSize.A0);
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
@@ -130,7 +130,7 @@ public class InternPDFExporter {
 
         PdfPTable table = new PdfPTable(getColumnCount());
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f}); // Adjust column widths if needed
+        table.setWidths(new float[] {1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f});
         table.setSpacingBefore(10);
 
         writeTableHeader(table);
@@ -141,7 +141,6 @@ public class InternPDFExporter {
         document.close();
     }
     private int getColumnCount() {
-        // You can adjust this based on the number of fields in your Intern class
         return 22;
     }
 
