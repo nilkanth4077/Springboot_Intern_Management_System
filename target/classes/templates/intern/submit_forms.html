@@ -2,200 +2,257 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Submit Forms</title>
-<meta content="" name="description">
-<meta content="" name="keywords">
-<style>
+    <title>Submit Forms</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <style>
 .lgout {
 	padding: 10px;
 	list-style-type: none;
 	border: 2px solid;
 	border-radius: 10px;
 }
-</style>
+
+
+
+
+
+
+    </style>
 </head>
 
 <body>
 
 
-	<!-- Include the header fragment -->
-	<div th:replace="fragments/internHeaderFragment :: header"></div>
+<!-- Include the header fragment -->
+<div th:replace="fragments/internHeaderFragment :: header"></div>
 
-	<!-- Include the aside fragment -->
-	<div th:replace="fragments/internAsideFragment :: aside"></div>
-
-
-	<main id="main" class="main">
-
-		<div class="pagetitle">
-			<h1>Submit Forms</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item">Forms</li>
-					<li class="breadcrumb-item active">Submit Forms</li>
-				</ol>
-			</nav>
-		</div>
-		<!-- End Page Title -->
-		
-		<div class="container">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Registration Form</th>
-					<th>Security Form</th>
-					<th>ICard Form</th>
-					<th>College NOC</th>
-					<th>Resume</th>
-					<th>College ICard</th>
-					<th>Passport Size Image</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- Iterate over interns and display those associated with the current group -->
-				<tr>
-					<td th:text="${intern.internId}"></td>
-					<td th:text="${intern.firstName}"></td>
-					<td th:text="${intern.lastName}"></td>
-<!--					<td><a href="#" th:if="${intern.registrationForm != null}"-->
-<!--						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.registrationForm} + '\');'">Open</a></td>-->
-<!--					<td><a href="#" th:if="${intern.securityForm != null}"-->
-<!--						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.securityForm} + '\');'">Open</a></td>-->
-<!--					<td><a href="#" th:if="${intern.icardForm != null}"-->
-<!--						th:attr="onclick='openPdfPopup(\'/files/forms/' + ${intern.group.groupId} + '/' + ${intern.internId} + '/' + ${intern.icardForm} + '\');'">Open</a></td>-->
-<!--					<td><a href="#"-->
-<!--						th:attr="onclick='openPdfPopup(\'/files/noc/' + ${intern.nocPdf} + '\');'">Open</a></td>-->
-<!--					<td><a href="#"-->
-<!--						th:attr="onclick='openPdfPopup(\'/files/resume/' + ${intern.resumePdf} + '\');'">Open</a></td>-->
-<!--					<td><a href="#"-->
-<!--						th:attr="onclick='openPdfPopup(\'/files/icard/' + ${intern.icardImage} + '\');'">Open</a></td>-->
-					<td><a href="#"
-						th:attr="onclick='openPdfPopup(\'/files/Intern Docs/' + ${intern.email} + '/' + ${passportSizeImage} + '\');'">Open</a></td>
-
-				</tr>
-			</tbody>
-		</table>
-		</div>
-
-		<section class="section dashboard" th:if="${intern.dateOfBirth == null}">
-			<div class="container mt-2">
-				<div class="card">
-					<div class="card-header">
-						<h3 class="text-dark">Enter credentials</h3>
-					</div>
-					<div class="card-body container">
-						<form action="submit_forms" method="post" enctype="multipart/form-data">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="permanentAddress" class="form-label">Permanent
-													Address:</label> <input type="text" class="form-control"
-													id="permanentAddress" name="permanentAddress" required>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="dateOfBirth" class="form-label"> Date Of
-													Birth:</label> <input type="date" class="form-control"
-													id="dateOfBirth" name="dateOfBirth" required>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="gender" class="form-label">Gender:</label> <select
-													class="form-control" id="gender" name="gender" required>
-													<option value="" selected>Select Gender</option>
-													<option value="male">Male</option>
-													<option value="female">Female</option>
-													<option value="other">Other</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group mt-3">
-												<label for="collegeGuideHodName" class="form-label">College
-													Guide HOD:</label> <input type="text" class="form-control"
-													id="collegeGuideHodName" name="collegeGuideHodName"
-													required>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group mt-3">
-												<label for="aggregatePercentage" class="form-label">Aggregate
-													Percentage:</label> <input type="number" class="form-control"
-													id="aggregatePercentage" name="aggregatePercentage"
-													required>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group mt-3">
-												<label for="usedResource" class="form-label">Resource:</label>
-												<select class="form-control" id="usedResource"
-													name="usedResource" required>
-													<option value="" selected>Select Resource</option>
-													<option value="laptop">Personal Device (Laptop)</option>
-													<option value="bisagDevice">BISAG Device</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group mt-3">
-												<label for="registrationForm" class="form-label">Registration
-													Form:</label> <input type="file" class="form-control"
-													id="registrationForm" name="registrationFormone" accept=".pdf" required>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group mt-3">
-												<label for="securityForm" class="form-label">Security
-													Form:</label> <input type="file" class="form-control"
-													id="securityForm" name="securityFormone" accept=".pdf" required>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group mt-3">
-												<label for="icardForm" class="form-label">ICard
-													Form:</label> <input type="file" class="form-control"
-													id="icardForm" name="icardFormone" accept=".pdf" required>
-											</div>
-										</div>
-									</div>
-								</div> 
+<!-- Include the aside fragment -->
+<div th:replace="fragments/internAsideFragment :: aside"></div>
 
 
-							</div>
-							<div class="text-center my-3">
-								<button type="submit" class="btn btn-primary">Submit</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Submit Forms</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">Submit Forms</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <td th:text="${intern.internId}"></td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td th:text="${intern.firstName}"></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td th:text="${intern.lastName}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <section class="section dashboard" th:if="${intern.dateOfBirth != null}">
+        <div class="container mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-dark">You have already submitted your documents. For any query please contact the
+                        administration.</h5></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <table>
+                        <tr>
+                            <th>College ID Image</th>
+                            <td>
+                                <iframe th:src="@{/bisag/intern/documents/icard/{id}(id=${intern.internId})}"
+                                        width="950" height="500"></iframe>
+                        </tr>
+                        <tr>
+                            <th>NOC Image</th>
+                            <td>
+                                <iframe th:src="@{/bisag/intern/documents/noc/{id}(id=${intern.internId})}"
+                                        width="950" height="500"></iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Resume</th>
+                            <td>
+                                <iframe th:src="@{/bisag/intern/documents/resume/{id}(id=${intern.internId})}"
+                                        width="950" height="500"></iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Passport Size Photo</th>
+                            <td>
+                                <iframe th:src="@{/bisag/intern/documents/passport/{id}(id=${intern.internId})}"
+                                        width="950" height="500"></iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Registration Form</th>
+                            <td>
+                                <iframe th:src="@{/bisag/intern/documents/registration/{id}(id=${intern.internId})}"
+                                        width="950" height="500"></iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Security Form</th>
+                            <td>
+                                <iframe th:src="@{/bisag/intern/documents/security/{id}(id=${intern.internId})}"
+                                        width="950" height="500"></iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ICard Form</th>
+                            <td>
+                                <iframe th:src="@{/bisag/intern/documents/icardForm/{id}(id=${intern.internId})}"
+                                        width="950" height="500"></iframe>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section dashboard" th:if="${intern.dateOfBirth == null}">
+        <div class="container mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-dark">Enter credentials</h3>
+                </div>
+                <div class="card-body container">
+                    <form action="submit_forms" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="permanentAddress" class="form-label">Permanent
+                                                Address:</label> <input type="text" class="form-control"
+                                                                        id="permanentAddress" name="permanentAddress"
+                                                                        required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="dateOfBirth" class="form-label"> Date Of
+                                                Birth:</label> <input type="date" class="form-control"
+                                                                      id="dateOfBirth" name="dateOfBirth" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="gender" class="form-label">Gender:</label> <select
+                                                class="form-control" id="gender" name="gender" required>
+                                            <option value="" selected>Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group mt-3">
+                                            <label for="collegeGuideHodName" class="form-label">College
+                                                Guide HOD:</label> <input type="text" class="form-control"
+                                                                          id="collegeGuideHodName"
+                                                                          name="collegeGuideHodName"
+                                                                          required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mt-3">
+                                            <label for="aggregatePercentage" class="form-label">Aggregate
+                                                Percentage:</label> <input type="number" class="form-control"
+                                                                           id="aggregatePercentage"
+                                                                           name="aggregatePercentage"
+                                                                           required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mt-3">
+                                            <label for="usedResource" class="form-label">Resource:</label>
+                                            <select class="form-control" id="usedResource"
+                                                    name="usedResource" required>
+                                                <option value="" selected>Select Resource</option>
+                                                <option value="laptop">Personal Device (Laptop)</option>
+                                                <option value="bisagDevice">BISAG Device</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group mt-3">
+                                            <label for="registrationForm" class="form-label">Registration
+                                                Form:</label> <input type="file" class="form-control"
+                                                                     id="registrationForm" name="registrationForm"
+                                                                     accept=".pdf" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mt-3">
+                                            <label for="securityForm" class="form-label">Security
+                                                Form:</label> <input type="file" class="form-control"
+                                                                     id="securityForm" name="securityForm"
+                                                                     accept=".pdf" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mt-3">
+                                            <label for="icardForm" class="form-label">ICard
+                                                Form:</label> <input type="file" class="form-control"
+                                                                     id="icardForm" name="icardForm" accept=".pdf"
+                                                                     required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
-		<!-- Include the footer fragment -->
-		<div th:replace="fragments/footerFragment :: footer"></div>
-	</main>
-	<!-- End #main -->
-	<script>
+                        </div>
+                        <div class="text-center my-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Include the footer fragment -->
+    <div th:replace="fragments/footerFragment :: footer"></div>
+</main>
+<!-- End #main -->
+<script>
 		function openPdfPopup(pdfUrl) {
 			window.open(pdfUrl, 'PDFViewer', 'width=600,height=780');
 			return false; // To prevent the default behavior of the anchor tag
 		}
-	</script>
+
+
+
+
+
+
+</script>
 
 
 </body>

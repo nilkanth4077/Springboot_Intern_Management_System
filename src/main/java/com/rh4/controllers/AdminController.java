@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -371,8 +372,32 @@ public class AdminController {
         return mv;
     }
 
+    @GetMapping("/intern_docs/{id}")
+    public ModelAndView internDocs(@PathVariable("id") String id, Model model) {
+        Optional<Intern> optionalApplication = internService.getIntern(id); // Implement this service method
+        System.out.println("ID: " + id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get(); // Retrieve the InternApplication object
+            model.addAttribute("id", id);
+            model.addAttribute("intern", application);
+            model.addAttribute("passportSizeImage", application.getPassportSizeImage());
+            model.addAttribute("collegeIcardImage", application.getCollegeIcardImage());
+            model.addAttribute("nocPdf", application.getNocPdf());
+            model.addAttribute("resumePdf", application.getResumePdf());
+            model.addAttribute("icardForm", application.getIcardForm());
+            model.addAttribute("registrationForm", application.getRegistrationForm());
+            model.addAttribute("securityForm", application.getSecurityForm());
+        } else {
+            model.addAttribute("error", "Intern Application not found");
+        }
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/intern_docs");
+        return mv;
+    }
+
     @GetMapping("/documents/passport/{id}")
-    public ResponseEntity<byte[]> getPassportSizeImage(@PathVariable("id") long id) {
+    public ResponseEntity<byte[]> getPassportSizeImageForInternApplication(@PathVariable("id") long id) {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
 
         if (optionalApplication.isPresent()) {
@@ -392,8 +417,29 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/intern/documents/passport/{id}")
+    public ResponseEntity<byte[]> getPassportSizeImageForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] image = application.getPassportSizeImage();
+
+            if (image != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(image);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/documents/icard/{id}")
-    public ResponseEntity<byte[]> getICardImage(@PathVariable("id") long id) {
+    public ResponseEntity<byte[]> getICardImageForInternApplication(@PathVariable("id") long id) {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
 
         if (optionalApplication.isPresent()) {
@@ -413,8 +459,29 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/intern/documents/icard/{id}")
+    public ResponseEntity<byte[]> getICardImageForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] image = application.getCollegeIcardImage();
+
+            if (image != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(image);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/documents/noc/{id}")
-    public ResponseEntity<byte[]> getNocPdf(@PathVariable("id") long id) {
+    public ResponseEntity<byte[]> getNocPdfForInternApplication(@PathVariable("id") long id) {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
 
         if (optionalApplication.isPresent()) {
@@ -434,14 +501,119 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/intern/documents/noc/{id}")
+    public ResponseEntity<byte[]> getNocPdfForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getNocPdf();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/documents/resume/{id}")
-    public ResponseEntity<byte[]> getResumePdf(@PathVariable("id") long id) {
+    public ResponseEntity<byte[]> getResumePdfForInternApplication(@PathVariable("id") long id) {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
 
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
 
             byte[] pdf = application.getResumePdf();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/intern/documents/resume/{id}")
+    public ResponseEntity<byte[]> getResumePdfForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getResumePdf();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/intern/documents/registration/{id}")
+    public ResponseEntity<byte[]> getRegistrationFormForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getRegistrationForm();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/intern/documents/security/{id}")
+    public ResponseEntity<byte[]> getSecurityFormForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getSecurityForm();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/intern/documents/icardForm/{id}")
+    public ResponseEntity<byte[]> getICardFormForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getIcardForm();
 
             if (pdf != null) {
                 return ResponseEntity.ok()
@@ -546,6 +718,172 @@ public class AdminController {
         return "redirect:/bisag/admin/intern_application_docs/" + id;
     }
 
+    @PostMapping("/intern/documents/passport/{id}")
+    public String updatePassportSizeImageForIntern(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "passportSizeImage.jpg";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "passportSizeImage.jpg";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+            application.setPassportSizeImage(file.getBytes());
+            internService.save(application);
+            return "redirect:/bisag/admin/intern_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_docs/" + id;
+    }
+
+    @PostMapping("/intern/documents/icard/{id}")
+    public String updateICardImageForIntern(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "collegeIcardImage.jpg";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "collegeIcardImage.jpg";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+            application.setCollegeIcardImage(file.getBytes());
+            internService.save(application);
+            return "redirect:/bisag/admin/intern_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_docs/" + id;
+    }
+
+    @PostMapping("/intern/documents/noc/{id}")
+    public String updateNocPdfForIntern(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "nocPdf.pdf";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "nocPdf.pdf";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+            application.setNocPdf(file.getBytes());
+            internService.save(application);
+            return "redirect:/bisag/admin/intern_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_docs/" + id;
+    }
+
+    @PostMapping("/intern/documents/resume/{id}")
+    public String updateResumePdfForIntern(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "resumePdf.pdf";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "resumePdf.pdf";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+
+            application.setResumePdf(file.getBytes());
+            internService.save(application);
+
+            return "redirect:/bisag/admin/intern_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_docs/" + id;
+    }
+
+    @PostMapping("/intern/documents/icardForm/{id}")
+    public String updateICardFormForIntern(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "icardForm.pdf";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "icardForm.pdf";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+
+            application.setIcardForm(file.getBytes());
+            internService.save(application);
+
+            return "redirect:/bisag/admin/intern_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_docs/" + id;
+    }
+
+    @PostMapping("/intern/documents/registration/{id}")
+    public String updateRegistrationFormForIntern(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "registrationForm.pdf";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "registrationForm.pdf";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+
+            application.setRegistrationForm(file.getBytes());
+            internService.save(application);
+
+            return "redirect:/bisag/admin/intern_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_docs/" + id;
+    }
+
+    @PostMapping("/intern/documents/security/{id}")
+    public String updateSecurityFormForIntern(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String oldFilePath = storageDir + "securityForm.pdf";
+
+            File oldFile = new File(oldFilePath);
+            if (oldFile.exists()) {
+                oldFile.delete();
+            }
+
+            String newFilePath = storageDir + "securityForm.pdf";
+            Files.write(Paths.get(newFilePath), file.getBytes());
+
+            application.setSecurityForm(file.getBytes());
+            internService.save(application);
+
+            return "redirect:/bisag/admin/intern_docs/" + id;
+        }
+        return "redirect:/bisag/admin/intern_docs/" + id;
+    }
+
     @PostMapping("/intern_application/ans")
     public String internApplicationSubmission(@RequestParam String message, @RequestParam long id,
                                               @RequestParam String status, @RequestParam String finalStatus) {
@@ -580,7 +918,7 @@ public class AdminController {
     public String internApplicationSubmission(@RequestParam long id, InternApplication internApplication, MultipartHttpServletRequest req) throws IllegalStateException, IOException, Exception {
         Optional<InternApplication> intern = internService.getInternApplication(id);
 
-        if (internApplication.getIsActive() == true) {
+        if (internApplication.getIsActive()) {
             intern.get().setFirstName(internApplication.getFirstName());
             intern.get().setLastName(internApplication.getLastName());
             intern.get().setContactNo(internApplication.getContactNo());
@@ -604,7 +942,7 @@ public class AdminController {
             cancelledEntry.setCancelId(Long.toString(intern.get().getId()));
             cancelledRepo.save(cancelledEntry);
         }
-
+        intern.get().setUpdatedAt(LocalDateTime.now());
         internService.addInternApplication(intern.get());
         return "redirect:/bisag/admin/intern_application/" + id;
     }
@@ -652,40 +990,9 @@ public class AdminController {
             intern.get().setDegree(internApplication.getDegree());
             intern.get().setAggregatePercentage(internApplication.getAggregatePercentage());
             intern.get().setUsedResource(internApplication.getUsedResource());
-
-//			if(req.getFile("icardImageone")!=null)
-//			{
-//				intern.get().setIcardImage(uploadfile(req.getFile("icardImageone"),"icard",intern.get().getInternId()));
-//				
-//			}
-//			if(req.getFile("nocPdfone")!=null)
-//			{
-//				intern.get().setNocPdf(uploadfile(req.getFile("nocPdfone"),"noc",intern.get().getInternId()));
-//			}
-//			if(req.getFile("resumePdfone")!=null)
-//			{
-//				intern.get().setResumePdf(uploadfile(req.getFile("resumePdfone"),"resume",intern.get().getInternId()));
-//			}
-//			if(req.getFile("passportSizeImageone")!=null)
-//			{
-//				intern.get().setPassportSizeImage(uploadfile(req.getFile("passportSizeImageone"),"psimage",intern.get().getInternId()));
-//			}
-//			if(req.getFile("")!=null)
-//			{
-//				intern.get().getSecurityForm(uploadfile(req.getFile("securityForm"),"securityForm",intern.get().getInternId()));
-//			}
-//			if(req.getFile("passportSizeImageone")!=null)
-//			{
-//				intern.get().setRegistrationForm(uploadfile(req.getFile("registrationForm"),"registrationForm",intern.get().getInternId()));
-//			}
-//			if(req.getFile("passportSizeImageone")!=null)
-//			{
-//				intern.get().setIcardForm(uploadfile(req.getFile("icardForm"),"icardForm",intern.get().getInternId()));
-//			}
         }
 
-
-        if (internApplication.getIsActive() == false) {
+        if (!internApplication.getIsActive()) {
             intern.get().setIsActive(false);
             intern.get().setCancellationStatus("cancelled");
             Cancelled cancelledEntry = new Cancelled();
@@ -693,8 +1000,9 @@ public class AdminController {
             cancelledEntry.setCancelId(intern.get().getInternId());
             cancelledRepo.save(cancelledEntry);
         }
+        intern.get().setUpdatedAt(LocalDateTime.now());
         internRepo.save(intern.get());
-        return "redirect:/bisag/admin/intern_application/new_interns";
+        return "redirect:/bisag/admin/intern/" + id;
     }
 
 
@@ -1202,15 +1510,6 @@ public class AdminController {
         mv.addObject("interns", interns);
         mv.addObject("admins", admins);
         mv.addObject("guides", guides);
-        return mv;
-    }
-
-    @GetMapping("/manage_forms")
-    public ModelAndView manageForms(Model model) {
-        ModelAndView mv = new ModelAndView("/admin/manage_forms");
-        List<Intern> interns = internService.getInterns();
-        model = countNotifications(model);
-        mv.addObject("interns", interns);
         return mv;
     }
 

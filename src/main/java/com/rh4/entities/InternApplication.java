@@ -1,6 +1,8 @@
 package com.rh4.entities;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -35,19 +37,19 @@ public class InternApplication {
     private String branch;
 
     @Lob
-	@Column(name = "passport_size_image")
+	@Column(name = "passport_size_image", columnDefinition = "LONGBLOB")
     private byte[] passportSizeImage;
 
     @Lob
-	@Column(name = "icard_image")
+	@Column(name = "icard_image", columnDefinition = "LONGBLOB")
     private byte[] collegeIcardImage;
 
     @Lob
-	@Column(name = "noc_pdf")
+	@Column(name = "noc_pdf", columnDefinition = "LONGBLOB")
     private byte[] nocPdf;
 
     @Lob
-	@Column(name = "resume_pdf")
+	@Column(name = "resume_pdf", columnDefinition = "LONGBLOB")
 	private byte[] resumePdf;
 	
     @Column(name = "semester")
@@ -85,4 +87,15 @@ public class InternApplication {
 	
 	@Column(name="is_active")
 	private Boolean isActive = true;
+
+    @Column(name = "created_at", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = true)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", nullable = true)
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

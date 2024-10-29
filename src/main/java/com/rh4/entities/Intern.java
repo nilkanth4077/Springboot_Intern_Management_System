@@ -2,6 +2,7 @@ package com.rh4.entities;
 
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
@@ -33,19 +34,19 @@ public class Intern {
     private String branch;
 
     @Lob
-    @Column(name = "icard_image")
+    @Column(name = "icard_image", columnDefinition = "LONGBLOB")
     private byte[] collegeIcardImage;
 
     @Lob
-    @Column(name = "noc_pdf")
+    @Column(name = "noc_pdf", columnDefinition = "LONGBLOB")
     private byte[] nocPdf;
 
     @Lob
-    @Column(name = "resume_pdf")
+    @Column(name = "resume_pdf", columnDefinition = "LONGBLOB")
     private byte[] resumePdf;
 
     @Lob
-    @Column(name = "passport_size_image")
+    @Column(name = "passport_size_image", columnDefinition = "LONGBLOB")
     private byte[] passportSizeImage;
 
     @Column(name = "semester")
@@ -97,22 +98,25 @@ public class Intern {
     private String usedResource;
 
     @Column(name = "created_at", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = true)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", nullable = true)
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(name = "cancellation_status")
     private String cancellationStatus;
 
-    @Column(name = "icard_form")
-    private String icardForm;
+    @Lob
+    @Column(name = "icard_form", columnDefinition = "LONGBLOB")
+    private byte[] icardForm;
 
-    @Column(name = "registration_form")
-    private String registrationForm;
+    @Lob
+    @Column(name = "registration_form", columnDefinition = "LONGBLOB")
+    private byte[] registrationForm;
 
-    @Column(name = "security_form")
-    private String securityForm;
+    @Lob
+    @Column(name = "security_form", columnDefinition = "LONGBLOB")
+    private byte[] securityForm;
 
     @ManyToOne
     private GroupEntity group;
@@ -124,8 +128,8 @@ public class Intern {
     public Intern(String internId, String firstName, String lastName, String contactNo, String email,
                   String collegeName, String branch, byte[] collegeIcardImage, byte[] nocPdf, byte[] resumePdf, int semester,
                   String permanentAddress, Date dateOfBirth, String gender, String collegeGuideHodName, String degree, Double aggregatePercentage, String projectDefinitionName, String cancellationStatus,
-                  Guide guide, String domain, Date joiningDate, Date completionDate, String password, String icardForm, String registrationForm, String securityForm,
-                  String usedResource, Date createdAt, Date updatedAt, GroupEntity group, boolean isActive) {
+                  Guide guide, String domain, Date joiningDate, Date completionDate, String password, byte[] icardForm, byte[] registrationForm, byte[] securityForm,
+                  String usedResource, LocalDateTime createdAt, LocalDateTime updatedAt, GroupEntity group, boolean isActive) {
         super();
         this.internId = internId;
         this.firstName = firstName;
@@ -191,15 +195,15 @@ public class Intern {
         this.passportSizeImage = passportSizeImage;
     }
 
-    public String getIcardForm() {
+    public byte[] getIcardForm() {
         return icardForm;
     }
 
-    public void setIcardForm(String icardForm) {
+    public void setIcardForm(byte[] icardForm) {
         this.icardForm = icardForm;
     }
 
-    public String getRegistrationForm() {
+    public byte[] getRegistrationForm() {
         return registrationForm;
     }
 
@@ -211,15 +215,15 @@ public class Intern {
         this.isActive = isActive;
     }
 
-    public void setRegistrationForm(String registrationForm) {
+    public void setRegistrationForm(byte[] registrationForm) {
         this.registrationForm = registrationForm;
     }
 
-    public String getSecurityForm() {
+    public byte[] getSecurityForm() {
         return securityForm;
     }
 
-    public void setSecurityForm(String securityForm) {
+    public void setSecurityForm(byte[] securityForm) {
         this.securityForm = securityForm;
     }
 
@@ -424,14 +428,13 @@ public class Intern {
         this.usedResource = usedResource;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
 
     public GroupEntity getGroup() {
         return group;
@@ -441,17 +444,17 @@ public class Intern {
         this.group = group;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     @PrePersist
     protected void onCreate() {
-        createdAt = new Date(System.currentTimeMillis());
+        createdAt = LocalDateTime.now();
     }
 
     public Object getGroupEntity() {

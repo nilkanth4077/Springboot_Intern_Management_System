@@ -2,6 +2,8 @@ package com.rh4.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -9,8 +11,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -389,26 +394,204 @@ public class InternController {
     public ModelAndView submitForms() {
         ModelAndView mv = new ModelAndView("intern/submit_forms");
         Intern intern = getSignedInIntern();
+
         mv.addObject("intern", intern);
-        mv.addObject("passportSizeImage", intern.getPassportSizeImage());
         return mv;
     }
 
     @PostMapping("/submit_forms")
-    public String submitForms(Intern internRemainingDetails, MultipartHttpServletRequest req) throws IllegalStateException, IOException, Exception {
+    public String submitForms(@RequestParam("permanentAddress") String permanentAddress,
+                              @RequestParam("dateOfBirth") java.sql.Date dateOfBirth,
+                              @RequestParam("gender") String gender,
+                              @RequestParam("collegeGuideHodName") String collegeGuideHodName,
+                              @RequestParam("aggregatePercentage") Double aggregatePercentage,
+                              @RequestParam("usedResource") String usedResource,
+                              @RequestParam("registrationForm") MultipartFile registrationForm,
+                              @RequestParam("securityForm") MultipartFile securityForm,
+                              @RequestParam("icardForm") MultipartFile icardForm) throws IllegalStateException, IOException, Exception {
         System.out.println("called sub");
         Intern intern = getSignedInIntern();
-        intern.setPermanentAddress(internRemainingDetails.getPermanentAddress());
-        intern.setDateOfBirth(internRemainingDetails.getDateOfBirth());
-        intern.setGender(internRemainingDetails.getGender());
-        intern.setCollegeGuideHodName(internRemainingDetails.getCollegeGuideHodName());
-        intern.setAggregatePercentage(internRemainingDetails.getAggregatePercentage());
-        intern.setUsedResource(internRemainingDetails.getUsedResource());
-        intern.setIcardForm(uploadfile(req.getFile("icardFormone"), "icardForm"));
-        intern.setRegistrationForm(uploadfile(req.getFile("registrationFormone"), "registrationForm"));
-        intern.setSecurityForm(uploadfile(req.getFile("securityFormone"), "securityForm"));
+
+        String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + intern.getEmail() + "/";
+        File directory = new File(storageDir);
+
+        // Create directory if it doesn't exist
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // Save files to local storage
+        String registrationFormName = storageDir + "registrationForm.pdf";
+        String securityFormName = storageDir + "securityForm.pdf";
+        String icardFormName = storageDir + "icardForm.pdf";
+
+        // Save Passport Size Image
+        Files.write(Paths.get(registrationFormName), registrationForm.getBytes());
+
+        // Save College Icard Image
+        Files.write(Paths.get(securityFormName), securityForm.getBytes());
+
+        // Save NOC PDF
+        Files.write(Paths.get(icardFormName), icardForm.getBytes());
+
+        intern.setPermanentAddress(permanentAddress);
+        intern.setDateOfBirth(dateOfBirth);
+        intern.setGender(gender);
+        intern.setCollegeGuideHodName(collegeGuideHodName);
+        intern.setAggregatePercentage(aggregatePercentage);
+        intern.setUsedResource(usedResource);
+        intern.setIcardForm(icardForm.getBytes());
+        intern.setSecurityForm(securityForm.getBytes());
+        intern.setRegistrationForm(registrationForm.getBytes());
         internService.registerIntern(intern);
         return "redirect:/bisag/intern/submit_forms";
+    }
+
+    @GetMapping("/documents/icardForm/{id}")
+    public ResponseEntity<byte[]> getICardFormForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getIcardForm();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/documents/security/{id}")
+    public ResponseEntity<byte[]> getSecurityFormForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getSecurityForm();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/documents/registration/{id}")
+    public ResponseEntity<byte[]> getRegistrationFormForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getRegistrationForm();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/documents/resume/{id}")
+    public ResponseEntity<byte[]> getResumePdfForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getResumePdf();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/documents/noc/{id}")
+    public ResponseEntity<byte[]> getNocPdfForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] pdf = application.getNocPdf();
+
+            if (pdf != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(pdf);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/documents/icard/{id}")
+    public ResponseEntity<byte[]> getICardImageForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] image = application.getCollegeIcardImage();
+
+            if (image != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(image);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/documents/passport/{id}")
+    public ResponseEntity<byte[]> getPassportSizeImageForIntern(@PathVariable("id") String id) {
+        Optional<Intern> optionalApplication = internService.getIntern(id);
+
+        if (optionalApplication.isPresent()) {
+            Intern application = optionalApplication.get();
+
+            byte[] image = application.getPassportSizeImage();
+
+            if (image != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(image);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/query")
