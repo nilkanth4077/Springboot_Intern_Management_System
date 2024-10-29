@@ -81,13 +81,25 @@ iframe {
         <p th:text="${error}"></p>
     </div>
 
-    <table id="documentsTable">
+    <table id="documentsTable" class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <td th:text="${intern.internId}"></td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td th:text="${intern.firstName}"></td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td th:text="${intern.lastName}"></td>
+        </tr>
         <tr>
             <th><p class="text-5xl font-bold underline">Passport Size Image</p></th>
             <td>
-                <iframe th:src="@{/bisag/admin/documents/passport/{id}(id=${id})}" width="300" height="200"></iframe>
+                <iframe th:src="@{/bisag/admin/intern/documents/passport/{id}(id=${id})}" width="300" height="500"></iframe>
 
-                <form id="passportForm" th:action="@{/bisag/admin/documents/passport/{id}(id=${id})}" method="post"
+                <form id="passportForm" th:action="@{/bisag/admin/intern/documents/passport/{id}(id=${id})}" method="post"
                       enctype="multipart/form-data">
                     <label for="passportFile">Update Passport Size Image:</label>
                     <input type="file" name="file" id="passportFile" class="border" accept=".jpg, .jpeg" required>
@@ -98,9 +110,9 @@ iframe {
         <tr>
             <th><p class="text-5xl font-bold underline">College ICard Image</p></th>
             <td>
-                <iframe th:src="@{/bisag/admin/documents/icard/{id}(id=${id})}" width="300" height="200"></iframe>
+                <iframe th:src="@{/bisag/admin/intern/documents/icard/{id}(id=${id})}" width="300" height="500"></iframe>
 
-                <form id="icard" th:action="@{/bisag/admin/documents/icard/{id}(id=${id})}" method="post"
+                <form id="icard" th:action="@{/bisag/admin/intern/documents/icard/{id}(id=${id})}" method="post"
                       enctype="multipart/form-data">
                     <label for="icardFile">Update College ICard Image:</label>
                     <input type="file" name="file" id="icardFile" class="border" accept=".jpg, .jpeg" required>
@@ -111,9 +123,9 @@ iframe {
         <tr>
             <th><p class="text-5xl font-bold underline">NOC PDF</p></th>
             <td>
-                <iframe th:src="@{/bisag/admin/documents/noc/{id}(id=${id})}" width="300" height="200"></iframe>
+                <iframe th:src="@{/bisag/admin/intern/documents/noc/{id}(id=${id})}" width="300" height="500"></iframe>
 
-                <form id="noc" th:action="@{/bisag/admin/documents/noc/{id}(id=${id})}" method="post"
+                <form id="noc" th:action="@{/bisag/admin/intern/documents/noc/{id}(id=${id})}" method="post"
                       enctype="multipart/form-data">
                     <label for="nocFile">Update NOC:</label>
                     <input type="file" name="file" id="nocFile" class="border" accept=".pdf" required>
@@ -124,12 +136,51 @@ iframe {
         <tr>
             <th><p class="text-5xl font-bold underline">Resume PDF</p></th>
             <td>
-                <iframe th:src="@{/bisag/admin/documents/resume/{id}(id=${id})}" width="300" height="200"></iframe>
+                <iframe th:src="@{/bisag/admin/intern/documents/resume/{id}(id=${id})}" width="300" height="500"></iframe>
 
-                <form id="resume" th:action="@{/bisag/admin/documents/resume/{id}(id=${id})}" method="post"
+                <form id="resume" th:action="@{/bisag/admin/intern/documents/resume/{id}(id=${id})}" method="post"
                       enctype="multipart/form-data">
                     <label for="resumeFile">Update Resume:</label>
                     <input type="file" name="file" id="resumeFile" class="border" accept=".pdf" required>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th><p class="text-5xl font-bold underline">ICard Form</p></th>
+            <td>
+                <iframe th:src="@{/bisag/admin/intern/documents/icardForm/{id}(id=${id})}" width="300" height="500"></iframe>
+
+                <form id="icardForm" th:action="@{/bisag/admin/intern/documents/icardForm/{id}(id=${id})}" method="post"
+                      enctype="multipart/form-data">
+                    <label for="resumeFile">Update ICard Form:</label>
+                    <input type="file" name="file" id="icardFormFile" class="border" accept=".pdf" required>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th><p class="text-5xl font-bold underline">Registration Form</p></th>
+            <td>
+                <iframe th:src="@{/bisag/admin/intern/documents/registration/{id}(id=${id})}" width="300" height="500"></iframe>
+
+                <form id="registration" th:action="@{/bisag/admin/intern/documents/registration/{id}(id=${id})}" method="post"
+                      enctype="multipart/form-data">
+                    <label for="resumeFile">Update Registration Form:</label>
+                    <input type="file" name="file" id="registrationFile" class="border" accept=".pdf" required>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th><p class="text-5xl font-bold underline">Security Form</p></th>
+            <td>
+                <iframe th:src="@{/bisag/admin/intern/documents/security/{id}(id=${id})}" width="300" height="500"></iframe>
+
+                <form id="security" th:action="@{/bisag/admin/intern/documents/security/{id}(id=${id})}" method="post"
+                      enctype="multipart/form-data">
+                    <label for="resumeFile">Update Security Form:</label>
+                    <input type="file" name="file" id="securityFile" class="border" accept=".pdf" required>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </td>

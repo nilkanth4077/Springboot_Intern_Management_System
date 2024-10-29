@@ -50,6 +50,9 @@ public class InternService {
 	public InternApplication save(InternApplication internApplication) {
 		return internApplicationRepo.save(internApplication);
 	}
+	public Intern save(Intern intern) {
+		return internRepo.save(intern);
+	}
 	public void addInternApplication(InternApplication intern)
 	{
 		internApplicationRepo.save(intern);
