@@ -55,8 +55,6 @@ public class GuideController {
 	private WeeklyReportService weeklyReportService;
 	@Autowired
 	private GroupRepo groupRepo;
-	@org.springframework.beans.factory.annotation.Value("${weeklyReportSubmission.filepath}")
-	private String weeklyReportSubmission;
 	@Autowired
 	private MyUserService myUserService;
 	Intern internFromUploadFileMethod;
@@ -240,7 +238,7 @@ public class GuideController {
 			Guide guide = getSignedInGuide();
 			WeeklyReport report = weeklyReportService.getReportByWeekNoAndGroupId(weekNo,group);
 			CurrentWeekNo = weekNo;
-			report.setSubmittedPdf(changeWeeklyReport(req.getFile("weeklyReportSubmission"), group));
+//			report.setSubmittedPdf(changeWeeklyReport(req.getFile("weeklyReportSubmission"), group));
 			MyUser user = myUserService.getUserByUsername(guide.getEmailId());
 			report.setReplacedBy(user);
 			Date currentDate = new Date();
@@ -283,27 +281,27 @@ public class GuideController {
 			groupRepo.save(group);
 			return "redirect:/bisag/guide/guide_pending_final_reports";
 		}
-		private String changeWeeklyReport(MultipartFile file, GroupEntity group) {
-			
-			try {
-				File myDir = new File(weeklyReportSubmission + "/"+ group.getGroupId());
-				if(!myDir.exists())
-				{
-					myDir.mkdirs();
-				}
-				if(!file.isEmpty())
-				{		
-					file.transferTo(Paths.get(myDir.getAbsolutePath(), group.getGroupId() + "_week_" + CurrentWeekNo + ".pdf"));
-					return group.getGroupId() + "_week_" + CurrentWeekNo + ".pdf";
-				}
-				else
-					return null;
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-				return "redirect:/";
-			}
-		}
+//		private String changeWeeklyReport(MultipartFile file, GroupEntity group) {
+//
+//			try {
+//				File myDir = new File(weeklyReportSubmission + "/"+ group.getGroupId());
+//				if(!myDir.exists())
+//				{
+//					myDir.mkdirs();
+//				}
+//				if(!file.isEmpty())
+//				{
+//					file.transferTo(Paths.get(myDir.getAbsolutePath(), group.getGroupId() + "_week_" + CurrentWeekNo + ".pdf"));
+//					return group.getGroupId() + "_week_" + CurrentWeekNo + ".pdf";
+//				}
+//				else
+//					return null;
+//			}
+//			catch (Exception e) {
+//				e.printStackTrace();
+//				return "redirect:/";
+//			}
+//		}
 		
 		@GetMapping("/query_to_admin")
 		public ModelAndView queryToAdmin() {

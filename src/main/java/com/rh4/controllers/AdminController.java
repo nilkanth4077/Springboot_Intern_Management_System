@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -74,22 +75,9 @@ public class AdminController {
     private GuideService guideService;
     @Autowired
     private DataExportService dataExportService;
-    ;
 
-    @org.springframework.beans.factory.annotation.Value("${icard.filepath}")
-    private String icardfolderpath;
-    @org.springframework.beans.factory.annotation.Value("${noc.filepath}")
-    private String nocfolderpath;
-    @org.springframework.beans.factory.annotation.Value("${resume.filepath}")
-    private String resumefolderpath;
-    @org.springframework.beans.factory.annotation.Value("${psimage.filepath}")
-    private String psimagefolderpath;
-    @org.springframework.beans.factory.annotation.Value("${icardForm.filepath}")
-    private String icardForm;
-    @org.springframework.beans.factory.annotation.Value("${registrationForm.filepath}")
-    private String registrationForm;
-    @org.springframework.beans.factory.annotation.Value("${securityForm.filepath}")
-    private String securityForm;
+    @Value("${app.storage.base-dir}")
+    private String baseDir;
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -632,7 +620,7 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "passportSizeImage.jpg";
 
             File oldFile = new File(oldFilePath);
@@ -654,7 +642,7 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "collegeIcardImage.jpg";
 
             File oldFile = new File(oldFilePath);
@@ -676,7 +664,7 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "nocPdf.pdf";
 
             File oldFile = new File(oldFilePath);
@@ -699,7 +687,7 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
 
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "resumePdf.pdf";
 
             File oldFile = new File(oldFilePath);
@@ -723,7 +711,7 @@ public class AdminController {
         Optional<Intern> optionalApplication = internService.getIntern(id);
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "passportSizeImage.jpg";
 
             File oldFile = new File(oldFilePath);
@@ -745,7 +733,7 @@ public class AdminController {
         Optional<Intern> optionalApplication = internService.getIntern(id);
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "collegeIcardImage.jpg";
 
             File oldFile = new File(oldFilePath);
@@ -767,7 +755,7 @@ public class AdminController {
         Optional<Intern> optionalApplication = internService.getIntern(id);
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "nocPdf.pdf";
 
             File oldFile = new File(oldFilePath);
@@ -790,7 +778,7 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "resumePdf.pdf";
 
             File oldFile = new File(oldFilePath);
@@ -815,7 +803,7 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "icardForm.pdf";
 
             File oldFile = new File(oldFilePath);
@@ -840,7 +828,7 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "registrationForm.pdf";
 
             File oldFile = new File(oldFilePath);
@@ -865,7 +853,7 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + application.getEmail() + "/";
+            String storageDir = baseDir + application.getEmail() + "/";
             String oldFilePath = storageDir + "securityForm.pdf";
 
             File oldFile = new File(oldFilePath);
