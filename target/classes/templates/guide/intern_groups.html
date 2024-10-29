@@ -115,7 +115,7 @@ tr.hover-element th div.dropdown .rounded button.btn-primary:hover {
 								<th>Group: <span th:text="${group.groupId}"></span></th>
 								<th>Domain: <span th:each="intern : ${interns}"
 									th:if="${intern.group.groupId == groups.Id}"
-									th:text="${intern.programmingLangName}"></span></th>
+									th:text="${intern.domain}"></span></th>
 								<th>Guide: <span th:text="${group.guide.name}"></span></th>
 								<th>
 									<div>

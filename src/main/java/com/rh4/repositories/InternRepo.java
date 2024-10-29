@@ -31,7 +31,7 @@ public interface InternRepo extends JpaRepository<Intern, String> {
 
 	@Query("SELECT i FROM Intern i " + "WHERE (:college IS NULL OR i.collegeName = :college) "
 			+ "AND (:branch IS NULL OR i.branch = :branch) " + "AND (:guide IS NULL OR i.guide = :guide) "
-			+ "AND (:domain IS NULL OR i.programmingLangName = :domain) "
+			+ "AND (:domain IS NULL OR i.domain = :domain) "
 			+ "AND (:startDate IS NULL OR i.joiningDate >= :startDate) "
 			+ "AND (:endDate IS NULL OR i.completionDate <= :endDate)" + "AND (i.isActive =:cancelled)")
 	List<Intern> getFilteredInterns(@Param("college") String college, @Param("branch") String branch,
@@ -40,7 +40,7 @@ public interface InternRepo extends JpaRepository<Intern, String> {
 
 	@Query("SELECT i FROM Intern i " + "INNER JOIN i.group g "
 			+ "WHERE (:college IS NULL OR i.collegeName = :college) " + "AND (:branch IS NULL OR i.branch = :branch) "
-			+ "AND (:guide IS NULL OR g.guide = :guide) " + "AND (:domain IS NULL OR i.programmingLangName = :domain) "
+			+ "AND (:guide IS NULL OR g.guide = :guide) " + "AND (:domain IS NULL OR i.domain = :domain) "
 			+ "AND (:startDate IS NULL OR i.joiningDate >= :startDate) "
 			+ "AND (:endDate IS NULL OR i.completionDate <= :endDate)" + "AND g.finalReportStatus = 'pending'")
 	List<Intern> getPendingInternsFilter(String college, String branch, Optional<Guide> guide, String domain,

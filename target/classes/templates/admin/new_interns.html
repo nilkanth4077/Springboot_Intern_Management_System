@@ -147,6 +147,7 @@ button {
 								<thead>
 									<tr>
 										<th><i class="fa-solid fa-sort mx-2"></i>ID</th>
+										<th>Documents</th>
 										<th><i class="fa-solid fa-sort mx-2"></i>First Name</th>
 										<th><i class="fa-solid fa-sort mx-2"></i>Last Name</th>
 										<th><i class="fa-solid fa-sort mx-2"></i>Contact No</th>
@@ -178,7 +179,6 @@ button {
 										<th><i class="fa-solid fa-sort mx-2"></i>Updated At</th>
 										<th><i class="fa-solid fa-sort mx-2"></i>Cancellation
 											Status</th>
-										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -186,17 +186,20 @@ button {
 										<td><a
 											th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"><span
 												th:text="${intern.internId}"></span></a></td>
+										<td><a
+												th:href="@{'/bisag/admin/intern_docs/' + ${intern.internId}}"
+												class="btn"><i class="fa-solid fa-book my-0"></i></a></td>
 										<td th:text="${intern.firstName}"></td>
 										<td th:text="${intern.lastName}"></td>
 										<td th:text="${intern.contactNo}"></td>
 										<td th:text="${intern.email}"></td>
 										<td th:text="${intern.group.groupId}"></td>
 										<td th:if="${intern.group != null}" th:text="${intern.group.guide != null} ? ${intern.group.guide.name} : 'Guide Not Assigned'"></td>
-										<td th:text="${intern.programmingLangName}"></td>
+										<td th:text="${intern.domain}"></td>
 										<td th:text="${intern.collegeName}"></td>
 										<td th:text="${intern.branch}"></td>
 										<td th:text="${intern.semester}"></td>
-										<td th:text="${intern.programmingLangName}"></td>
+										<td th:text="${intern.domain}"></td>
 										<td th:text="${intern.semester}"></td>
 										<td th:text="${intern.permanentAddress}"></td>
 										<td th:text="${intern.dateOfBirth}"></td>
@@ -211,9 +214,6 @@ button {
 										<td th:text="${intern.createdAt}"></td>
 										<td th:text="${intern.updatedAt}"></td>
 										<td th:text="${intern.cancellationStatus}"></td>
-										<td><a
-											th:href="@{'/bisag/admin/intern/' + ${intern.internId}}"
-											class="btn"><i class="fa-solid fa-circle-info my-0"></i></a></td>
 									</tr>
 								</tbody>
 							</table>

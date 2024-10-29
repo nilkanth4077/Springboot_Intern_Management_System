@@ -143,8 +143,8 @@ button {
 													th:text="${intern.id}"></span></a></td>
 											<td th:text="${intern.firstName}"></td>
 											<td th:text="${intern.lastName}"></td>
-											<td th:text="${intern.programmingLangName}"
-												data-domain="${intern.programmingLangName}"></td>
+											<td th:text="${intern.domain}"
+												data-domain="${intern.domain}"></td>
 											<td><a
 												th:href="@{'/bisag/admin/intern_application/' + ${intern.id}}"
 												class="btn"><i class="fa-solid fa-circle-info"></i></a></td>
@@ -192,7 +192,7 @@ button {
 				});
 
 				if (intern) {
-					var internDomain = intern.programmingLangName;
+					var internDomain = intern.domain;
 
 					if (checkbox.checked) {
 						uniqueDomains.add(internDomain);
