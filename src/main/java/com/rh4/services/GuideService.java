@@ -7,12 +7,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.rh4.entities.Admin;
 import com.rh4.entities.GroupEntity;
 import com.rh4.entities.Guide;
 import com.rh4.entities.MyUser;
 import com.rh4.repositories.GroupRepo;
-//import com.rh4.repositories.GuideListRepo;
 import com.rh4.repositories.GuideRepo;
 import com.rh4.repositories.UserRepo;
 

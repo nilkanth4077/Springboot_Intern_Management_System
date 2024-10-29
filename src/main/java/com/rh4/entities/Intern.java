@@ -11,7 +11,6 @@ import jakarta.validation.constraints.Past;
 @Table(name = "intern")
 public class Intern {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "intern_id")
     private String internId;
 
@@ -57,8 +56,6 @@ public class Intern {
 
     @Column(name = "password")
     private String password;
-
-    ///////////////////////////////////////////////
 
     @Column(name = "is_active")
     private boolean isActive = true;

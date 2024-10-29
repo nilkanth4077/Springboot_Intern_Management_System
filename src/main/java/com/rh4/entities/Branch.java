@@ -21,7 +21,6 @@ public class Branch {
 
 	public Branch() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Branch(long branchId, String name) {

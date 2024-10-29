@@ -46,7 +46,6 @@ public class WeeklyReport {
 
 	public WeeklyReport() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public WeeklyReport(long weeklyReportId, Intern intern, GroupEntity group, Date reportSubmittedDate, Date deadline,
