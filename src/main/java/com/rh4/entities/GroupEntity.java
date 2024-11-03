@@ -2,15 +2,7 @@ package com.rh4.entities;
 
 import java.beans.JavaBean;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="group_entity")
@@ -35,12 +27,14 @@ public class GroupEntity {
 	
 	@Column(name = "final_report_status")
 	private String finalReportStatus = "pending";
-	
-	@Column(name = "project_definition_document")
-	private String projectDefinitionDocument;
-	
-	@Column(name = "final_report")
-    private String finalReport;
+
+	@Lob
+	@Column(name = "project_definition_document", columnDefinition = "LONGBLOB")
+	private byte[] projectDefinitionDocument;
+
+	@Lob
+	@Column(name = "final_report", columnDefinition = "LONGBLOB")
+    private byte[] finalReport;
 	
 	@Column(name = "domain")
     private String domain;
@@ -53,15 +47,15 @@ public class GroupEntity {
 			super();
 		}
   	
-	public GroupEntity(long id, String groupId, String projectDefinition, String description, String finalReport, String finalReportStatus,
-		String projectDefinitionStatus, String projectDefinitionDocument, String domain, Guide guide) {
+	public GroupEntity(long id, String groupId, String projectDefinition, String description, byte[] finalReport, String finalReportStatus,
+		String projectDefinitionStatus, byte[] projectDefinitionDocument, String domain, Guide guide) {
 	super();
 	this.id = id;
 	this.groupId = groupId;
 	this.projectDefinition = projectDefinition;
 	this.description = description;
 	this.finalReport = finalReport;
-	this.finalReport = finalReport;
+	this.finalReportStatus = finalReportStatus;
 	this.domain = domain;
 	this.projectDefinitionStatus = projectDefinitionStatus;
 	this.projectDefinitionDocument = projectDefinitionDocument;
@@ -75,11 +69,11 @@ public class GroupEntity {
 		this.finalReportStatus = finalReportStatus;
 	}
 
-	public String getFinalReport() {
+	public byte[] getFinalReport() {
 		return finalReport;
 	}
 
-	public void setFinalReport(String finalReport) {
+	public void setFinalReport(byte[] finalReport) {
 		this.finalReport = finalReport;
 	}
 
@@ -140,12 +134,11 @@ public class GroupEntity {
 		this.projectDefinitionStatus = projectDefinitionStatus;
 	}
 
-	public String getProjectDefinitionDocument() {
+	public byte[] getProjectDefinitionDocument() {
 		return projectDefinitionDocument;
 	}
 
-	public void setProjectDefinitionDocument(String projectDefinitionDocument) {
+	public void setProjectDefinitionDocument(byte[] projectDefinitionDocument) {
 		this.projectDefinitionDocument = projectDefinitionDocument;
 	}
-	
 }

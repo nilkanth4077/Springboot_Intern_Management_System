@@ -54,6 +54,9 @@ public class InternController {
     @Value("${app.storage.base-dir}")
     private String baseDir;
 
+    @Value("${app.storage.base-dir2}")
+    private String baseDir2;
+
     @Autowired
     private InternService internService;
     @Autowired
@@ -219,17 +222,29 @@ public class InternController {
 
     }
 
-    @PostMapping("/project_definition_submition")
-    public String approveProjectDefinition(MultipartHttpServletRequest req,
-                                           @ModelAttribute("ProjectDefinition") ProjectDefinition projectDefinition, BindingResult bindingresult)
-            throws IllegalStateException, Exception {
+    @PostMapping("/project_definition_submission")
+    public String approveProjectDefinition(@RequestParam("projectDefinition") String projectDefinition,
+                                           @RequestParam("description") String description,
+                                           @RequestParam("projectDefinitionDocument") MultipartFile projectDefinitionDocument
+    )
+            throws Exception {
         Intern intern = getSignedInIntern();
         GroupEntity group = intern.getGroup();
-        group.setProjectDefinition(projectDefinition.getProjectDefinition());
-        group.setDescription(projectDefinition.getDescription());
-        group.setProjectDefinitionDocument(projectDefinition.getProjectDefinitionDocument());
-//        group.setProjectDefinitionDocument(
-//                uploadfile(req.getFile("projectDefinitionDocument"), "projectDefinitionDocument"));
+
+        String storageDir = baseDir2 + group.getGroupId() + "/";
+        File directory = new File(storageDir);
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String projectDefinitionDocumentFileName = storageDir + "projectDefinitionDocument.pdf";
+
+        Files.write(Paths.get(projectDefinitionDocumentFileName), projectDefinitionDocument.getBytes());
+
+        group.setProjectDefinition(projectDefinition);
+        group.setDescription(description);
+        group.setProjectDefinitionDocument(projectDefinitionDocument.getBytes());
         group.setProjectDefinitionStatus("gpending");
         groupRepo.save(group);
         return "redirect:/bisag/intern/project_definition";
@@ -623,6 +638,26 @@ public class InternController {
         mv.addObject("submitDisable", submitDisable);
         return mv;
 
+    }
+
+    @PostMapping("/final_report_submission")
+    public String finalReportSubmission(@RequestParam("finalReport") MultipartFile finalReport) throws Exception {
+        Intern intern = getSignedInIntern();
+        GroupEntity group = intern.getGroup();
+        String storageDir = baseDir + intern.getEmail() + "/";
+        File directory = new File(storageDir);
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String finalReportFileName = storageDir + "finalReport.pdf";
+
+        Files.write(Paths.get(finalReportFileName), finalReport.getBytes());
+        group.setFinalReport(finalReport.getBytes());
+        group.setFinalReportStatus("gpending");
+        groupRepo.save(group);
+        return "redirect:/bisag/intern/final_report_submission";
     }
 
     @PostMapping("/change_password")
