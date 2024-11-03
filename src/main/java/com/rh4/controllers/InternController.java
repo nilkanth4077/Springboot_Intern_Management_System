@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -50,18 +51,8 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/bisag/intern")
 public class InternController {
 
-    @org.springframework.beans.factory.annotation.Value("${projectDefinitionDocument.filepath}")
-    private String projectDefinitionDocument;
-    @org.springframework.beans.factory.annotation.Value("${weeklyReportSubmission.filepath}")
-    private String weeklyReportSubmission;
-    @org.springframework.beans.factory.annotation.Value("${icardForm.filepath}")
-    private String icardForm;
-    @org.springframework.beans.factory.annotation.Value("${registrationForm.filepath}")
-    private String registrationForm;
-    @org.springframework.beans.factory.annotation.Value("${securityForm.filepath}")
-    private String securityForm;
-    @org.springframework.beans.factory.annotation.Value("${finalReport.filepath}")
-    private String finalReport;
+    @Value("${app.storage.base-dir}")
+    private String baseDir;
 
     @Autowired
     private InternService internService;
@@ -237,8 +228,8 @@ public class InternController {
         group.setProjectDefinition(projectDefinition.getProjectDefinition());
         group.setDescription(projectDefinition.getDescription());
         group.setProjectDefinitionDocument(projectDefinition.getProjectDefinitionDocument());
-        group.setProjectDefinitionDocument(
-                uploadfile(req.getFile("projectDefinitionDocument"), "projectDefinitionDocument"));
+//        group.setProjectDefinitionDocument(
+//                uploadfile(req.getFile("projectDefinitionDocument"), "projectDefinitionDocument"));
         group.setProjectDefinitionStatus("gpending");
         groupRepo.save(group);
         return "redirect:/bisag/intern/project_definition";
@@ -317,7 +308,7 @@ public class InternController {
         weeklyReport.setGuide(group.getGuide());
         weeklyReport.setIntern(intern);
         weeklyReport.setReportSubmittedDate(currentDate);
-        weeklyReport.setSubmittedPdf(uploadfile(req.getFile("weeklyReportSubmission"), "weeklyReportSubmission"));
+//        weeklyReport.setSubmittedPdf(uploadfile(req.getFile("weeklyReportSubmission"), "weeklyReportSubmission"));
         weeklyReport.setWeekNo(currentWeekNo);
 
         Date updatedNextSubmissionDate = checkLastWeeklyReportSubmissionDate(getNextSubmissionDate());
@@ -371,7 +362,7 @@ public class InternController {
         GroupEntity group = intern.getGroup();
         WeeklyReport report = weeklyReportService.getReportByWeekNoAndGroupId(weekNo, group);
         CurrentWeekNo = weekNo;
-        report.setSubmittedPdf(uploadfile(req.getFile("weeklyReportSubmission"), "weeklyReportSubmission"));
+//        report.setSubmittedPdf(uploadfile(req.getFile("weeklyReportSubmission"), "weeklyReportSubmission"));
         MyUser user = myUserService.getUserByUsername(intern.getEmail());
         report.setReplacedBy(user);
         Date currentDate = new Date();
@@ -412,10 +403,9 @@ public class InternController {
         System.out.println("called sub");
         Intern intern = getSignedInIntern();
 
-        String storageDir = "D:/User/IMS/Springboot_Intern_Management_System/src/main/resources/static/files/Intern Docs/" + intern.getEmail() + "/";
+        String storageDir = baseDir + intern.getEmail() + "/";
         File directory = new File(storageDir);
 
-        // Create directory if it doesn't exist
         if (!directory.exists()) {
             directory.mkdirs();
         }
@@ -632,116 +622,6 @@ public class InternController {
         mv.addObject("deadline", deadlineOfFinalReport);
         mv.addObject("submitDisable", submitDisable);
         return mv;
-
-    }
-
-    @PostMapping("/final_report_submission")
-    public String finalReportSubmission(MultipartHttpServletRequest req) throws IllegalStateException, IOException, Exception {
-        Intern intern = getSignedInIntern();
-        GroupEntity group = intern.getGroup();
-        group.setFinalReport(uploadfile(req.getFile("finalReport"), "finalReport"));
-        group.setFinalReportStatus("gpending");
-        groupRepo.save(group);
-        return "redirect:/bisag/intern/final_report_submission";
-    }
-
-    public String uploadfile(MultipartFile file, String object) throws Exception, IllegalStateException, IOException {
-        try {
-            if (object == "projectDefinitionDocument") {
-                File myDir = new File(projectDefinitionDocument);
-                if (!myDir.exists())
-                    myDir.mkdirs();
-                long timeadd = System.currentTimeMillis();
-
-                if (!file.isEmpty()) {
-                    file.transferTo(Paths.get(myDir.getAbsolutePath(), timeadd + "_" + file.getOriginalFilename()));
-                    return timeadd + "_" + file.getOriginalFilename();
-                } else {
-                    return null;
-                }
-            } else if (object == "weeklyReportSubmission") {
-                Intern intern = getSignedInIntern();
-                GroupEntity group = intern.getGroup();
-                File myDir = new File(weeklyReportSubmission + "/" + group.getGroupId());
-                if (!myDir.exists())
-                    myDir.mkdirs();
-                long timeadd = System.currentTimeMillis();
-
-                if (!file.isEmpty()) {
-                    file.transferTo(
-                            Paths.get(myDir.getAbsolutePath(), group.getGroupId() + "_Week_" + CurrentWeekNo + ".pdf"));
-                    return group.getGroupId() + "_Week_" + CurrentWeekNo + ".pdf";
-                } else {
-                    return null;
-                }
-            } else if (object == "icardForm") {
-                Intern intern = getSignedInIntern();
-                GroupEntity group = intern.getGroup();
-                File myDir = new File(icardForm + "/" + group.getGroupId() + "/" + getSignedInIntern().getInternId());
-                if (!myDir.exists())
-                    myDir.mkdirs();
-
-                if (!file.isEmpty()) {
-                    file.transferTo(
-                            Paths.get(myDir.getAbsolutePath(), getSignedInIntern().getInternId() + "_icardForm.pdf"));
-                    return getSignedInIntern().getInternId() + "_icardForm.pdf";
-                } else {
-                    return null;
-                }
-            } else if (object == "securityForm") {
-                Intern intern = getSignedInIntern();
-                GroupEntity group = intern.getGroup();
-                File myDir = new File(
-                        securityForm + "/" + group.getGroupId() + "/" + getSignedInIntern().getInternId());
-                if (!myDir.exists())
-                    myDir.mkdirs();
-
-                if (!file.isEmpty()) {
-                    file.transferTo(Paths.get(myDir.getAbsolutePath(),
-                            getSignedInIntern().getInternId() + "_securityForm.pdf"));
-                    return getSignedInIntern().getInternId() + "_securityForm.pdf";
-                } else {
-                    return null;
-                }
-            } else if (object == "registrationForm") {
-                Intern intern = getSignedInIntern();
-                GroupEntity group = intern.getGroup();
-                File myDir = new File(
-                        registrationForm + "/" + group.getGroupId() + "/" + getSignedInIntern().getInternId());
-                if (!myDir.exists())
-                    myDir.mkdirs();
-
-                if (!file.isEmpty()) {
-                    file.transferTo(Paths.get(myDir.getAbsolutePath(),
-                            getSignedInIntern().getInternId() + "_registrationForm.pdf"));
-                    return getSignedInIntern().getInternId() + "_registrationForm.pdf";
-                } else {
-                    return null;
-                }
-            } else if (object == "finalReport") {
-                Intern intern = getSignedInIntern();
-                GroupEntity group = intern.getGroup();
-                File myDir = new File(
-                        finalReport + "/" + group.getGroupId());
-                if (!myDir.exists())
-                    myDir.mkdirs();
-
-                if (!file.isEmpty()) {
-                    file.transferTo(Paths.get(myDir.getAbsolutePath(),
-                            group.getGroupId() + "_Final_Report.pdf"));
-                    return group.getGroupId() + "_Final_Report.pdf";
-                } else {
-                    return null;
-                }
-            } else {
-                System.out.println("nothing is true");
-                return "redirect:/";
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/";
-        }
 
     }
 
