@@ -84,13 +84,12 @@ public class SecurityConfig {
         http.headers(headers -> headers.frameOptions(frameOptions ->
                 frameOptions.sameOrigin()
                         .contentSecurityPolicy(cps -> cps
-                                .policyDirectives("default-src 'self'; " +
-                                        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
-                                        "script-src 'self' 'unsafe-inline' 'unsafe-eval' " +
-                                        "https://cdnjs.cloudflare.com " +
-                                        "https://cdn.jsdelivr.net " +
-                                        "https://ajax.googleapis.com; " +
-                                        "font-src 'self' https://cdnjs.cloudflare.com;")))
+                                .policyDirectives(
+                                        "default-src 'self'; " +
+                                                "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com https://maxcdn.bootstrapcdn.com; " +
+                                                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://ajax.googleapis.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://maxcdn.bootstrapcdn.com; " +
+                                                "font-src 'self' https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com;"
+                                )))
         );
         http.logout(logout ->
                 logout
