@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weekly Report</title>
-<!-- Include any necessary styles or scripts -->
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Bootstrap CSS is used for the card layout in this example -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Report</title>
+    <!-- Include any necessary styles or scripts -->
+    <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            rel="stylesheet">
+    <!-- Bootstrap CSS is used for the card layout in this example -->
 </head>
 <style>
 .late-status {
@@ -51,208 +51,218 @@
 	transition: background-color 0.1s ease, border-radius 0.1s ease, padding
 		0.1s ease;
 }
+
+
+
+
+
+
+
+
+
+
+
 </style>
 
 <body>
 
-	<!-- Include the header fragment -->
-	<div th:replace="fragments/internHeaderFragment :: header"></div>
+<!-- Include the header fragment -->
+<div th:replace="fragments/internHeaderFragment :: header"></div>
 
-	<!-- Include the aside fragment -->
-	<div th:replace="fragments/internAsideFragment :: aside"></div>
+<!-- Include the aside fragment -->
+<div th:replace="fragments/internAsideFragment :: aside"></div>
 
-	<main id="main" class="main">
+<main id="main" class="main">
 
-		<section class="section dashboard">
-			<div class="container">
-				<div class="row">
+    <section class="section dashboard">
+        <div class="container">
+            <div class="row">
 
-					<!-- Second Sales Card -->
-					<div class="col-xxl-6 col-md-6">
-						<div class="card info-card sales-card">
+                <!-- Second Sales Card -->
+                <div class="col-xxl-6 col-md-6">
+                    <div class="card info-card sales-card">
 
-							<div class="card-body">
+                        <div class="card-body">
 
-								<div class="d-flex align-items-center">
-									<div
-										class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-										<i class="bi bi-people"></i>
-									</div>
-									<div class="ps-3">
-										<h4>
-											<span>Next Submission Date</span>
-										</h4>
-										<h5>
+                            <div class="d-flex align-items-center">
+                                <div
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h4>
+                                        <span>Next Submission Date</span>
+                                    </h4>
+                                    <h5>
 											<span class="text-success small pt-1 fw-bold"
-												th:text="${nextSubmissionDate}">08/05/2024</span> <span
-												class="text-success small pt-1 fw-bold">( Week-</span> <span
-												class="text-success small pt-1 fw-bold"
-												th:text="${nextSubmissionWeekNo}"></span> <span
-												class="text-success small pt-1 fw-bold">)</span>
-										</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                                                  th:text="${nextSubmissionDate}">08/05/2024</span> <span
+                                            class="text-success small pt-1 fw-bold">( Week-</span> <span
+                                            class="text-success small pt-1 fw-bold"
+                                            th:text="${nextSubmissionWeekNo}"></span> <span
+                                            class="text-success small pt-1 fw-bold">)</span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-					<!-- First Sales Card -->
-					<div class="col-xxl-6 col-md-6">
-						<div class="card info-card sales-card">
+                <!-- First Sales Card -->
+                <div class="col-xxl-6 col-md-6">
+                    <div class="card info-card sales-card">
 
-							<div class="card-body">
+                        <div class="card-body">
 
-								<div class="d-flex align-items-center">
-									<div
-										class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-										<i class="bi bi-people"></i>
-									</div>
-									<div class="ps-3">
-										<h4>
-											<span>Status</span>
-										</h4>
-										<h5>
-											<span class="text-danger small pt-1 fw-bold">Pending</span>
-											</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<h1 class="text-danger small pt-1 mx-3 fw-bold" th:if="${weeklyReportDisable1 != 'false' || weeklyReportDisable2 != 'false'}">No need to submit more reports. You have completed your internship.</h1>
-		<div class="container mt-2">
-			<div class="card">
-				<div
-					class="card-header d-flex justify-content-between align-items-center">
-					<h3 class="text-dark">Add New Report</h3>
-					<button class="btn btn-primary" data-toggle="modal"
-						data-target="#myModal"  th:disabled="${weeklyReportDisable1 == 'true' || weeklyReportDisable2 == 'true'}">+</button>
+                            <div class="d-flex align-items-center">
+                                <div
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h4>
+                                        <span>Status</span>
+                                    </h4>
+                                    <h5>
+                                        <span class="text-danger small pt-1 fw-bold">Pending</span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h1 class="text-danger small pt-1 mx-3 fw-bold"
+        th:if="${weeklyReportDisable1 != 'false' || weeklyReportDisable2 != 'false'}">No need to submit more reports.
+        You have completed your internship.</h1>
+    <div class="container mt-2">
+        <div class="card">
+            <div
+                    class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="text-dark">Add New Report</h3>
+                <button class="btn btn-primary" data-toggle="modal"
+                        data-target="#myModal"
+                        th:disabled="${weeklyReportDisable1 == 'true' || weeklyReportDisable2 == 'true'}">+
+                </button>
 
-				</div>
-				<div class="card-body">
-					<div class="row">
-						<div th:each="weeklyReport : ${weeklyReports}" class="col-md-3">
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div th:each="weeklyReport : ${weeklyReports}" class="col-md-3">
 
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="card-title">
-											<h5 class="mb-0" th:text="'Week - ' + ${weeklyReport.weekNo}"></h5>
-										</div>
-										<!-- Three dots icon -->
-										<div class="dropdown icon-container">
-											<i class="fa-solid fa-ellipsis-vertical"
-												data-toggle="dropdown" role="button" aria-haspopup="true"
-												aria-expanded="false"></i>
-											<div class="dropdown-menu">
-												<a
-													th:href="@{'/files/weekly_reports/' + ${group.groupId} + '/' + ${weeklyReport.submittedPdf}}"
-													target="_blank" class="dropdown-item">View Report</a> <a
-													th:href="@{'/bisag/intern/change_weekly_report/' + ${weeklyReport.weekNo}}"
-													class="dropdown-item">Details</a>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="card-title">
+                                        <h5 class="mb-0" th:text="'Week - ' + ${weeklyReport.weekNo}"></h5>
+                                    </div>
+                                    <!-- Three dots icon -->
+                                    <div>
+                                        <a th:href="@{'/bisag/intern/change_weekly_report/' + ${weeklyReport.weekNo}}" class="dropdown-item">
+                                            <i class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
 
-											</div>
-										</div>
-									</div>
-
-									<table class="table table-striped table-bordered">
-										<tr>
-											<td>Submitted Date:</td>
-											<td th:text="${weeklyReport.reportSubmittedDate}"></td>
-										</tr>
-										<tr>
-											<td>Deadline:</td>
-											<td th:text="${weeklyReport.deadline}"></td>
-										</tr>
-										<tr>
-											<td>Submitted By:</td>
-											<td
-												th:text="${weeklyReport.intern.firstName} + ' ' + ${weeklyReport.intern.lastName}"></td>
-										</tr>
-										<tr>
-											<td>Status:</td>
-											<td
-												th:class="${weeklyReport.status == 'late submitted' ? 'late-status' : 'green-status'}"
-												th:text="${weeklyReport.status}"></td>
-										</tr>
-									</table>
+                                <table class="table table-striped table-bordered">
+                                    <tr>
+                                        <td>Submitted Date:</td>
+                                        <td th:text="${weeklyReport.reportSubmittedDate}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Deadline:</td>
+                                        <td th:text="${weeklyReport.deadline}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Submitted By:</td>
+                                        <td
+                                                th:text="${weeklyReport.intern.firstName} + ' ' + ${weeklyReport.intern.lastName}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status:</td>
+                                        <td
+                                                th:class="${weeklyReport.status == 'late submitted' ? 'late-status' : 'green-status'}"
+                                                th:text="${weeklyReport.status}"></td>
+                                    </tr>
+                                </table>
 
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Add New Report</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<!-- Your form content goes here -->
-						<!-- Example form content: -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Report</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your form content goes here -->
+                    <!-- Example form content: -->
 
-						<div class="form-group">
-							<label for="groupId">Group ID:</label> <input type="text"
-								class="form-control" id="groupId" name="groupId"
-								th:value="${group.groupId}" readonly>
-						</div>
-						<div class="form-group">
-							<label for="internId">Intern ID:</label> <input type="text"
-								class="form-control" id="internId" name="internId"
-								th:value="${intern.internId}" readonly>
-						</div>
-						<form action="weekly_report_submission" method="post"
-							enctype="multipart/form-data">
-							<div class="form-group">
-								<label for="weekNo">Week No:</label> <input type="text"
-									class="form-control" id="weekNo" name="currentWeekNo"
-									th:value="${nextSubmissionWeekNo}" readonly>
-							</div>
-							<div class="form-group">
-								<label for="weeklyReportSubmission" class="form-label">Upload
-									NOC:</label> <input type="file" class="form-control"
-									id="weeklyReportSubmission" name="weeklyReportSubmission"
-									required>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Save
-									changes</button>
-							</div>
-						</form>
-					</div>
+                    <div class="form-group">
+                        <label for="groupId">Group ID:</label> <input type="text"
+                                                                      class="form-control" id="groupId" name="groupId"
+                                                                      th:value="${group.groupId}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="internId">Intern ID:</label> <input type="text"
+                                                                        class="form-control" id="internId"
+                                                                        name="internId"
+                                                                        th:value="${intern.internId}" readonly>
+                    </div>
+                    <form action="weekly_report_submission" method="post"
+                          enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="weekNo">Week No:</label> <input type="text"
+                                                                        class="form-control" id="weekNo"
+                                                                        name="currentWeekNo"
+                                                                        th:value="${nextSubmissionWeekNo}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="weeklyReportSubmission" class="form-label">Upload
+                                Weekly Report:</label> <input type="file" class="form-control"
+                                                              id="weeklyReportSubmission" name="weeklyReportSubmission"
+                                                              accept=".pdf"
+                                                              required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">Save
+                                changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
-				</div>
-			</div>
-		</div>
+            </div>
+        </div>
+    </div>
 
 
+    <!-- Include the footer fragment -->
+    <div th:replace="fragments/footerFragment :: footer"></div>
+</main>
 
-		<!-- Include the footer fragment -->
-		<div th:replace="fragments/footerFragment :: footer"></div>
-	</main>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<!-- Bootstrap JS is used for the card layout in this example -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 
