@@ -313,8 +313,8 @@ public class InternController {
         WeeklyReport weeklyReport = new WeeklyReport();
         CurrentWeekNo = currentWeekNo;
 
-        String storageDir = baseDir + intern.getEmail() + "/Weekly Reports";
-        String storageDir2 = storageDir + "/" + intern.getInternId() + "_" + "Week" + currentWeekNo;
+        String storageDir = baseDir2 + intern.getGroup().getGroupId() + "/Weekly Reports";
+        String storageDir2 = storageDir + "/" + intern.getGroup().getGroupId() + "_" + "Week" + currentWeekNo;
         File directory = new File(storageDir);
 
         if (!directory.exists()) {
@@ -394,7 +394,7 @@ public class InternController {
         CurrentWeekNo = weekNo;
         report.setSubmittedPdf(weeklyReportSubmission.getBytes());
 
-        String storageDir = baseDir + intern.getEmail() + "/Weekly Reports/" + intern.getInternId() + "_Week" + weekNo + ".pdf";
+        String storageDir = baseDir2 + intern.getGroup().getGroupId() + "/Weekly Reports/" + intern.getGroup().getGroupId() + "_Week" + weekNo + ".pdf";
         File existingFile = new File(storageDir);
 
         if (existingFile.exists()) {
