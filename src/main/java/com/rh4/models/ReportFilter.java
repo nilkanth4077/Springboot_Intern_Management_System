@@ -14,7 +14,6 @@ public class ReportFilter {
     private String format;
 	public ReportFilter() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ReportFilter(String college, String branch, String guide, String domain, Date startDate, Date endDate,
 			String cancelled, String format) {

@@ -79,7 +79,6 @@ public class Guide {
 
 	public Guide() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Guide(long guideId,

@@ -42,7 +42,6 @@ public class SuperAdmin {
     
 	public SuperAdmin() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

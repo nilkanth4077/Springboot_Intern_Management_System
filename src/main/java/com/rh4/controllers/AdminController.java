@@ -94,7 +94,6 @@ public class AdminController {
         Admin admin = adminService.getAdminByUsername(username);
         return admin;
     }
-    // generate internid//////////////////////////////////////
 
     public String generateInternId() {
         // Generate custom internId using current year and serial number
@@ -122,8 +121,6 @@ public class AdminController {
         int lastFourDigits = Integer.parseInt(serialNumber);
         return lastFourDigits;
     }
-
-    // generate groupid////////////////////////////////////////////////////////////
 
 //	public String generateGroupId() {
 //		// Generate custom groupId using current year and serial number

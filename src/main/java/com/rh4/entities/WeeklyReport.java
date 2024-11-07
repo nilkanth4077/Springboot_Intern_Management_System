@@ -2,14 +2,7 @@ package com.rh4.entities;
 
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "weekly_report")
@@ -32,8 +25,10 @@ public class WeeklyReport {
 	private Date deadline;
 	
 	private int weekNo;
-	
-	private String submittedPdf;
+
+	@Lob
+	@Column(name = "submitted_pdf", columnDefinition = "LONGBLOB")
+    private byte[] submittedPdf;
 	
 	@JoinColumn(name = "guide_id")
 	@ManyToOne
@@ -46,11 +41,10 @@ public class WeeklyReport {
 
 	public WeeklyReport() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public WeeklyReport(long weeklyReportId, Intern intern, GroupEntity group, Date reportSubmittedDate, Date deadline,
-			int weekNo, String submittedPdf, Guide guide, MyUser replacedBy, String status) {
+			int weekNo, byte[] submittedPdf, Guide guide, MyUser replacedBy, String status) {
 		super();
 		this.weeklyReportId = weeklyReportId;
 		this.intern = intern;
@@ -112,11 +106,11 @@ public class WeeklyReport {
 		this.weekNo = weekNo;
 	}
 
-	public String getSubmittedPdf() {
+	public byte[] getSubmittedPdf() {
 		return submittedPdf;
 	}
 
-	public void setSubmittedPdf(String submittedPdf) {
+	public void setSubmittedPdf(byte[] submittedPdf) {
 		this.submittedPdf = submittedPdf;
 	}
 
