@@ -15,6 +15,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -260,13 +262,13 @@ public class InternController {
         List<WeeklyReport> weeklyReports = weeklyReportService.getReportsByGroupId(group.getId());
         checkWeeklyReportDisable();
         String weeklyReportDisable1;
-        if (WEEKLYREPORTDISABLE == true) {
+        if (WEEKLYREPORTDISABLE) {
             weeklyReportDisable1 = "true";
         } else {
             weeklyReportDisable1 = "false";
         }
 
-//		// Retrieve the last weekly report
+		// Retrieve the last weekly report
         WeeklyReport lastWeeklyReport = null;
         if (!weeklyReports.isEmpty()) {
             lastWeeklyReport = weeklyReports.get(weeklyReports.size() - 1);
@@ -280,12 +282,6 @@ public class InternController {
             LocalDate localDate = deadlineOfLastWeeklyReport.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String formattedDate = localDate.format(formatter);
-//	    System.out.println(deadlineOfLastWeeklyReport);
-//	    System.out.println(checkLastWeeklyReportSubmissionDate(nextSubmissionDate));
-
-            //Convert deadlineOfLastWeeklyReport to LocalDate
-
-            //Format the LocalDate as a string with the desired format
 
             System.out.println(formattedDate); // Print the formatted date
 
@@ -297,10 +293,7 @@ public class InternController {
                 weeklyReportDisable2 = "false";
             }
             mv.addObject("weeklyReportDisable2", weeklyReportDisable2);
-        } else {
-            weeklyReportDisable2 = "false";
         }
-
 
         mv.addObject("nextSubmissionDate", checkLastWeeklyReportSubmissionDate(nextSubmissionDate));
         mv.addObject("nextSubmissionWeekNo", nextSubmissionWeekNo);
@@ -313,17 +306,30 @@ public class InternController {
 
     @PostMapping("/weekly_report_submission")
     public String weeklyReportSubmission(@RequestParam("currentWeekNo") int currentWeekNo,
-                                         MultipartHttpServletRequest req) throws IllegalStateException, IOException, Exception {
+                                         @RequestParam("weeklyReportSubmission") MultipartFile weeklyReportSubmission) throws IllegalStateException, IOException, Exception {
         Intern intern = getSignedInIntern();
         GroupEntity group = intern.getGroup();
         Date currentDate = new Date();
         WeeklyReport weeklyReport = new WeeklyReport();
         CurrentWeekNo = currentWeekNo;
+
+        String storageDir = baseDir + intern.getEmail() + "/Weekly Reports";
+        String storageDir2 = storageDir + "/" + intern.getInternId() + "_" + "Week" + currentWeekNo;
+        File directory = new File(storageDir);
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String weeklyReportFileName = storageDir2 + ".pdf";
+
+        Files.write(Paths.get(weeklyReportFileName), weeklyReportSubmission.getBytes());
+
         weeklyReport.setGroup(group);
         weeklyReport.setGuide(group.getGuide());
         weeklyReport.setIntern(intern);
         weeklyReport.setReportSubmittedDate(currentDate);
-//        weeklyReport.setSubmittedPdf(uploadfile(req.getFile("weeklyReportSubmission"), "weeklyReportSubmission"));
+        weeklyReport.setSubmittedPdf(weeklyReportSubmission.getBytes());
         weeklyReport.setWeekNo(currentWeekNo);
 
         Date updatedNextSubmissionDate = checkLastWeeklyReportSubmissionDate(getNextSubmissionDate());
@@ -357,27 +363,46 @@ public class InternController {
             String status = "Your Current Weekly report is required some modifications given by guide. Please check it out.";
             mv.addObject("status", status);
             mv.addObject("replacedBy", guide.getName());
-
         } else if (user.getRole().equals("INTERN")) {
             Intern intern = internService.getInternByUsername(user.getUsername());
-            mv.addObject("replacedBy", intern.getFirstName() + intern.getLastName());
+            mv.addObject("replacedBy", intern.getFirstName() + " " + intern.getLastName());
             mv.addObject("status",
                     "Your current weekly report is accepted and if any changes are required then you will be notified.");
-        } else {
         }
         mv.addObject("report", report);
         mv.addObject("group", group);
         return mv;
     }
 
+    @GetMapping("/viewPdf/{internId}/{weekNo}")
+    public ResponseEntity<byte[]> viewPdf(@PathVariable String internId, @PathVariable int weekNo) {
+        WeeklyReport report = weeklyReportService.getReportByInternIdAndWeekNo(internId, weekNo);
+        byte[] pdfContent = report.getSubmittedPdf();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+
+        return new ResponseEntity<>(pdfContent, headers, HttpStatus.OK);
+    }
+
     @PostMapping("/change_weekly_report/changed_report")
-    public String chanegWeeklyReportSubmission(@RequestParam("weekNo") int weekNo, MultipartHttpServletRequest req)
+    public String chanegWeeklyReportSubmission(@RequestParam("weekNo") int weekNo, @RequestParam("weeklyReportSubmission") MultipartFile weeklyReportSubmission)
             throws IllegalStateException, IOException, Exception {
         Intern intern = getSignedInIntern();
         GroupEntity group = intern.getGroup();
         WeeklyReport report = weeklyReportService.getReportByWeekNoAndGroupId(weekNo, group);
         CurrentWeekNo = weekNo;
-//        report.setSubmittedPdf(uploadfile(req.getFile("weeklyReportSubmission"), "weeklyReportSubmission"));
+        report.setSubmittedPdf(weeklyReportSubmission.getBytes());
+
+        String storageDir = baseDir + intern.getEmail() + "/Weekly Reports/" + intern.getInternId() + "_Week" + weekNo + ".pdf";
+        File existingFile = new File(storageDir);
+
+        if (existingFile.exists()) {
+            existingFile.delete();
+        }
+
+        Files.write(Paths.get(storageDir), weeklyReportSubmission.getBytes());
+
         MyUser user = myUserService.getUserByUsername(intern.getEmail());
         report.setReplacedBy(user);
         Date currentDate = new Date();
@@ -393,7 +418,7 @@ public class InternController {
         }
 
         weeklyReportService.addReport(report);
-        return "redirect:/bisag/intern/weekly_report_submission";
+        return "redirect:/bisag/intern/change_weekly_report/" + weekNo;
     }
 
     @GetMapping("/submit_forms")

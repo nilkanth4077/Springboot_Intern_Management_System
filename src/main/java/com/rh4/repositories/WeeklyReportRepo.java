@@ -1,6 +1,7 @@
 package com.rh4.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,5 +25,7 @@ public interface WeeklyReportRepo extends JpaRepository<WeeklyReport, Long> {
     @Query("SELECT w FROM WeeklyReport w WHERE w.guide.id = :id")
     List<WeeklyReport> findAllByGuideId(long id);
 
-	WeeklyReport findByWeekNoAndGroup(int weekNo, GroupEntity group);
+    WeeklyReport findByWeekNoAndGroup(int weekNo, GroupEntity group);
+
+    WeeklyReport findByInternInternIdAndWeekNo(String internId, int weekNo);
 }
