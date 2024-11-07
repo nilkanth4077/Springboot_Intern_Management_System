@@ -1,6 +1,7 @@
 package com.rh4.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -46,6 +47,8 @@ public class WeeklyReportService {
 		return weeklyReportRepo.findAll();
 	}
 
-	
+	public WeeklyReport getReportByInternIdAndWeekNo(String internId, int weekNo) {
+		return weeklyReportRepo.findByInternInternIdAndWeekNo(internId, weekNo);
+	}
 	
 }

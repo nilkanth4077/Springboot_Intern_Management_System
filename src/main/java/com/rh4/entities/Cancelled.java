@@ -27,7 +27,6 @@ public class Cancelled {
 
 	public Cancelled() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Cancelled(long id, String tableName, String cancelId) {

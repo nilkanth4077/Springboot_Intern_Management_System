@@ -21,7 +21,6 @@ public class Domain {
 
 	public Domain() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Domain(long domainId, String name) {
