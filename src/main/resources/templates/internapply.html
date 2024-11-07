@@ -219,6 +219,7 @@ html, body {
         z-index: 1000; /* Make sure it appears above other elements */
     }
 
+
 </style>
 
 <body>
@@ -259,13 +260,13 @@ html, body {
                                            required data-tooltip="Please enter your first name">
                                     <div class="tooltip" id="tooltip-firstName"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-2" style="position: relative;">
                                     <input type="text" class="form-control"
                                            placeholder="Last Name*" id="lastName" name="lastName"
                                            required data-tooltip="Please enter your last name">
                                     <div class="tooltip" id="tooltip-lastName"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-2" style="position: relative;">
                                     <input type="tel" class="form-control"
                                            placeholder="Contact Number*" id="contactNo" name="contactNo"
                                            required data-tooltip="Please enter your contact number">
@@ -274,7 +275,8 @@ html, body {
                                 <div class="form-group my-4" style="position: relative;">
                                     <label for="email" class="form-label text-white">Email
                                         ID:</label> <input type="email" class="form-control"
-                                                           placeholder="Email*" id="email" name="email" required data-tooltip="Please enter your email id">
+                                                           placeholder="Email*" id="email" name="email" required
+                                                           data-tooltip="Please enter your email id">
                                     <div class="tooltip" id="tooltip-email"></div>
                                 </div>
                                 <div class="form-group" style="position: relative;">
@@ -291,22 +293,24 @@ html, body {
                                 <!-- Additional fields -->
                                 <div class="form-group" style="position: relative;">
                                     <select class="form-select" id="collegeName"
-                                            name="collegeName" required data-tooltip="Please enter your college/university">
+                                            name="collegeName" required
+                                            data-tooltip="Please enter your college/university">
                                         <option value="" disabled selected>Select College</option>
                                         <option th:each="college : ${colleges}"
                                                 th:text="${college.name}" th:value="${college.name}"></option>
                                     </select>
                                     <div class="tooltip" id="tooltip-college"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
-                                    <select class="form-select" id="branch" name="branch" required data-tooltip="Please enter your stream">
+                                <div class="form-group mt-2" style="position: relative;">
+                                    <select class="form-select" id="branch" name="branch" required
+                                            data-tooltip="Please enter your stream">
                                         <option value="" disabled selected>Select Branch</option>
                                         <option th:each="branch : ${branches}"
                                                 th:text="${branch.name}" th:value="${branch.name}"></option>
                                     </select>
                                     <div class="tooltip" id="tooltip-branch"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-2" style="position: relative;">
                                     <select class="form-select" id="domain"
                                             name="domain" required data-tooltip="Please enter your internship domain">
                                         <option value="" disabled selected>Select Domain</option>
@@ -315,7 +319,7 @@ html, body {
                                     </select>
                                     <div class="tooltip" id="tooltip-domain"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-2" style="position: relative;">
                                     <select class="form-select" id="degree"
                                             name="degree" required data-tooltip="Please enter your degree">
                                         <option value="" disabled selected>Select Degree</option>
@@ -324,7 +328,7 @@ html, body {
                                     </select>
                                     <div class="tooltip" id="tooltip-degree"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-3" style="position: relative;">
                                     <input type="password" id="password" class="form-control"
                                            placeholder="Password*" name="password" required>
                                     <div id="password-tooltip" class="tooltip-content">
@@ -336,7 +340,7 @@ html, body {
                                             etc.)</p>
                                     </div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-4" style="position: relative;">
                                     <label for="resumePdf" class="form-label text-white mt-0">Upload Resume:</label>
                                     <input type="file" class="form-control" id="resumePdf" name="resumePdf"
                                            accept=".pdf" required
@@ -350,20 +354,22 @@ html, body {
                                 <div class="form-group" style="position: relative;">
                                     <input type="number" class="form-control"
                                            placeholder="Semester*" id="semester" name="semester"
-                                           required data-tooltip="Please enter your current semester">
+                                           required
+                                           data-tooltip="Please enter your current semester, must between 1 to 8">
                                     <div class="tooltip" id="tooltip-semester"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-2" style="position: relative;">
                                     <input type="date" class="form-control" id="joiningDate" placeholder="Joining Date*"
                                            name="joiningDate" onfocus="(this.type='date')" onblur="(this.type='text')"
                                            required data-tooltip="Please enter your Joining date">
                                     <div class="tooltip" id="tooltip-joiningDate"></div>
                                 </div>
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group mt-2" style="position: relative;">
                                     <input type="date" class="form-control" id="completionDate"
                                            placeholder="Completion Date*"
                                            name="completionDate" onfocus="(this.type='date')"
-                                           onblur="(this.type='text')" required data-tooltip="Please enter your Completion date">
+                                           onblur="(this.type='text')" required
+                                           data-tooltip="Please enter your Completion date, must be in future">
                                     <div class="tooltip" id="tooltip-completionDate"></div>
                                 </div>
                                 <div class="form-group my-4" style="position: relative;">
@@ -412,9 +418,12 @@ html, body {
             </div>
             <div class="modal-body">
                 <th:block>
-                    <p class="text-center text-success" th:text="${session.msg}"></p>
+                    <!-- Apply 'text-success' for success and 'text-danger' for error -->
+                    <p class="text-center"
+                       th:text="${session.msg}"
+                       th:classappend="${session.msg.contains('Error') ? ' text-danger' : ' text-success'}">
+                    </p>
                 </th:block>
-
             </div>
         </div>
     </div>
@@ -445,6 +454,7 @@ html, body {
             }, 60000);
         }
     });
+
 </script>
 
 <script>
@@ -459,6 +469,7 @@ html, body {
 				}, 200000);
 			});
 		});
+
 </script>
 <script>
     const passwordInput = document.getElementById("password");
@@ -479,6 +490,7 @@ passwordInput.addEventListener("input", function () {
     document.getElementById("number").classList.toggle("valid", /[0-9]/.test(value));
     document.getElementById("special").classList.toggle("valid", /[@#$%^&+=]/.test(value));
 });
+
 </script>
 <script>
     function showTooltip(inputElement, tooltipElement) {
@@ -505,6 +517,7 @@ passwordInput.addEventListener("input", function () {
             tooltip.style.top = e.pageY + 10 + 'px'; // Offset by 10px to avoid cursor
         });
     });
+
 
 </script>
 
