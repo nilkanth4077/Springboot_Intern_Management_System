@@ -220,6 +220,7 @@ public class InternController {
         } else {
             mv.addObject("group", null); // Handle the case when no group is assigned
         }
+        mv.addObject("intern", getSignedInIntern());
         return mv;
 
     }
@@ -637,6 +638,7 @@ public class InternController {
         }
         mv.addObject("admins", admins);
         mv.addObject("guides", guides);
+        mv.addObject("intern", getSignedInIntern());
         return mv;
     }
 
@@ -695,8 +697,7 @@ public class InternController {
     @GetMapping("/apply_leave")
     public ModelAndView applyLeave() {
         ModelAndView mv = new ModelAndView("intern/apply_leave");
-        Intern intern = getSignedInIntern();
-        mv.addObject("intern", intern);
+        mv.addObject("intern", getSignedInIntern());
         return mv;
     }
 
