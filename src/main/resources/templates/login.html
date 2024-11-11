@@ -2,24 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Apply for the Internship</title>
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apply for the Internship</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+    <link
+            href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+            rel="stylesheet" id="bootstrap-css">
+    <script
+            src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
 </head>
 <style>
 html, body {
@@ -114,6 +114,7 @@ html, body {
 	font-weight: 600;
 	width: 10%;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 .btnRegister:hover {
@@ -194,80 +195,103 @@ html, body {
 	/* Adjust the blur amount as needed */
 	z-index: -1;
 }
+
 </style>
 
 <body>
 
-	<div class="container-fluid register">
-		<div class="row">
-			<div class="col-md-3 register-left">
-				<div style="position: relative; display: inline-block;">
-					<div
-						style="position: absolute; border-radius: 50%; background-color: white; width: 100px; height: 100px; top: 20px;"></div>
-					<img th:src="@{/assets/img/bisag_logo.png}" alt=""
-						style="position: relative; z-index: 1; width: 100px; height: 100px;">
-				</div>
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <div style="position: relative; display: inline-block;">
+                <div
+                        style="position: absolute; border-radius: 50%; background-color: white; width: 100px; height: 100px; top: 20px;"></div>
+                <img th:src="@{/assets/img/bisag_logo.png}" alt=""
+                     style="position: relative; z-index: 1; width: 100px; height: 100px;">
+            </div>
 
 
-				<h3 class="mt-4">Welcome</h3>
-				<p>For individuals without an established account, the opportunity to initiate a new registration is available</p>
-				<a th:href="@{/bisag_internship}"><input type="submit" name=""
-					value="Apply For Internship" /></a><br />
-			</div>
-			<div class="col-md-9 register-right shadow">
-				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="home" role="tabpanel"
-						aria-labelledby="home-tab">
-						<h1 class="register-heading text-white">Login</h1>
-						<form th:action="@{/login}" method="post"
-							enctype="multipart/form-data">
-							<div class="register-form">
-								<div class="col-md-6 offset-md-3">
-									<div class="form-group">
-										<label for="username" class="form-label mt-4 text-white"><h5>Username:</h5></label> <input
-											type="text" class="form-control" placeholder="Email*"
-											id="username" name="username" required>
-									</div>
-									<div class="form-group">
-										<label for="password" class="form-label text-white"><h5>Password:</h5></label> <input
-											type="password" class="form-control" placeholder="Password*"
-											id="password" name="password" required>
-									</div>
-								</div>
-								<div class="text-center">
-									<button type="submit" class="btnRegister">
-										<span aria-hidden="true"></span>Submit
-									</button>
-									<a th:href="@{/}" type="button" class="btnRegister">Home</a>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <h3 class="mt-4">Welcome</h3>
+            <p>For individuals without an established account, the opportunity to initiate a new registration is
+                available</p>
+            <a th:href="@{/bisag_internship}"><input type="submit" name=""
+                                                     value="Apply For Internship"/></a><br/>
+        </div>
+        <div class="col-md-9 register-right shadow">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                     aria-labelledby="home-tab">
+                    <h1 class="register-heading text-white">Login</h1>
+                    <form th:action="@{/login}" method="post"
+                          enctype="multipart/form-data">
+                        <div class="register-form">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="form-group">
+                                    <label for="username" class="form-label mt-4 text-white"><h5>Username:</h5></label>
+                                    <input
+                                            type="text" class="form-control" placeholder="Email*"
+                                            id="username" name="username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="form-label text-white"><h5>Password:</h5></label>
+                                    <input
+                                            type="password" class="form-control" placeholder="Password*"
+                                            id="password" name="password" required>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btnRegister">
+                                    <span aria-hidden="true"></span>Submit
+                                </button>
+                                <a th:href="@{/}" type="button" class="btnRegister">Home</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" th:if="${session.msg}" id="messageModal" tabindex="-1" role="dialog"
+     aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <th:block>
+                    <!-- Apply 'text-success' for success and 'text-danger' for error -->
+                    <p class="text-center"
+                       th:text="${session.msg}"
+                       th:classappend="${session.msg.contains('Error') ? ' text-danger' : ' text-success'}">
+                    </p>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 
 
-	<!-- Include jQuery -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Bootstrap JS -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-		crossorigin="anonymous"></script>
-
-
-
-	<!-- Include Bootstrap JS -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-		crossorigin="anonymous"></script>
-
-	<script>
+<script>
 		$(document).ready(function() {
 			// Initially hide the loading spinner
 			$('.spinner-border').addClass('visually-hidden');
@@ -285,7 +309,8 @@ html, body {
 				}, 200000); // Simulated delay of 2 seconds (adjust as needed)
 			});
 		});
-	</script>
+
+</script>
 </body>
 
 </html>

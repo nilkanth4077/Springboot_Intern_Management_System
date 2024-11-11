@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>IMS Admin Panel</title>
-<meta content="" name="description">
-<meta content="" name="keywords">
-<style>
+    <title>IMS Admin Panel</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <style>
 .lgout {
 	padding: 10px;
 	list-style-type: none;
@@ -30,479 +30,489 @@
 	background-color: white;
 	/* Set your desired background color */
 }
-</style>
+
+    </style>
 </head>
 
 <body>
 
 
-	<!-- Include the header fragment -->
-	<div th:replace="fragments/headerFragment :: header"></div>
+<!-- Include the header fragment -->
+<div th:replace="fragments/headerFragment :: header"></div>
 
-	<!-- Include the aside fragment -->
-	<div th:replace="fragments/asideFragment :: aside"></div>
+<!-- Include the aside fragment -->
+<div th:replace="fragments/asideFragment :: aside"></div>
 
 
-	<main id="main" class="main">
+<main id="main" class="main">
 
-		<div class="pagetitle">
-			<h1>Dashboard</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-					<li class="breadcrumb-item active">Dashboard</li>
-				</ol>
-			</nav>
-		</div>
-		<!-- End Page Title -->
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
 
-		<section class="section dashboard">
-			<div class="row">
+    <section class="section dashboard">
+        <div class="row">
 
-				<!-- Left side columns -->
-				<div class="col-lg-12">
-					<div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
 
-						<!-- Sales Card -->
-						<div class="col-xxl-3 col-md-4">
-							<a th:href="@{/bisag/admin/intern_application}">
-								<div class="card info-card sales-card glowing-card">
+                    <!-- Sales Card -->
+                    <div class="col-xxl-3 col-md-4">
+                        <a th:href="@{/bisag/admin/intern_application}">
+                            <div class="card info-card sales-card glowing-card">
 
-									<div class="card-body">
+                                <div class="card-body">
 
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-people"></i>
-											</div>
-											<div class="ps-3">
-												<h6>
-													<span th:text="${interviewPendingApplicationsCount}"></span>
-												</h6>
-												<span class="text-success small pt-1 fw-bold">Pending
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>
+                                                <span th:text="${interviewPendingApplicationsCount}"></span>
+                                            </h6>
+                                            <span class="text-success small pt-1 fw-bold">Pending
 													Applications</span>
-											</div>
-										</div>
-									</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-								</div>
-							</a>
-						</div>
-						<!-- End Sales Card -->
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Sales Card -->
 
-						<!-- Revenue Card -->
-						<div class="col-xxl-3 col-md-4">
-							<a th:href="@{/bisag/admin/intern_application/approved_interns}">
-								<div class="card info-card revenue-card glowing-card">
+                    <!-- Revenue Card -->
+                    <div class="col-xxl-3 col-md-4">
+                        <a th:href="@{/bisag/admin/intern_application/approved_interns}">
+                            <div class="card info-card revenue-card glowing-card">
 
-									<div class="card-body">
+                                <div class="card-body">
 
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-people"></i>
-											</div>
-											<div class="ps-3">
-												<h6>
-													<span th:text="${countInterviewApplications}"></span>
-												</h6>
-												<span class="text-success small pt-1 fw-bold">Pending
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>
+                                                <span th:text="${countInterviewApplications}"></span>
+                                            </h6>
+                                            <span class="text-success small pt-1 fw-bold">Pending
 													Interviews</span>
 
-											</div>
-										</div>
-									</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-								</div>
-							</a>
-						</div>
-						<!-- End Revenue Card -->
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Revenue Card -->
 
-						<!-- Interns Card -->
-						<div class="col-xxl-3 col-md-4">
-							<a th:href="@{/bisag/admin/intern_application/new_interns}">
-								<div class="card info-card interns-card glowing-card">
+                    <!-- Interns Card -->
+                    <div class="col-xxl-3 col-md-4">
+                        <a th:href="@{/bisag/admin/intern_application/new_interns}">
+                            <div class="card info-card interns-card glowing-card">
 
-									<div class="card-body">
+                                <div class="card-body">
 
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-people"></i>
-											</div>
-											<div class="ps-3">
-												<h6>
-													<span th:text="${countInterns}"></span>
-												</h6>
-												<span class="text-success small pt-1 fw-bold">Current
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>
+                                                <span th:text="${countInterns}"></span>
+                                            </h6>
+                                            <span class="text-success small pt-1 fw-bold">Current
 													Interns</span>
-											</div>
-										</div>
-									</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-								</div>
-							</a>
-						</div>
-						<!-- End Interns Card -->
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Interns Card -->
 
 
-						<!-- Customers Card -->
-						<div class="col-xxl-3 col-xl-4">
-							<a th:href="@{/bisag/admin/guide_list}">
-								<div class="card info-card customers-card glowing-card">
+                    <!-- Customers Card -->
+                    <div class="col-xxl-3 col-xl-4">
+                        <a th:href="@{/bisag/admin/guide_list}">
+                            <div class="card info-card customers-card glowing-card">
 
-									<div class="card-body">
+                                <div class="card-body">
 
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-people"></i>
-											</div>
-											<div class="ps-3">
-												<h6>
-													<span th:text="${countGuide}"></span>
-												</h6>
-												<span class="text-danger small pt-1 fw-bold">Guides</span>
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>
+                                                <span th:text="${countGuide}"></span>
+                                            </h6>
+                                            <span class="text-danger small pt-1 fw-bold">Guides</span>
 
-											</div>
-										</div>
+                                        </div>
+                                    </div>
 
-									</div>
-								</div>
-							</a>
-						</div>
-						<!-- End Customers Card -->
-						
-						<!-- Interns Card -->
-						<div class="col-xxl-4 col-md-4">
-							<a th:href="@{/bisag/admin/create_group}">
-								<div class="card info-card interns-card glowing-card">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Customers Card -->
 
-									<div class="card-body">
+                    <!-- Interns Card -->
+                    <div class="col-xxl-4 col-md-4">
+                        <a th:href="@{/bisag/admin/create_group}">
+                            <div class="card info-card interns-card glowing-card">
 
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-people"></i>
-											</div>
-											<div class="ps-3">
-												<h6>
-													<span th:text="${pendingGroupCreationCount}"></span>
-												</h6>
-												<span class="text-success small pt-1 fw-bold">Pending Group Creation</span>
-											</div>
-										</div>
-									</div>
+                                <div class="card-body">
 
-								</div>
-							</a>
-						</div>
-						<!-- End Interns Card -->
-						
-						<!-- Customers Card -->
-						<div class="col-xxl-4 col-xl-4">
-							<a th:href="@{/bisag/admin/cancellation_requests}">
-								<div class="card info-card customers-card glowing-card">
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>
+                                                <span th:text="${pendingGroupCreationCount}"></span>
+                                            </h6>
+                                            <span class="text-success small pt-1 fw-bold">Pending Group Creation</span>
+                                        </div>
+                                    </div>
+                                </div>
 
-									<div class="card-body">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Interns Card -->
 
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-people"></i>
-											</div>
-											<div class="ps-3">
-												<h6>
-													<span th:text="${requestedCancellationsCount}"></span>
-												</h6>
-												<span class="text-danger small pt-1 fw-bold">Pending Cancellation Requests</span>
+                    <!-- Customers Card -->
+                    <div class="col-xxl-4 col-xl-4">
+                        <a th:href="@{/bisag/admin/cancellation_requests}">
+                            <div class="card info-card customers-card glowing-card">
 
-											</div>
-										</div>
+                                <div class="card-body">
 
-									</div>
-								</div>
-							</a>
-						</div>
-						<!-- End Customers Card -->
-						
-						<!-- Sales Card -->
-						<div class="col-xxl-4 col-md-4">
-							<a th:href="@{/bisag/admin/admin_pending_def_approvals}">
-								<div class="card info-card sales-card glowing-card">
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>
+                                                <span th:text="${requestedCancellationsCount}"></span>
+                                            </h6>
+                                            <span class="text-danger small pt-1 fw-bold">Pending Cancellation Requests</span>
 
-									<div class="card-body">
+                                        </div>
+                                    </div>
 
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-people"></i>
-											</div>
-											<div class="ps-3">
-												<h6>
-													<span th:text="${adminPendingProjectDefinitionCount}"></span>
-												</h6>
-												<span class="text-success small pt-1 fw-bold">Pending
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Customers Card -->
+
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-4">
+                        <a th:href="@{/bisag/admin/admin_pending_def_approvals}">
+                            <div class="card info-card sales-card glowing-card">
+
+                                <div class="card-body">
+
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>
+                                                <span th:text="${adminPendingProjectDefinitionCount}"></span>
+                                            </h6>
+                                            <span class="text-success small pt-1 fw-bold">Pending
 													Project Definitions</span>
-											</div>
-										</div>
-									</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-								</div>
-							</a>
-						</div>
-						<!-- End Sales Card -->
+                            </div>
+                        </a>
+                    </div>
+                    <!-- End Sales Card -->
 
-						<section class="section profile">
-							<div class="row">
-								<div class="col-xl-4">
+                    <section class="section profile">
+                        <div class="row">
+                            <div class="col-xl-4">
 
-									<div class="card">
-										<div
-											class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                                <div class="card">
+                                    <div
+                                            class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-											<span class="icon"><i class="fa-solid fa-user"></i></span>
-											<h2>
-												<span th:text="${admin.name}"></span>
-											</h2>
-											<h3>Admin</h3>
-										</div>
-									</div>
+                                        <span class="icon"><i class="fa-solid fa-user"></i></span>
+                                        <h2>
+                                            <span th:text="${admin.name}"></span>
+                                        </h2>
+                                        <h3>Admin</h3>
+                                    </div>
+                                </div>
 
-								</div>
-
-
-
-								<div class="col-xl-8">
-
-									<div class="card">
-										<div class="card-body pt-3">
-											<!-- Bordered Tabs -->
-											<ul class="nav nav-tabs nav-tabs-bordered">
-
-												<li class="nav-item">
-													<button class="nav-link active" data-bs-toggle="tab"
-														data-bs-target="#profile-overview">Overview</button>
-												</li>
-
-												<li class="nav-item">
-													<button class="nav-link" data-bs-toggle="tab"
-														data-bs-target="#profile-edit">Edit Profile</button>
-												</li>
-
-												<li class="nav-item">
-													<button class="nav-link" data-bs-toggle="tab"
-														data-bs-target="#profile-change-password">Change
-														Password</button>
-												</li>
-
-											</ul>
-											<div class="tab-content pt-2">
-
-												<div class="tab-pane fade show active profile-overview"
-													id="profile-overview">
-
-													<h5 class="card-title">Profile Details</h5>
-
-													<div class="row">
-														<div class="col-lg-3 col-md-4 label ">Name</div>
-														<div class="col-lg-9 col-md-8">
-															<span th:text="${admin.name}"></span>
-														</div>
-													</div>
-
-													<div class="row">
-														<div class="col-lg-3 col-md-4 label">Location</div>
-														<div class="col-lg-9 col-md-8">
-															<span th:text="${admin.location}"></span>
-														</div>
-													</div>
-
-													<div class="row">
-														<div class="col-lg-3 col-md-4 label">Email ID</div>
-														<div class="col-lg-9 col-md-8">
-															<span th:text="${admin.emailId}"></span>
-														</div>
-													</div>
-
-													<div class="row">
-														<div class="col-lg-3 col-md-4 label">Contact No</div>
-														<div class="col-lg-9 col-md-8">
-															<span th:text="${admin.contactNo}"></span>
-														</div>
-													</div>
+                            </div>
 
 
-												</div>
+                            <div class="col-xl-8">
 
-												<div class="tab-pane fade profile-edit pt-3"
-													id="profile-edit">
+                                <div class="card">
+                                    <div class="card-body pt-3">
+                                        <!-- Bordered Tabs -->
+                                        <ul class="nav nav-tabs nav-tabs-bordered">
 
-													<!-- Profile Edit Form -->
-													<form
-														th:action="@{'/bisag/admin/update_admin/' + ${admin.adminId}}"
-														th:object="${admin}" method="post">
-														<input type="hidden" th:field="*{adminId}">
-														<div class="row mb-3">
-															<label for="name"
-																class="col-md-4 col-lg-3 col-form-label"> Name</label>
-															<div class="col-md-8 col-lg-9">
-																<input name="name" type="text" class="form-control"
-																	id="name" th:value="${admin.name}">
-															</div>
-														</div>
+                                            <li class="nav-item">
+                                                <button class="nav-link active" data-bs-toggle="tab"
+                                                        data-bs-target="#profile-overview">Overview
+                                                </button>
+                                            </li>
 
-														<div class="row mb-3">
-															<label for="fullName"
-																class="col-md-4 col-lg-3 col-form-label">
-																Location</label>
-															<div class="col-md-8 col-lg-9">
-																<input name="location" type="text" class="form-control"
-																	id="location" th:value="${admin.location}">
-															</div>
-														</div>
+                                            <li class="nav-item">
+                                                <button class="nav-link" data-bs-toggle="tab"
+                                                        data-bs-target="#profile-edit">Edit Profile
+                                                </button>
+                                            </li>
 
-														<div class="row mb-3">
-															<label for="company"
-																class="col-md-4 col-lg-3 col-form-label">Email</label>
-															<div class="col-md-8 col-lg-9">
-																<input name="emailId" type="email" class="form-control"
-																	id="emailId" th:value="${admin.emailId}">
-															</div>
-														</div>
+                                            <li class="nav-item">
+                                                <button class="nav-link" data-bs-toggle="tab"
+                                                        data-bs-target="#profile-change-password">Change
+                                                    Password
+                                                </button>
+                                            </li>
 
-														<div class="row mb-3">
-															<label for="Job" class="col-md-4 col-lg-3 col-form-label">Contact
-																No</label>
-															<div class="col-md-8 col-lg-9">
-																<input name="contactNo" type="tel" class="form-control"
-																	id="contactNo" th:value="${admin.contactNo}">
-															</div>
-														</div>
+                                        </ul>
+                                        <div class="tab-content pt-2">
 
-														<div class="modal fade" id="confirmationModal"
-															tabindex="-1" role="dialog"
-															aria-labelledby="confirmationModalLabel"
-															aria-hidden="true">
-															<div class="modal-dialog" role="document">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<h5 class="modal-title" id="confirmationModalLabel">Super_Admin
-																			Says</h5>
-																		<button type="button" class="close"
-																			style="border-radius: 5px; background-color: red;"
-																			data-dismiss="modal" aria-label="Close"
-																			onclick="closePopup()">
-																			<span aria-hidden="true" style="color: white;">X</span>
-																		</button>
-																	</div>
+                                            <div class="tab-pane fade show active profile-overview"
+                                                 id="profile-overview">
 
-																	<div class="modal-body">Are you sure you want to
-																		update the details?</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-danger"
-																			data-dismiss="modal" onclick="closePopup()">Cancel</button>
-																		<button type="submit" class="btn btn-primary"
-																			onclick="showConfirmationModal()">Save
-																			Changes</button>
-																	</div>
-																</div>
-															</div>
-														</div>
+                                                <h5 class="card-title">Profile Details</h5>
 
-														<div class="text-center">
-															<button type="button" class="btn btn-primary"
-																onclick="showConfirmationModal()">Save Changes</button>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label ">Name</div>
+                                                    <div class="col-lg-9 col-md-8">
+                                                        <span th:text="${admin.name}"></span>
+                                                    </div>
+                                                </div>
 
-														</div>
-													</form>
-													<!-- End Profile Edit Form -->
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Location</div>
+                                                    <div class="col-lg-9 col-md-8">
+                                                        <span th:text="${admin.location}"></span>
+                                                    </div>
+                                                </div>
 
-												</div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Email ID</div>
+                                                    <div class="col-lg-9 col-md-8">
+                                                        <span th:text="${admin.emailId}"></span>
+                                                    </div>
+                                                </div>
 
-												<div class="tab-pane fade pt-3" id="profile-change-password">
-													<!-- Change Password Form -->
-													<form th:action="@{'/bisag/admin/change_password'}"
-														method="post" onsubmit="return validatePasswords()">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Contact No</div>
+                                                    <div class="col-lg-9 col-md-8">
+                                                        <span th:text="${admin.contactNo}"></span>
+                                                    </div>
+                                                </div>
 
-														<div class="row mb-3">
-															<label for="newPassword"
-																class="col-md-4 col-lg-3 col-form-label">New
-																Password</label>
-															<div class="col-md-8 col-lg-9">
-																<div class="input-group">
-																	<input name="newPassword" type="password"
-																		class="form-control" id="newPassword" required
-																		oninput="checkPasswordStrength(this.value)">
-																	<!-- Eye icon to toggle password visibility -->
-																	<div class="input-group-append">
+
+                                            </div>
+
+                                            <div class="tab-pane fade profile-edit pt-3"
+                                                 id="profile-edit">
+
+                                                <!-- Profile Edit Form -->
+                                                <form
+                                                        th:action="@{'/bisag/admin/update_admin/' + ${admin.adminId}}"
+                                                        th:object="${admin}" method="post">
+                                                    <input type="hidden" th:field="*{adminId}">
+                                                    <div class="row mb-3">
+                                                        <label for="name"
+                                                               class="col-md-4 col-lg-3 col-form-label"> Name</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input name="name" type="text" class="form-control"
+                                                                   id="name" th:value="${admin.name}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for="location"
+                                                               class="col-md-4 col-lg-3 col-form-label">
+                                                            Location</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input name="location" type="text" class="form-control"
+                                                                   id="location" th:value="${admin.location}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for="emailId"
+                                                               class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input name="emailId" type="email" class="form-control"
+                                                                   id="emailId" th:value="${admin.emailId}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for="contactNo" class="col-md-4 col-lg-3 col-form-label">Contact
+                                                            No</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input name="contactNo" type="tel" class="form-control"
+                                                                   id="contactNo" th:value="${admin.contactNo}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal fade" id="confirmationModal"
+                                                         tabindex="-1" role="dialog"
+                                                         aria-labelledby="confirmationModalLabel"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="confirmationModalLabel">
+                                                                        Super_Admin
+                                                                        Says</h5>
+                                                                    <button type="button" class="close"
+                                                                            style="border-radius: 5px; background-color: red;"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            onclick="closePopup()">
+                                                                        <span aria-hidden="true"
+                                                                              style="color: white;">X</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="modal-body">Are you sure you want to
+                                                                    update the details?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger"
+                                                                            data-dismiss="modal" onclick="closePopup()">
+                                                                        Cancel
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-primary"
+                                                                            onclick="showConfirmationModal()">Save
+                                                                        Changes
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <button type="button" class="btn btn-primary"
+                                                                onclick="showConfirmationModal()">Save Changes
+                                                        </button>
+
+                                                    </div>
+                                                </form>
+                                                <!-- End Profile Edit Form -->
+
+                                            </div>
+
+                                            <div class="tab-pane fade pt-3" id="profile-change-password">
+                                                <!-- Change Password Form -->
+                                                <form th:action="@{'/bisag/admin/change_password'}"
+                                                      method="post" onsubmit="return validatePasswords()">
+
+                                                    <div class="row mb-3">
+                                                        <label for="newPassword"
+                                                               class="col-md-4 col-lg-3 col-form-label">New
+                                                            Password</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <div class="input-group">
+                                                                <input name="newPassword" type="password"
+                                                                       class="form-control" id="newPassword" required
+                                                                       oninput="checkPasswordStrength(this.value)">
+                                                                <!-- Eye icon to toggle password visibility -->
+                                                                <div class="input-group-append">
 																		<span class="input-group-text"
-																			onclick="togglePasswordVisibility('newPassword')">
+                                                                              onclick="togglePasswordVisibility('newPassword')">
 																			<i class="fa fa-eye" aria-hidden="true"
-																			style="font-size: 1.5rem; height: 100%;"></i>
+                                                                               style="font-size: 1.5rem; height: 100%;"></i>
 																		</span>
-																	</div>
-																</div>
-															</div>
-														</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
 
+                                                    <div class="row mb-3">
+                                                        <label for="renewPassword"
+                                                               class="col-md-4 col-lg-3 col-form-label">Re-enter
+                                                            New Password</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input name="renewPassword" type="password"
+                                                                   class="form-control" id="renewPassword" required>
+                                                        </div>
+                                                    </div>
 
-														<div class="row mb-3">
-															<label for="renewPassword"
-																class="col-md-4 col-lg-3 col-form-label">Re-enter
-																New Password</label>
-															<div class="col-md-8 col-lg-9">
-																<input name="renewPassword" type="password"
-																	class="form-control" id="renewPassword" required>
-															</div>
-														</div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-8 offset-md-4 col-lg-9 offset-lg-3">
+                                                            <small id="passwordStrengthMessage" class="text-muted">Password
+                                                                strength: <span id="passwordStrength">Weak</span>
+                                                            </small>
+                                                        </div>
+                                                    </div>
 
-														<div class="row mb-3">
-															<div class="col-md-8 offset-md-4 col-lg-9 offset-lg-3">
-																<small id="passwordStrengthMessage" class="text-muted">Password
-																	strength: <span id="passwordStrength">Weak</span>
-																</small>
-															</div>
-														</div>
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-primary">Change
+                                                            Password
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                                <!-- End Change Password Form -->
 
-														<div class="text-center">
-															<button type="submit" class="btn btn-primary">Change
-																Password</button>
-														</div>
-													</form>
-													<!-- End Change Password Form -->
+                                            </div>
 
-												</div>
+                                        </div>
+                                        <!-- End Bordered Tabs -->
 
-											</div>
-											<!-- End Bordered Tabs -->
+                                    </div>
+                                </div>
 
-										</div>
-									</div>
+                            </div>
+                        </div>
+                    </section>
 
-								</div>
-							</div>
-						</section>
-
-					</div>
-				</div>
-				<!-- End Left side columns -->
+                </div>
+            </div>
+            <!-- End Left side columns -->
 
 
-			</div>
-		</section>
+        </div>
+    </section>
 
-		<!-- Include the footer fragment -->
-		<div th:replace="fragments/footerFragment :: footer"></div>
+    <!-- Include the footer fragment -->
+    <div th:replace="fragments/footerFragment :: footer"></div>
 
-	</main>
-	<!-- End #main -->
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
-		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
-		crossorigin="anonymous"></script>
+</main>
+<!-- End #main -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+        crossorigin="anonymous"></script>
 
-	<script>
+<script>
 		function showConfirmationModal() {
 			$('#confirmationModal').modal('show');
 		}
@@ -511,8 +521,9 @@
 			$('body').removeClass('modal-open');
 			$('.modal-backdrop').remove();
 		}
-	</script>
-	<script th:inline="javascript">
+
+</script>
+<script th:inline="javascript">
 		function validatePasswords() {
 			var newPassword = document.getElementById('newPassword').value;
 			var renewPassword = document.getElementById('renewPassword').value;
@@ -523,8 +534,9 @@
 			}
 			return true; // Allow form submission
 		}
-	</script>
-	<script>
+
+</script>
+<script>
 		function checkPasswordStrength(password) {
 			var strengthContainer = document
 					.getElementById('passwordStrengthMessage');
@@ -575,7 +587,8 @@
 				icon.classList.add('fa-eye-slash');
 			}
 		}
-	</script>
+
+</script>
 
 </body>
 

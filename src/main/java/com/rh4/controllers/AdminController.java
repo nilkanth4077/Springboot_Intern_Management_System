@@ -89,6 +89,11 @@ public class AdminController {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
+    public Admin adminName(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        return adminService.getAdminByUsername(username);
+    }
+
     public Admin getSignedInAdmin() {
         String username = (String) session.getAttribute("username");
         Admin admin = adminService.getAdminByUsername(username);
@@ -317,6 +322,7 @@ public class AdminController {
         List<InternApplication> interns = internService.getInternApplication();
         model = countNotifications(model);
         mv.addObject("interns", interns);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -998,6 +1004,7 @@ public class AdminController {
         model = countNotifications(model);
         mv.addObject("interns", intern);
         mv.setViewName("admin/approved_interns");
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1073,6 +1080,7 @@ public class AdminController {
         mv.addObject("intern", intern);
         model = countNotifications(model);
         mv.setViewName("admin/new_interns");
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1083,6 +1091,7 @@ public class AdminController {
         ModelAndView mv = new ModelAndView();
         List<InternApplication> intern = internService.getInternApplication();
         mv.addObject("interns", intern);
+        mv.addObject("admin", adminName(session));
         model = countNotifications(model);
         mv.setViewName("admin/create_group");
         return mv;
@@ -1140,6 +1149,7 @@ public class AdminController {
         mv.addObject("branches", branches);
         mv.addObject("domains", domains);
         mv.addObject("degrees", degrees);
+        mv.addObject("admin", adminName(session));
         mv.setViewName("admin/add_fields");
         return mv;
     }
@@ -1176,6 +1186,7 @@ public class AdminController {
         List<GroupEntity> group = groupService.getGuideNotAllocatedGroup();
         model = countNotifications(model);
         mv.addObject("groups", group);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1263,9 +1274,11 @@ public class AdminController {
     // ---------------------------------------//
 
     @GetMapping("/register_guide")
-    public String registerGuide(Model model) {
+    public ModelAndView registerGuide(Model model) {
+        ModelAndView mv = new ModelAndView("admin/guide_registration");
         model = countNotifications(model);
-        return "admin/guide_registration";
+        mv.addObject("admin", adminName(session));
+        return mv;
     }
 
     @PostMapping("/register_guide")
@@ -1297,6 +1310,7 @@ public class AdminController {
         List<Guide> guides = guideService.getGuide();
         model = countNotifications(model);
         mv.addObject("guides", guides);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1365,6 +1379,7 @@ public class AdminController {
         mv.addObject("notAllocatedGroups", notAllocatedGroups);
         mv.addObject("guides", guides);
         mv.addObject("interns", interns);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1397,6 +1412,7 @@ public class AdminController {
         List<GroupEntity> groups = groupService.getAPendingGroups();
         model = countNotifications(model);
         mv.addObject("groups", groups);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1435,6 +1451,7 @@ public class AdminController {
         model = countNotifications(model);
         mv.addObject("groups", groups);
         mv.addObject("reports", reports);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1470,6 +1487,7 @@ public class AdminController {
         model = countNotifications(model);
         // Add the list of requested interns to the ModelAndView
         mv.addObject("requestedInterns", requestedInterns);
+        mv.addObject("admin", adminName(session));
 
         return mv;
     }
@@ -1495,6 +1513,7 @@ public class AdminController {
         mv.addObject("interns", interns);
         mv.addObject("admins", admins);
         mv.addObject("guides", guides);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1504,6 +1523,7 @@ public class AdminController {
         List<GroupEntity> groups = groupService.getAPendingFinalReports();
         model = countNotifications(model);
         mv.addObject("groups", groups);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1526,6 +1546,7 @@ public class AdminController {
         List<Intern> interns = internService.getInterns();
         model = countNotifications(model);
         mv.addObject("interns", interns);
+        mv.addObject("admin", adminName(session));
         return mv;
     }
 
@@ -1551,6 +1572,7 @@ public class AdminController {
         mv.addObject("branches", branch);
         mv.addObject("domains", domain);
         mv.addObject("guides", guide);
+        mv.addObject("admin", adminName(session));
         // mv.addObject("cancelled",cancelled);
         return mv;
     }
