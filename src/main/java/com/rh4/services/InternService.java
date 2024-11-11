@@ -1,4 +1,5 @@
 package com.rh4.services;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -173,6 +174,15 @@ public class InternService {
 		userRepo.save(user);
 
 	}
-	
-	
+
+	@Transactional
+	public void updateInternProfilePicture(String internId, byte[] profilePicture) {
+		internRepo.updateProfilePicture(internId, profilePicture);
+	}
+
+	public byte[] getImageData(String id) {
+		Intern intern = internRepo.findById(id).orElseThrow(() -> new RuntimeException("Image not found"));
+		return intern.getProfilePicture();
+	}
+
 }

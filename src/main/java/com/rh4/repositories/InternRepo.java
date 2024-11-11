@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -45,5 +46,9 @@ public interface InternRepo extends JpaRepository<Intern, String> {
 			+ "AND (:endDate IS NULL OR i.completionDate <= :endDate)" + "AND g.finalReportStatus = 'pending'")
 	List<Intern> getPendingInternsFilter(String college, String branch, Optional<Guide> guide, String domain,
 			Date startDate, Date endDate);
+
+	@Modifying
+	@Query("UPDATE Intern i SET i.profilePicture = :profilePicture WHERE i.internId = :internId")
+	void updateProfilePicture(@Param("internId") String internId, @Param("profilePicture") byte[] profilePicture);
 
 }
