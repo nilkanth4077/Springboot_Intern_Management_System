@@ -48,6 +48,10 @@ public class Intern {
     @Column(name = "passport_size_image", columnDefinition = "LONGBLOB")
     private byte[] passportSizeImage;
 
+    @Lob
+    @Column(name = "profile_picture", columnDefinition = "LONGBLOB")
+    private byte[] profilePicture;
+
     @Column(name = "semester")
     private int semester;
 
@@ -447,6 +451,14 @@ public class Intern {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     @PrePersist
