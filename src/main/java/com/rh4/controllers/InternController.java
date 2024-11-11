@@ -1,5 +1,6 @@
 package com.rh4.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,8 +14,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -186,6 +189,10 @@ public class InternController {
             mv.addObject("group", null); // Handle the case when no group is assigned
         }
 
+        if (intern.getProfilePicture() != null) {
+            String encodedImage = Base64.encodeBase64String(intern.getProfilePicture());
+            model.addAttribute("encodedProfilePicture", encodedImage);
+        }
         // Set the "id" and "username" attributes in the session
         session.setAttribute("id", intern.getInternId());
         session.setAttribute("username", username);
@@ -206,6 +213,17 @@ public class InternController {
         intern.setCancellationStatus("requested");
         internService.updateCancellationStatus(intern);
         return "redirect:/bisag/intern/intern_dashboard";
+    }
+
+    @GetMapping("/image/{id}")
+    public ResponseEntity<InputStreamResource> getImage(@PathVariable String id) {
+        byte[] imageData = internService.getImageData(id);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(imageData);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=image.jpg")
+                .contentType(MediaType.IMAGE_JPEG) // Change this based on your image type
+                .body(new InputStreamResource(byteArrayInputStream));
     }
 
     // project def approval
@@ -269,7 +287,7 @@ public class InternController {
             weeklyReportDisable1 = "false";
         }
 
-		// Retrieve the last weekly report
+        // Retrieve the last weekly report
         WeeklyReport lastWeeklyReport = null;
         if (!weeklyReports.isEmpty()) {
             lastWeeklyReport = weeklyReports.get(weeklyReports.size() - 1);
@@ -699,6 +717,19 @@ public class InternController {
         ModelAndView mv = new ModelAndView("intern/apply_leave");
         mv.addObject("intern", getSignedInIntern());
         return mv;
+    }
+
+    @PostMapping("/{internId}/profile-picture")
+    public String updateProfilePicture(
+            @PathVariable("internId") String internId,
+            @RequestParam("profilePicture") MultipartFile profilePicture) {
+        try {
+            byte[] profilePictureBytes = profilePicture.getBytes();
+            internService.updateInternProfilePicture(internId, profilePictureBytes);
+            return "redirect:/bisag/intern/intern_dashboard";
+        } catch (IOException e) {
+            return "redirect:/bisag/intern/intern_dashboard";
+        }
     }
 
 }
