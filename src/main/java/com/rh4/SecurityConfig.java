@@ -1,5 +1,6 @@
 package com.rh4;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,6 +30,12 @@ import org.springframework.boot.CommandLineRunner;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Value("${SUPER_ADMIN_EMAIL}")
+    private String superAdminEmail;
+
+    @Value("${SUPER_ADMIN_PASSWORD}")
+    private String superAdminPassword;
 
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
@@ -103,27 +110,27 @@ public class SecurityConfig {
     }
 
 //	@Bean
-//    CommandLineRunner loadInitialUsersInDB(UserRepo repo) 
+//    CommandLineRunner loadInitialUsersInDB(UserRepo repo)
 //	{
 //        return args -> {
-//        	
+//
 //        	SuperAdmin s1 = new SuperAdmin();
 //        	s1.setName("superadmin");
-//        	s1.setEmailId("superadmin.bisag@gmail.com");
+//        	s1.setEmailId(superAdminEmail);
 //        	s1.setContactNo((long)23123466);
-//        	s1.setLocation("bharuch");
-//        	s1.setPassword(passwordEncoder().encode("123"));
+//        	s1.setLocation("India");
+//        	s1.setPassword(passwordEncoder().encode(superAdminPassword));
 //        	s1.setCreatedAt(null);
 //        	srepo.save(s1);
 //            MyUser user3 = new MyUser();
-//            user3.setUsername("superadmin.bisag@gmail.com");
-//            user3.setPassword(passwordEncoder().encode("123"));
+//            user3.setUsername(superAdminEmail);
+//            user3.setPassword(passwordEncoder().encode(superAdminPassword));
 //            user3.setRole("SUPERADMIN");
 //            user3.setUserId(Long.toString(s1.getSuperAdminId()));
 //            user3.setEnabled(true);
 //            repo.save(user3);
 //
-//            System.out.println("users save in DB");
+//            System.out.println("Default super admin created");
 //        };
 //	}
 }
