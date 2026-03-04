@@ -1,105 +1,58 @@
 package com.rh4.entities;
 
-import java.beans.JavaBean;
-
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Table(name="group_entity")
+@Table(name = "group_entity")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class GroupEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private long id;
-	
-	@Column(name = "group_id")
-    private String groupId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+
+	@Column(name = "group_id", nullable = false)
+	private String groupId;
+
 	@Column(name = "project_definition")
 	private String projectDefinition;
-	
+
 	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "project_definition_status")
+
+	@Column(name = "project_definition_status", nullable = false)
 	private String projectDefinitionStatus = "pending";
-	
-	@Column(name = "final_report_status")
+
+	@Column(name = "final_report_status", nullable = false)
 	private String finalReportStatus = "pending";
 
 	@Lob
-	@Column(name = "project_definition_document", columnDefinition = "LONGBLOB")
+	@Column(name = "project_definition_document")
 	private byte[] projectDefinitionDocument;
 
 	@Lob
-	@Column(name = "final_report", columnDefinition = "LONGBLOB")
-    private byte[] finalReport;
-	
+	@Column(name = "final_report")
+	private byte[] finalReport;
+
 	@Column(name = "domain")
-    private String domain;
-	
-	@JoinColumn(name = "guide_id")
+	private String domain;
+
 	@ManyToOne
-	public Guide guide;
-		
-   public GroupEntity() {
-			super();
-		}
-  	
-	public GroupEntity(long id, String groupId, String projectDefinition, String description, byte[] finalReport, String finalReportStatus,
-		String projectDefinitionStatus, byte[] projectDefinitionDocument, String domain, Guide guide) {
-	super();
-	this.id = id;
-	this.groupId = groupId;
-	this.projectDefinition = projectDefinition;
-	this.description = description;
-	this.finalReport = finalReport;
-	this.finalReportStatus = finalReportStatus;
-	this.domain = domain;
-	this.projectDefinitionStatus = projectDefinitionStatus;
-	this.projectDefinitionDocument = projectDefinitionDocument;
-	this.guide = guide;
-}
-	public String getFinalReportStatus() {
-		return finalReportStatus;
-	}
+	@JoinColumn(name = "guide_id")
+	private Guide guide;
 
-	public void setFinalReportStatus(String finalReportStatus) {
-		this.finalReportStatus = finalReportStatus;
-	}
-
-	public byte[] getFinalReport() {
-		return finalReport;
-	}
-
-	public void setFinalReport(byte[] finalReport) {
-		this.finalReport = finalReport;
-	}
-
-	public Guide getGuide() {
-		return guide;
-	}
-
-	public void setGuide(Guide guide) {
-		this.guide = guide;
-	}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-
-	public String getDomain() {
-		return domain;
-	}
-
-	public void setDomain(String domain) {
-		this.domain = domain;
 	}
 
 	public String getGroupId() {
@@ -134,11 +87,43 @@ public class GroupEntity {
 		this.projectDefinitionStatus = projectDefinitionStatus;
 	}
 
+	public String getFinalReportStatus() {
+		return finalReportStatus;
+	}
+
+	public void setFinalReportStatus(String finalReportStatus) {
+		this.finalReportStatus = finalReportStatus;
+	}
+
 	public byte[] getProjectDefinitionDocument() {
 		return projectDefinitionDocument;
 	}
 
 	public void setProjectDefinitionDocument(byte[] projectDefinitionDocument) {
 		this.projectDefinitionDocument = projectDefinitionDocument;
+	}
+
+	public byte[] getFinalReport() {
+		return finalReport;
+	}
+
+	public void setFinalReport(byte[] finalReport) {
+		this.finalReport = finalReport;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
+	public Guide getGuide() {
+		return guide;
+	}
+
+	public void setGuide(Guide guide) {
+		this.guide = guide;
 	}
 }

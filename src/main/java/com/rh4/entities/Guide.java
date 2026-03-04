@@ -1,110 +1,73 @@
 package com.rh4.entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "guide")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Guide {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "guide_id")
-	private long guideId;
+	private Long guideId;
 
 	@NotNull
 	@Size(min = 2, max = 20)
 	@Pattern(regexp = "^[a-zA-Z ]+$", message = "Only characters are allowed")
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	@NotNull
 	@Size(min = 2, max = 20)
 	@Pattern(regexp = "^[a-zA-Z ]+$", message = "Only characters are allowed")
-	@Column(name = "location")
+	@Column(name = "location", nullable = false)
 	private String location;
 
 	@NotNull
-	@Digits(integer = 10, fraction = 0, message = "Contact number must be a numeric value with up to 10 digits")
-	@Column(name = "floor")
-	private long floor;
+	@Digits(integer = 10, fraction = 0, message = "Floor must be numeric with up to 10 digits")
+	@Column(name = "floor", nullable = false)
+	private Long floor;
 
 	@NotNull
-	@Digits(integer = 10, fraction = 0, message = "Contact number must be a numeric value with up to 10 digits")
-	@Column(name = "lab_no")
-	private long labNo;
+	@Digits(integer = 10, fraction = 0, message = "Lab number must be numeric with up to 10 digits")
+	@Column(name = "lab_no", nullable = false)
+	private Long labNo;
 
 	@NotNull
-	@Digits(integer = 10, fraction = 0, message = "Contact number must be a numeric value with up to 10 digits")
-	@Column(name = "contact_no", unique = true)
-	private long contactNo;
+	@Digits(integer = 10, fraction = 0, message = "Contact number must be numeric with up to 10 digits")
+	@Column(name = "contact_no", unique = true, nullable = false)
+	private Long contactNo;
 
 	@Email
 	@Column(name = "email_id", unique = true)
 	private String emailId;
 
-	@CreationTimestamp
-	@Column(name = "created_at", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = true)
-	private Date createdAt;
-
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
+
+	@CreationTimestamp
+	@Column(name = "created_at", updatable = false)
+	private LocalDateTime createdAt;
 
 	@OneToMany(mappedBy = "guide")
 	private List<GroupEntity> groups;
 
-	public List<GroupEntity> getGroups() {
-		return groups;
-	}
-
-	public void setGroups(List<GroupEntity> groups) {
-		this.groups = groups;
-	}
-
-	public Guide() {
-		super();
-	}
-
-	public Guide(long guideId,
-			@NotNull @Size(min = 2, max = 20) @Pattern(regexp = "^[a-zA-Z ]+$", message = "Only characters are allowed") String name,
-			@NotNull @Size(min = 2, max = 20) @Pattern(regexp = "^[a-zA-Z ]+$", message = "Only characters are allowed") String location,
-			@NotNull @Digits(integer = 10, fraction = 0, message = "Contact number must be a numeric value with up to 10 digits") long floor,
-			@NotNull @Digits(integer = 10, fraction = 0, message = "Contact number must be a numeric value with up to 10 digits") long labNo,
-			@NotNull @Digits(integer = 10, fraction = 0, message = "Contact number must be a numeric value with up to 10 digits") long contactNo,
-			@Email String emailId, Date createdAt, String password) {
-		super();
-		this.guideId = guideId;
-		this.name = name;
-		this.location = location;
-		this.floor = floor;
-		this.labNo = labNo;
-		this.contactNo = contactNo;
-		this.emailId = emailId;
-		this.createdAt = createdAt;
-		this.password = password;
-	}
-
-	public long getGuideId() {
+	public Long getGuideId() {
 		return guideId;
 	}
 
-	public void setGuideId(long guideId) {
+	public void setGuideId(Long guideId) {
 		this.guideId = guideId;
 	}
 
@@ -124,27 +87,27 @@ public class Guide {
 		this.location = location;
 	}
 
-	public long getFloor() {
+	public Long getFloor() {
 		return floor;
 	}
 
-	public void setFloor(long floor) {
+	public void setFloor(Long floor) {
 		this.floor = floor;
 	}
 
-	public long getLabNo() {
+	public Long getLabNo() {
 		return labNo;
 	}
 
-	public void setLabNo(long labNo) {
+	public void setLabNo(Long labNo) {
 		this.labNo = labNo;
 	}
 
-	public long getContactNo() {
+	public Long getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(long contactNo) {
+	public void setContactNo(Long contactNo) {
 		this.contactNo = contactNo;
 	}
 
@@ -156,14 +119,6 @@ public class Guide {
 		this.emailId = emailId;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -172,4 +127,19 @@ public class Guide {
 		this.password = password;
 	}
 
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public List<GroupEntity> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<GroupEntity> groups) {
+		this.groups = groups;
+	}
 }

@@ -24,17 +24,17 @@ public interface InternRepo extends JpaRepository<Intern, String> {
 
 	long countByCancellationStatus(String cancellationStatus);
 
-	@Query("SELECT i FROM Intern i WHERE i.isActive = false")
+	@Query("SELECT i FROM Intern i WHERE i.active = false")
 	List<Intern> getCancelledIntern();
 
-	@Query("SELECT i FROM Intern i WHERE i.isActive = true")
+	@Query("SELECT i FROM Intern i WHERE i.active = true")
 	List<Intern> getCurrentInterns();
 
 	@Query("SELECT i FROM Intern i " + "WHERE (:college IS NULL OR i.collegeName = :college) "
 			+ "AND (:branch IS NULL OR i.branch = :branch) " + "AND (:guide IS NULL OR i.guide = :guide) "
 			+ "AND (:domain IS NULL OR i.domain = :domain) "
 			+ "AND (:startDate IS NULL OR i.joiningDate >= :startDate) "
-			+ "AND (:endDate IS NULL OR i.completionDate <= :endDate)" + "AND (i.isActive =:cancelled)")
+			+ "AND (:endDate IS NULL OR i.completionDate <= :endDate)" + "AND (i.active =:cancelled)")
 	List<Intern> getFilteredInterns(@Param("college") String college, @Param("branch") String branch,
 			@Param("guide") Optional<Guide> guide, @Param("domain") String domain, @Param("startDate") Date startDate,
 			@Param("endDate") Date endDate, @Param("cancelled") boolean cancelled);

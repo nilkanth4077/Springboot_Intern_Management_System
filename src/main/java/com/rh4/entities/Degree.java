@@ -1,32 +1,30 @@
 package com.rh4.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "degree")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Degree {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "degree_id")
-    private long degreeId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "degree_id")
+	private Long degreeId;
 
-    @Column(name = "name")
-    private String name;
-	public Degree() {
-		super();
-	}
+	@Column(name = "name", nullable = false, unique = true)
+	private String name;
 
-	public long getDegreeId() {
+	public Long getDegreeId() {
 		return degreeId;
 	}
 
-	public void setDegreeId(long degreeId) {
+	public void setDegreeId(Long degreeId) {
 		this.degreeId = degreeId;
 	}
 
@@ -37,5 +35,4 @@ public class Degree {
 	public void setName(String name) {
 		this.name = name;
 	}
-    
 }

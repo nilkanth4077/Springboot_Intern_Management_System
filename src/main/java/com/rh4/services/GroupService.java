@@ -60,7 +60,7 @@ public class GroupService {
 		
 		Optional<Guide> guide = guideService.getGuideById(guideid);
 		GroupEntity group = getGroup(groupid);
-		group.guide = guide.get();
+		group.setGuide(guide.get());
 		groupRepo.save(group);
 	}
 

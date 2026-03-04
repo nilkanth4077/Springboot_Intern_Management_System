@@ -1,36 +1,33 @@
 package com.rh4.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "college")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class College {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "college_id")
-    private long collegeId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "college_id")
+	private Long collegeId;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name", nullable = false)
+	private String name;
 
-    @Column(name = "location")
-    private String location;
+	@Column(name = "location")
+	private String location;
 
-	public College() {
-		super();
-	}
-
-	public long getCollegeId() {
+	public Long getCollegeId() {
 		return collegeId;
 	}
 
-	public void setCollegeId(long collegeId) {
+	public void setCollegeId(Long collegeId) {
 		this.collegeId = collegeId;
 	}
 
@@ -49,6 +46,4 @@ public class College {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
-    
 }

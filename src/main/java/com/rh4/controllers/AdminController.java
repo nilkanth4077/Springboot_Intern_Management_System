@@ -76,8 +76,8 @@ public class AdminController {
     @Autowired
     private DataExportService dataExportService;
 
-    @Value("${app.storage.base-dir}")
-    private String baseDir;
+//    @Value("${app.storage.base-dir}")
+//    private String baseDir;
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -623,16 +623,16 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "passportSizeImage.jpg";
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "passportSizeImage.jpg";
 
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
 
-            String newFilePath = storageDir + "passportSizeImage.jpg";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String newFilePath = storageDir + "passportSizeImage.jpg";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setPassportSizeImage(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_application_docs/" + id;
@@ -645,16 +645,16 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "collegeIcardImage.jpg";
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "collegeIcardImage.jpg";
 
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "collegeIcardImage.jpg";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "collegeIcardImage.jpg";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setCollegeIcardImage(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_application_docs/" + id;
@@ -667,16 +667,16 @@ public class AdminController {
         Optional<InternApplication> optionalApplication = internService.getInternApplication(id);
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "nocPdf.pdf";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "nocPdf.pdf";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "nocPdf.pdf";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "nocPdf.pdf";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setNocPdf(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_application_docs/" + id;
@@ -690,16 +690,16 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             InternApplication application = optionalApplication.get();
 
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "resumePdf.pdf";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "resumePdf.pdf";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "resumePdf.pdf";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "resumePdf.pdf";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
 
             application.setResumePdf(file.getBytes());
             internService.save(application);
@@ -714,16 +714,16 @@ public class AdminController {
         Optional<Intern> optionalApplication = internService.getIntern(id);
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "passportSizeImage.jpg";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "passportSizeImage.jpg";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "passportSizeImage.jpg";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "passportSizeImage.jpg";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setPassportSizeImage(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_docs/" + id;
@@ -736,16 +736,16 @@ public class AdminController {
         Optional<Intern> optionalApplication = internService.getIntern(id);
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "collegeIcardImage.jpg";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "collegeIcardImage.jpg";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "collegeIcardImage.jpg";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "collegeIcardImage.jpg";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setCollegeIcardImage(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_docs/" + id;
@@ -758,16 +758,16 @@ public class AdminController {
         Optional<Intern> optionalApplication = internService.getIntern(id);
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "nocPdf.pdf";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "nocPdf.pdf";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "nocPdf.pdf";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "nocPdf.pdf";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
             application.setNocPdf(file.getBytes());
             internService.save(application);
             return "redirect:/bisag/admin/intern_docs/" + id;
@@ -781,16 +781,16 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "resumePdf.pdf";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "resumePdf.pdf";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "resumePdf.pdf";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "resumePdf.pdf";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
 
             application.setResumePdf(file.getBytes());
             internService.save(application);
@@ -806,16 +806,16 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "icardForm.pdf";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "icardForm.pdf";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "icardForm.pdf";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "icardForm.pdf";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
 
             application.setIcardForm(file.getBytes());
             internService.save(application);
@@ -831,16 +831,16 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "registrationForm.pdf";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "registrationForm.pdf";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "registrationForm.pdf";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "registrationForm.pdf";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
 
             application.setRegistrationForm(file.getBytes());
             internService.save(application);
@@ -856,16 +856,16 @@ public class AdminController {
         if (optionalApplication.isPresent()) {
             Intern application = optionalApplication.get();
 
-            String storageDir = baseDir + application.getEmail() + "/";
-            String oldFilePath = storageDir + "securityForm.pdf";
-
-            File oldFile = new File(oldFilePath);
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
-
-            String newFilePath = storageDir + "securityForm.pdf";
-            Files.write(Paths.get(newFilePath), file.getBytes());
+//            String storageDir = baseDir + application.getEmail() + "/";
+//            String oldFilePath = storageDir + "securityForm.pdf";
+//
+//            File oldFile = new File(oldFilePath);
+//            if (oldFile.exists()) {
+//                oldFile.delete();
+//            }
+//
+//            String newFilePath = storageDir + "securityForm.pdf";
+//            Files.write(Paths.get(newFilePath), file.getBytes());
 
             application.setSecurityForm(file.getBytes());
             internService.save(application);
@@ -909,7 +909,7 @@ public class AdminController {
     public String internApplicationSubmission(@RequestParam long id, InternApplication internApplication, MultipartHttpServletRequest req) throws IllegalStateException, IOException, Exception {
         Optional<InternApplication> intern = internService.getInternApplication(id);
 
-        if (internApplication.getIsActive()) {
+        if (internApplication.getActive()) {
             intern.get().setFirstName(internApplication.getFirstName());
             intern.get().setLastName(internApplication.getLastName());
             intern.get().setContactNo(internApplication.getContactNo());
@@ -920,14 +920,14 @@ public class AdminController {
 
             intern.get().setEmail(internApplication.getEmail());
             intern.get().setCollegeName(internApplication.getCollegeName());
-            intern.get().setIsActive(true);
+            intern.get().setActive(true);
             intern.get().setBranch(internApplication.getBranch());
             intern.get().setDomain(internApplication.getDomain());
             intern.get().setSemester(internApplication.getSemester());
             intern.get().setJoiningDate(internApplication.getJoiningDate());
             intern.get().setCompletionDate(internApplication.getCompletionDate());
         } else {
-            intern.get().setIsActive(false);
+            intern.get().setActive(false);
             Cancelled cancelledEntry = new Cancelled();
             cancelledEntry.setTableName("InternApplication");
             cancelledEntry.setCancelId(Long.toString(intern.get().getId()));
@@ -953,7 +953,7 @@ public class AdminController {
         } else {
             intern.get().setGroup(groupService.getGroup(groupId));
         }
-        if (intern.get().getIsActive()) {
+        if (intern.get().isActive()) {
             intern.get().setFirstName(internApplication.getFirstName());
             intern.get().setLastName(internApplication.getLastName());
             intern.get().setContactNo(internApplication.getContactNo());
@@ -969,7 +969,7 @@ public class AdminController {
             intern.get().setEmail(internApplication.getEmail());
             intern.get().setCollegeName(internApplication.getCollegeName());
             intern.get().setBranch(internApplication.getBranch());
-            intern.get().setIsActive(true);
+            intern.get().isActive();
             intern.get().setDomain(internApplication.getDomain());
             intern.get().setSemester(internApplication.getSemester());
             intern.get().setJoiningDate(internApplication.getJoiningDate());
@@ -983,8 +983,8 @@ public class AdminController {
             intern.get().setUsedResource(internApplication.getUsedResource());
         }
 
-        if (!internApplication.getIsActive()) {
-            intern.get().setIsActive(false);
+        if (!internApplication.isActive()) {
+            intern.get().isActive();
             intern.get().setCancellationStatus("cancelled");
             Cancelled cancelledEntry = new Cancelled();
             cancelledEntry.setTableName("intern");
@@ -1029,12 +1029,12 @@ public class AdminController {
     public String approvedInterns(@RequestParam long id, InternApplication internApplication, MultipartHttpServletRequest req) throws IllegalStateException, IOException, Exception {
         Optional<InternApplication> intern = internService.getInternApplication(id);
 
-        if (internApplication.getIsActive() == true) {
+        if (internApplication.getActive() == true) {
             intern.get().setFirstName(internApplication.getFirstName());
             intern.get().setLastName(internApplication.getLastName());
             intern.get().setContactNo(internApplication.getContactNo());
             intern.get().setEmail(internApplication.getEmail());
-            intern.get().setIsActive(true);
+            intern.get().setActive(true);
             intern.get().setCollegeName(internApplication.getCollegeName());
             intern.get().setBranch(internApplication.getBranch());
             intern.get().setDomain(internApplication.getDomain());
@@ -1042,7 +1042,7 @@ public class AdminController {
             intern.get().setJoiningDate(internApplication.getJoiningDate());
             intern.get().setCompletionDate(internApplication.getCompletionDate());
         } else {
-            intern.get().setIsActive(false);
+            intern.get().setActive(false);
             Cancelled cancelledEntry = new Cancelled();
             cancelledEntry.setTableName("InternApplication");
             cancelledEntry.setCancelId(Long.toString(intern.get().getId()));

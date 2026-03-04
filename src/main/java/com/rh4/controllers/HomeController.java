@@ -43,8 +43,8 @@ public class HomeController {
     private InternApplicationRepo internApplicationRepo;
     private EmailSenderService emailService;
 
-    @Value("${app.storage.base-dir}")
-    private String baseDir;
+//    @Value("${app.storage.base-dir}")
+//    private String baseDir;
 
     @Autowired
     private InternService internService;
@@ -118,31 +118,31 @@ public class HomeController {
                                   @RequestParam("completionDate") Date completionDate, HttpSession session) {
 
         try {
-            String storageDir = baseDir + email + "/";
-            File directory = new File(storageDir);
+//            String storageDir = baseDir + email + "/";
+//            File directory = new File(storageDir);
 
             // Create directory if it doesn't exist
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
+//            if (!directory.exists()) {
+//                directory.mkdirs();
+//            }
 
             // Save files to local storage
-            String passportFileName = storageDir + "passportSizeImage.jpg";
-            String icardFileName = storageDir + "collegeIcardImage.jpg";
-            String nocFileName = storageDir + "nocPdf.pdf";
-            String resumeFileName = storageDir + "resumePdf.pdf";
+//            String passportFileName = storageDir + "passportSizeImage.jpg";
+//            String icardFileName = storageDir + "collegeIcardImage.jpg";
+//            String nocFileName = storageDir + "nocPdf.pdf";
+//            String resumeFileName = storageDir + "resumePdf.pdf";
 
-            // Save Passport Size Image
-            Files.write(Paths.get(passportFileName), passportSizeImage.getBytes());
-
-            // Save College Icard Image
-            Files.write(Paths.get(icardFileName), icardImage.getBytes());
-
-            // Save NOC PDF
-            Files.write(Paths.get(nocFileName), nocPdf.getBytes());
-
-            // Save Resume PDF
-            Files.write(Paths.get(resumeFileName), resumePdf.getBytes());
+//            // Save Passport Size Image
+//            Files.write(Paths.get(passportFileName), passportSizeImage.getBytes());
+//
+//            // Save College Icard Image
+//            Files.write(Paths.get(icardFileName), icardImage.getBytes());
+//
+//            // Save NOC PDF
+//            Files.write(Paths.get(nocFileName), nocPdf.getBytes());
+//
+//            // Save Resume PDF
+//            Files.write(Paths.get(resumeFileName), resumePdf.getBytes());
 
             InternApplication internApplication = new InternApplication();
             internApplication.setFirstName(firstName);

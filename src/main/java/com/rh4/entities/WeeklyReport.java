@@ -1,68 +1,61 @@
 package com.rh4.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "weekly_report")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class WeeklyReport {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "weekly_report")
-	private long weeklyReportId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "weekly_report_id")
+	private Long weeklyReportId;
+
+	@ManyToOne
 	@JoinColumn(name = "intern_id")
-	@ManyToOne
 	private Intern intern;
-	
-	@JoinColumn(name = "group_id")
+
 	@ManyToOne
+	@JoinColumn(name = "group_id")
 	private GroupEntity group;
-	
+
+	@Column(name = "report_submitted_date")
 	private Date reportSubmittedDate;
+
+	@Column(name = "deadline")
 	private Date deadline;
-	
+
+	@Column(name = "week_no")
 	private int weekNo;
 
 	@Lob
-	@Column(name = "submitted_pdf", columnDefinition = "LONGBLOB")
-    private byte[] submittedPdf;
-	
+	@Column(name = "submitted_pdf", columnDefinition = "BYTEA")
+	private byte[] submittedPdf;
+
+	@ManyToOne
 	@JoinColumn(name = "guide_id")
-	@ManyToOne
 	private Guide guide;
-	
+
 	@ManyToOne
+	@JoinColumn(name = "replaced_by")
 	private MyUser replacedBy;
-	
+
 	private String status;
 
-	public WeeklyReport() {
-		super();
-	}
-
-	public WeeklyReport(long weeklyReportId, Intern intern, GroupEntity group, Date reportSubmittedDate, Date deadline,
-			int weekNo, byte[] submittedPdf, Guide guide, MyUser replacedBy, String status) {
-		super();
-		this.weeklyReportId = weeklyReportId;
-		this.intern = intern;
-		this.group = group;
-		this.reportSubmittedDate = reportSubmittedDate;
-		this.deadline = deadline;
-		this.weekNo = weekNo;
-		this.submittedPdf = submittedPdf;
-		this.guide = guide;
-		this.replacedBy = replacedBy;
-		this.status = status;
-	}
-
-	public long getWeeklyReportId() {
+	public Long getWeeklyReportId() {
 		return weeklyReportId;
 	}
 
-	public void setWeeklyReportId(long weeklyReportId) {
+	public void setWeeklyReportId(Long weeklyReportId) {
 		this.weeklyReportId = weeklyReportId;
 	}
 
@@ -137,6 +130,4 @@ public class WeeklyReport {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	
 }

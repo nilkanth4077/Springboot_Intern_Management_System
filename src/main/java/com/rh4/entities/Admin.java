@@ -1,71 +1,45 @@
 package com.rh4.entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "admin")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Admin {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "admin_id")
-    private Long adminId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "admin_id")
+	private Long adminId;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "location")
-    private String location;
+	@Column(name = "location")
+	private String location;
 
-    @Column(name = "contact_no" , unique = true)
-    private Long contactNo;
+	// Recommended as String instead of Long
+	@Column(name = "contact_no", unique = true)
+	private String contactNo;
 
-    @Column(name = "email_id", unique = true)
-    private String emailId;
+	@Column(name = "email_id", unique = true)
+	private String emailId;
 
-    @Column(name="password")
-    private String password;
-    
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = true)
-    private Date createdAt;
+	@Column(name = "password")
+	private String password;
 
-    public Admin() {
-		super();
-	}
-
-	
-	public Admin(Long adminId, String name, String location, Long contactNo, String emailId, String password,
-			Date createdAt) {
-		super();
-		this.adminId = adminId;
-		this.name = name;
-		this.location = location;
-		this.contactNo = contactNo;
-		this.emailId = emailId;
-		this.password = password;
-		this.createdAt = createdAt;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	@CreationTimestamp
+	@Column(name = "created_at", updatable = false)
+	private LocalDateTime createdAt;
 
 	public Long getAdminId() {
 		return adminId;
@@ -91,11 +65,11 @@ public class Admin {
 		this.location = location;
 	}
 
-	public Long getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(Long contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 
@@ -107,12 +81,19 @@ public class Admin {
 		this.emailId = emailId;
 	}
 
-	public Date getCreatedAt() {
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-
 }

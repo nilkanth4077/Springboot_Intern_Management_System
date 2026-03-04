@@ -1,39 +1,30 @@
 package com.rh4.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "domain")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Domain {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "domain_id")
-    private long domainId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "domain_id")
+	private Long domainId;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name", nullable = false, unique = true)
+	private String name;
 
-	public Domain() {
-		super();
-	}
-
-	public Domain(long domainId, String name) {
-		super();
-		this.domainId = domainId;
-		this.name = name;
-	}
-
-	public long getDomainId() {
+	public Long getDomainId() {
 		return domainId;
 	}
 
-	public void setDomainId(long domainId) {
+	public void setDomainId(Long domainId) {
 		this.domainId = domainId;
 	}
 
@@ -44,5 +35,4 @@ public class Domain {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 }

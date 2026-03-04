@@ -56,11 +56,11 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/bisag/intern")
 public class InternController {
 
-    @Value("${app.storage.base-dir}")
-    private String baseDir;
-
-    @Value("${app.storage.base-dir2}")
-    private String baseDir2;
+//    @Value("${app.storage.base-dir}")
+//    private String baseDir;
+//
+//    @Value("${app.storage.base-dir2}")
+//    private String baseDir2;
 
     @Autowired
     private InternService internService;
@@ -82,7 +82,7 @@ public class InternController {
     public Intern getSignedInIntern() {
         String username = (String) session.getAttribute("username");
         Intern intern = internService.getInternByUsername(username);
-        if (intern.getIsActive()) {
+        if (intern != null && intern.isActive()) {
             return intern;
         } else {
             return null;
@@ -179,8 +179,8 @@ public class InternController {
         String username = getUsername();
         InternApplication internApplication = internService.getInternApplicationByUsername(username);
         // Add group details to the ModelAndView
-        if (intern.getGroupEntity() != null) {
-            mv.addObject("group", intern.getGroupEntity());
+        if (intern.getGroup() != null) {
+            mv.addObject("group", intern.getGroup());
             List<Intern> interns = internService.getInternsByGroupId(intern.getGroup().getId());
             mv.addObject("interns", interns);
             int internCountGroupWise = interns.size();
@@ -233,8 +233,8 @@ public class InternController {
         ModelAndView mv = new ModelAndView("/intern/project_definition");
         String username = getUsername();
         Intern intern = getSignedInIntern();
-        if (intern.getGroupEntity() != null) {
-            mv.addObject("group", intern.getGroupEntity());
+        if (intern.getGroup() != null) {
+            mv.addObject("group", intern.getGroup());
         } else {
             mv.addObject("group", null); // Handle the case when no group is assigned
         }
@@ -252,16 +252,16 @@ public class InternController {
         Intern intern = getSignedInIntern();
         GroupEntity group = intern.getGroup();
 
-        String storageDir = baseDir2 + group.getGroupId() + "/";
-        File directory = new File(storageDir);
+//        String storageDir = baseDir2 + group.getGroupId() + "/";
+//        File directory = new File(storageDir);
 
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
+//        if (!directory.exists()) {
+//            directory.mkdirs();
+//        }
 
-        String projectDefinitionDocumentFileName = storageDir + "projectDefinitionDocument.pdf";
+//        String projectDefinitionDocumentFileName = storageDir + "projectDefinitionDocument.pdf";
 
-        Files.write(Paths.get(projectDefinitionDocumentFileName), projectDefinitionDocument.getBytes());
+//        Files.write(Paths.get(projectDefinitionDocumentFileName), projectDefinitionDocument.getBytes());
 
         group.setProjectDefinition(projectDefinition);
         group.setDescription(description);
@@ -332,17 +332,17 @@ public class InternController {
         WeeklyReport weeklyReport = new WeeklyReport();
         CurrentWeekNo = currentWeekNo;
 
-        String storageDir = baseDir2 + intern.getGroup().getGroupId() + "/Weekly Reports";
-        String storageDir2 = storageDir + "/" + intern.getGroup().getGroupId() + "_" + "Week" + currentWeekNo;
-        File directory = new File(storageDir);
+//        String storageDir = baseDir2 + intern.getGroup().getGroupId() + "/Weekly Reports";
+//        String storageDir2 = storageDir + "/" + intern.getGroup().getGroupId() + "_" + "Week" + currentWeekNo;
+//        File directory = new File(storageDir);
 
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
+//        if (!directory.exists()) {
+//            directory.mkdirs();
+//        }
 
-        String weeklyReportFileName = storageDir2 + ".pdf";
+//        String weeklyReportFileName = storageDir2 + ".pdf";
 
-        Files.write(Paths.get(weeklyReportFileName), weeklyReportSubmission.getBytes());
+//        Files.write(Paths.get(weeklyReportFileName), weeklyReportSubmission.getBytes());
 
         weeklyReport.setGroup(group);
         weeklyReport.setGuide(group.getGuide());
@@ -413,14 +413,14 @@ public class InternController {
         CurrentWeekNo = weekNo;
         report.setSubmittedPdf(weeklyReportSubmission.getBytes());
 
-        String storageDir = baseDir2 + intern.getGroup().getGroupId() + "/Weekly Reports/" + intern.getGroup().getGroupId() + "_Week" + weekNo + ".pdf";
-        File existingFile = new File(storageDir);
+//        String storageDir = baseDir2 + intern.getGroup().getGroupId() + "/Weekly Reports/" + intern.getGroup().getGroupId() + "_Week" + weekNo + ".pdf";
+//        File existingFile = new File(storageDir);
 
-        if (existingFile.exists()) {
-            existingFile.delete();
-        }
+//        if (existingFile.exists()) {
+//            existingFile.delete();
+//        }
 
-        Files.write(Paths.get(storageDir), weeklyReportSubmission.getBytes());
+//        Files.write(Paths.get(storageDir), weeklyReportSubmission.getBytes());
 
         MyUser user = myUserService.getUserByUsername(intern.getEmail());
         report.setReplacedBy(user);
@@ -462,26 +462,26 @@ public class InternController {
         System.out.println("called sub");
         Intern intern = getSignedInIntern();
 
-        String storageDir = baseDir + intern.getEmail() + "/";
-        File directory = new File(storageDir);
+//        String storageDir = baseDir + intern.getEmail() + "/";
+//        File directory = new File(storageDir);
 
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
+//        if (!directory.exists()) {
+//            directory.mkdirs();
+//        }
 
         // Save files to local storage
-        String registrationFormName = storageDir + "registrationForm.pdf";
-        String securityFormName = storageDir + "securityForm.pdf";
-        String icardFormName = storageDir + "icardForm.pdf";
+//        String registrationFormName = storageDir + "registrationForm.pdf";
+//        String securityFormName = storageDir + "securityForm.pdf";
+//        String icardFormName = storageDir + "icardForm.pdf";
 
-        // Save Passport Size Image
-        Files.write(Paths.get(registrationFormName), registrationForm.getBytes());
-
-        // Save College Icard Image
-        Files.write(Paths.get(securityFormName), securityForm.getBytes());
-
-        // Save NOC PDF
-        Files.write(Paths.get(icardFormName), icardForm.getBytes());
+//        // Save Passport Size Image
+//        Files.write(Paths.get(registrationFormName), registrationForm.getBytes());
+//
+//        // Save College Icard Image
+//        Files.write(Paths.get(securityFormName), securityForm.getBytes());
+//
+//        // Save NOC PDF
+//        Files.write(Paths.get(icardFormName), icardForm.getBytes());
 
         intern.setPermanentAddress(permanentAddress);
         intern.setDateOfBirth(dateOfBirth);
@@ -649,8 +649,8 @@ public class InternController {
         List<Admin> admins = adminService.getAdmin();
         List<Guide> guides = guideService.getGuide();
         Intern intern = getSignedInIntern();
-        if (intern.getGroupEntity() != null) {
-            mv.addObject("group", intern.getGroupEntity());
+        if (intern.getGroup() != null) {
+            mv.addObject("group", intern.getGroup());
         } else {
             mv.addObject("group", null); // Handle the case when no group is assigned
         }
@@ -666,8 +666,8 @@ public class InternController {
         ModelAndView mv = new ModelAndView("/intern/final_report_submission");
         String username = getUsername();
         Intern intern = getSignedInIntern();
-        if (intern.getGroupEntity() != null) {
-            mv.addObject("group", intern.getGroupEntity());
+        if (intern.getGroup() != null) {
+            mv.addObject("group", intern.getGroup());
         } else {
             mv.addObject("group", null);
         }
@@ -689,16 +689,16 @@ public class InternController {
     public String finalReportSubmission(@RequestParam("finalReport") MultipartFile finalReport) throws Exception {
         Intern intern = getSignedInIntern();
         GroupEntity group = intern.getGroup();
-        String storageDir = baseDir + intern.getEmail() + "/";
-        File directory = new File(storageDir);
+//        String storageDir = baseDir + intern.getEmail() + "/";
+//        File directory = new File(storageDir);
 
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
+//        if (!directory.exists()) {
+//            directory.mkdirs();
+//        }
 
-        String finalReportFileName = storageDir + "finalReport.pdf";
+//        String finalReportFileName = storageDir + "finalReport.pdf";
 
-        Files.write(Paths.get(finalReportFileName), finalReport.getBytes());
+//        Files.write(Paths.get(finalReportFileName), finalReport.getBytes());
         group.setFinalReport(finalReport.getBytes());
         group.setFinalReportStatus("gpending");
         groupRepo.save(group);

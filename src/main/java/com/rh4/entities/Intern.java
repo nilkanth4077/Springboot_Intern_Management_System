@@ -1,15 +1,22 @@
 package com.rh4.entities;
 
-
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
+import lombok.*;
 
 @Entity
 @Table(name = "intern")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Intern {
+
     @Id
     @Column(name = "intern_id")
     private String internId;
@@ -32,25 +39,41 @@ public class Intern {
     @Column(name = "branch_name")
     private String branch;
 
+    // ================= FILES (PostgreSQL BYTEA) =================
+
     @Lob
-    @Column(name = "icard_image", columnDefinition = "LONGBLOB")
+    @Column(name = "icard_image")
     private byte[] collegeIcardImage;
 
     @Lob
-    @Column(name = "noc_pdf", columnDefinition = "LONGBLOB")
+    @Column(name = "noc_pdf")
     private byte[] nocPdf;
 
     @Lob
-    @Column(name = "resume_pdf", columnDefinition = "LONGBLOB")
+    @Column(name = "resume_pdf")
     private byte[] resumePdf;
 
     @Lob
-    @Column(name = "passport_size_image", columnDefinition = "LONGBLOB")
+    @Column(name = "passport_size_image")
     private byte[] passportSizeImage;
 
     @Lob
-    @Column(name = "profile_picture", columnDefinition = "LONGBLOB")
+    @Column(name = "profile_picture")
     private byte[] profilePicture;
+
+    @Lob
+    @Column(name = "icard_form")
+    private byte[] icardForm;
+
+    @Lob
+    @Column(name = "registration_form")
+    private byte[] registrationForm;
+
+    @Lob
+    @Column(name = "security_form")
+    private byte[] securityForm;
+
+    // ================= BASIC INFO =================
 
     @Column(name = "semester")
     private int semester;
@@ -62,13 +85,13 @@ public class Intern {
     private String password;
 
     @Column(name = "is_active")
-    private boolean isActive = true;
+    public boolean active = true;
 
     @Column(name = "permanent_address")
     private String permanentAddress;
 
-    @Column(name = "date_of_birth")
     @Past(message = "Birth date must be in the past")
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
     @Column(name = "gender")
@@ -86,9 +109,6 @@ public class Intern {
     @Column(name = "project_definition_name")
     private String projectDefinitionName;
 
-    @ManyToOne
-    private Guide guide;
-
     @Column(name = "joining_date")
     private Date joiningDate;
 
@@ -98,150 +118,48 @@ public class Intern {
     @Column(name = "used_resource", columnDefinition = "TEXT")
     private String usedResource;
 
-    @Column(name = "created_at", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = true)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", nullable = true)
-    private LocalDateTime updatedAt;
-
     @Column(name = "cancellation_status")
     private String cancellationStatus;
 
-    @Lob
-    @Column(name = "icard_form", columnDefinition = "LONGBLOB")
-    private byte[] icardForm;
+    // ================= RELATIONSHIPS =================
 
-    @Lob
-    @Column(name = "registration_form", columnDefinition = "LONGBLOB")
-    private byte[] registrationForm;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guide_id")
+    private Guide guide;
 
-    @Lob
-    @Column(name = "security_form", columnDefinition = "LONGBLOB")
-    private byte[] securityForm;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
     private GroupEntity group;
 
-    public Intern() {
-        super();
+    // ================= AUDIT FIELDS =================
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    public Intern(String firstName, String lastName, String contactNo, String email, String collegeName, Date joiningDate, Date completionDate, String branch, String degree, String password, byte[] collegeIcardImage, byte[] nocPdf, byte[] resumePdf, byte[] passportSizeImage, int semester, String domain, GroupEntity group) {
     }
 
-    public Intern(String internId, String firstName, String lastName, String contactNo, String email,
-                  String collegeName, String branch, byte[] collegeIcardImage, byte[] nocPdf, byte[] resumePdf, int semester,
-                  String permanentAddress, Date dateOfBirth, String gender, String collegeGuideHodName, String degree, Double aggregatePercentage, String projectDefinitionName, String cancellationStatus,
-                  Guide guide, String domain, Date joiningDate, Date completionDate, String password, byte[] icardForm, byte[] registrationForm, byte[] securityForm,
-                  String usedResource, LocalDateTime createdAt, LocalDateTime updatedAt, GroupEntity group, boolean isActive) {
-        super();
+    // ================= LIFECYCLE =================
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getInternId() {
+        return internId;
+    }
+
+    public void setInternId(String internId) {
         this.internId = internId;
-        this.firstName = firstName;
-        this.isActive = isActive;
-        this.lastName = lastName;
-        this.contactNo = contactNo;
-        this.email = email;
-        this.collegeName = collegeName;
-        this.branch = branch;
-        this.collegeIcardImage = collegeIcardImage;
-        this.nocPdf = nocPdf;
-        this.resumePdf = resumePdf;
-        this.semester = semester;
-        this.permanentAddress = permanentAddress;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.password = password;
-        this.collegeGuideHodName = collegeGuideHodName;
-        this.degree = degree;
-        this.aggregatePercentage = aggregatePercentage;
-        this.projectDefinitionName = projectDefinitionName;
-        this.guide = guide;
-        this.securityForm = securityForm;
-        this.icardForm = icardForm;
-        this.registrationForm = registrationForm;
-        this.domain = domain;
-        this.joiningDate = joiningDate;
-        this.completionDate = completionDate;
-        this.usedResource = usedResource;
-        this.cancellationStatus = cancellationStatus;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.group = group;
-    }
-
-    public Intern(String firstName, String lastName, String contactNo, String email, String collegeName, Date joiningDate, Date completionDate,
-                  String branch, String degree, String password, byte[] collegeIcardImage, byte[] nocPdf, byte[] resumePdf, byte[] passportSizeImage, int semester, String domain, GroupEntity group) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.contactNo = contactNo;
-        this.email = email;
-        this.collegeName = collegeName;
-        this.joiningDate = joiningDate;
-        this.completionDate = completionDate;
-        this.branch = branch;
-        this.degree = degree;
-        this.collegeIcardImage = collegeIcardImage;
-        this.nocPdf = nocPdf;
-        this.resumePdf = resumePdf;
-        this.passportSizeImage = passportSizeImage;
-        this.semester = semester;
-        this.password = password;
-        this.domain = domain;
-        this.group = group;
-    }
-
-    public byte[] getPassportSizeImage() {
-        return passportSizeImage;
-    }
-
-    public void setPassportSizeImage(byte[] passportSizeImage) {
-        this.passportSizeImage = passportSizeImage;
-    }
-
-    public byte[] getIcardForm() {
-        return icardForm;
-    }
-
-    public void setIcardForm(byte[] icardForm) {
-        this.icardForm = icardForm;
-    }
-
-    public byte[] getRegistrationForm() {
-        return registrationForm;
-    }
-
-    public boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public void setRegistrationForm(byte[] registrationForm) {
-        this.registrationForm = registrationForm;
-    }
-
-    public byte[] getSecurityForm() {
-        return securityForm;
-    }
-
-    public void setSecurityForm(byte[] securityForm) {
-        this.securityForm = securityForm;
-    }
-
-    public String getCancellationStatus() {
-        return cancellationStatus;
-    }
-
-    public void setCancellationStatus(String cancellationStatus) {
-        this.cancellationStatus = cancellationStatus;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -260,12 +178,28 @@ public class Intern {
         this.lastName = lastName;
     }
 
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
     }
 
     public String getBranch() {
@@ -300,6 +234,46 @@ public class Intern {
         this.resumePdf = resumePdf;
     }
 
+    public byte[] getPassportSizeImage() {
+        return passportSizeImage;
+    }
+
+    public void setPassportSizeImage(byte[] passportSizeImage) {
+        this.passportSizeImage = passportSizeImage;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public byte[] getIcardForm() {
+        return icardForm;
+    }
+
+    public void setIcardForm(byte[] icardForm) {
+        this.icardForm = icardForm;
+    }
+
+    public byte[] getRegistrationForm() {
+        return registrationForm;
+    }
+
+    public void setRegistrationForm(byte[] registrationForm) {
+        this.registrationForm = registrationForm;
+    }
+
+    public byte[] getSecurityForm() {
+        return securityForm;
+    }
+
+    public void setSecurityForm(byte[] securityForm) {
+        this.securityForm = securityForm;
+    }
+
     public int getSemester() {
         return semester;
     }
@@ -308,14 +282,29 @@ public class Intern {
         this.semester = semester;
     }
 
-    public String getInternId() {
-        return internId;
+    public String getDomain() {
+        return domain;
     }
 
-    public void setInternId(String internId) {
-        this.internId = internId;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public String getPermanentAddress() {
         return permanentAddress;
@@ -339,22 +328,6 @@ public class Intern {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getContactNo() {
-        return contactNo;
-    }
-
-    public void setContactNo(String contactNo) {
-        this.contactNo = contactNo;
-    }
-
-    public String getCollegeName() {
-        return collegeName;
-    }
-
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
     }
 
     public String getCollegeGuideHodName() {
@@ -389,22 +362,6 @@ public class Intern {
         this.projectDefinitionName = projectDefinitionName;
     }
 
-    public Guide getGuide() {
-        return guide;
-    }
-
-    public void setGuide(Guide guide) {
-        this.guide = guide;
-    }
-
-    public String getDomain() {
-        return domain;
-    }
-
-    public void setDomain(String domain) {
-        this.domain = domain;
-    }
-
     public Date getJoiningDate() {
         return joiningDate;
     }
@@ -429,12 +386,20 @@ public class Intern {
         this.usedResource = usedResource;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public String getCancellationStatus() {
+        return cancellationStatus;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCancellationStatus(String cancellationStatus) {
+        this.cancellationStatus = cancellationStatus;
+    }
+
+    public Guide getGuide() {
+        return guide;
+    }
+
+    public void setGuide(Guide guide) {
+        this.guide = guide;
     }
 
     public GroupEntity getGroup() {
@@ -445,28 +410,19 @@ public class Intern {
         this.group = group;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public byte[] getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(byte[] profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-
-    public Object getGroupEntity() {
-        return group;
     }
 }

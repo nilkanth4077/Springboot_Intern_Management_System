@@ -1,46 +1,33 @@
 package com.rh4.entities;
-import java.util.Date;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "cancelled")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Cancelled {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-	@Column(name = "table_name")
-    private String tableName;
+	@Column(name = "table_name", nullable = false)
+	private String tableName;
 
-	@Column(name = "cancel_id")
+	@Column(name = "cancel_id", nullable = false)
 	private String cancelId;
 
-	public Cancelled() {
-		super();
-	}
-
-	public Cancelled(long id, String tableName, String cancelId) {
-		super();
-		this.id = id;
-		this.tableName = tableName;
-		this.cancelId = cancelId;
-	}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -59,6 +46,4 @@ public class Cancelled {
 	public void setCancelId(String cancelId) {
 		this.cancelId = cancelId;
 	}
-	
-	
 }

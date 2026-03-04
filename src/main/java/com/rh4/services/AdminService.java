@@ -109,7 +109,7 @@ public class AdminService {
 			if ("approve".equals(cancelAns)) {
 				// Handle approval
 				intern.setCancellationStatus("cancelled");
-				intern.setIsActive(false);
+				intern.setActive(false);
 				// Save the intern to the cancelled table
 				Cancelled cancelledEntry = new Cancelled();
 				cancelledEntry.setTableName("intern");
