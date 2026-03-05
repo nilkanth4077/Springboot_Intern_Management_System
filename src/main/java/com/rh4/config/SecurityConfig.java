@@ -1,5 +1,6 @@
 package com.rh4.config;
 
+import com.rh4.enums.Role;
 import com.rh4.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,10 +27,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/speciality/**", "/zoom/**").permitAll()
-                        .requestMatchers("/user/**").hasRole("USER")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/super_admin/**").hasRole("SUPERADMIN")
-                        .requestMatchers("/get/**", "/slot/**", "/send/**", "/update/user").hasAnyRole("USER", "ADMIN", "DOCTOR")
+                        .requestMatchers("/user/**").hasRole(Role.INTERN.toString())
+                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.toString())
+                        .requestMatchers("/super_admin/**").hasRole(Role.SUPERADMIN.toString())
+                        .requestMatchers("/get/**", "/slot/**", "/send/**", "/update/user").hasAnyRole(Role.INTERN.toString(), Role.ADMIN.toString(), Role.GUIDE.toString())
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

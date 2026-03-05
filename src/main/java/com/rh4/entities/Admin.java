@@ -37,6 +37,10 @@ public class Admin {
 	@Column(name = "password")
 	private String password;
 
+	@OneToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	private MyUser user;
+
 	@CreationTimestamp
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;

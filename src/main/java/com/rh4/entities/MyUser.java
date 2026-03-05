@@ -1,5 +1,6 @@
 package com.rh4.entities;
 
+import com.rh4.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,9 @@ public class MyUser {
 
 	@Column(nullable = false)
 	private boolean enabled;
+
+	@OneToOne(mappedBy = "user")
+	private Admin admin;
 
 	public Long getUserId() {
 		return userId;
@@ -59,6 +63,14 @@ public class MyUser {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 
 	public boolean isEnabled() {

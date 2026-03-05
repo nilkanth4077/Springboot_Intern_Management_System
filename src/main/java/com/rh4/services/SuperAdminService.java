@@ -3,6 +3,7 @@ package com.rh4.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.rh4.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

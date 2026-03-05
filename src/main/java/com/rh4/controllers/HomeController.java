@@ -1,6 +1,7 @@
 package com.rh4.controllers;
 
 import com.rh4.dto.LoginRequest;
+import com.rh4.enums.Role;
 import com.rh4.repositories.*;
 import com.rh4.services.EmailSenderService;
 import com.rh4.services.FieldService;
@@ -123,7 +124,7 @@ public class HomeController {
             user.setPassword(passwordEncoder().encode(password));
             user.setEnabled(true);
 //            user.setUserId(Long.toString(internApplication.getId()));
-            user.setRole("UNDERPROCESSINTERN");
+            user.setRole("INTERN");
             userRepo.save(user);
 
             // Send Email

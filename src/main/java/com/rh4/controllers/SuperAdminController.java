@@ -56,32 +56,6 @@ public class SuperAdminController {
 
         adminService.registerAdmin(admin);
 
-//        emailService.sendSimpleEmail(
-//                admin.getEmailId(),
-//                "Notification: Appointment as Administrator\r\n" +
-//                        "\r\n" +
-//                        "Dear " + admin.getName() + "\r\n" +
-//                        "\r\n" +
-//                        "I trust this email finds you well. We are pleased to inform you that you have been appointed as an administrator within our organization, effective immediately. Your dedication and contributions to the team have not gone unnoticed, and we believe that your new role will bring added value to our operations.\r\n" +
-//                        "\r\n" +
-//                        "As an administrator, you now hold a position of responsibility within the organization. We trust that you will approach your duties with diligence, professionalism, and a commitment to upholding the values of our organization.\r\n" +
-//                        "\r\n" +
-//                        "It is imperative to recognize the importance of your role and the impact it may have on the functioning of our team. We have confidence in your ability to handle the responsibilities that come with this position and to contribute positively to the continued success of our organization.\r\n" +
-//                        "\r\n" +
-//                        "We would like to emphasize the importance of maintaining the highest standards of integrity and ethics in your role. It is expected that you will use your administrative privileges responsibly and refrain from any misuse.\r\n" +
-//                        "\r\n" +
-//                        "Should you have any questions or require further clarification regarding your new responsibilities, please do not hesitate to reach out to [Contact Person/Department].\r\n" +
-//                        "\r\n" +
-//                        "Once again, congratulations on your appointment as an administrator. We look forward to your continued contributions and success in this elevated role.\r\n" +
-//                        "\r\n" +
-//                        "Best regards,\r\n" +
-//                        "\r\n" +
-//                        "Your Colleague,\r\n" +
-//                        "Administrator\r\n" +
-//                        "1231231231",
-//                "BISAG ADMINISTRATIVE OFFICE"
-//        );
-
         return ResponseEntity.ok().body("Admin registered successfully");
     }
 

@@ -3,7 +3,10 @@ package com.rh4.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.rh4.dto.StandardDTO;
+import com.rh4.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,23 +32,21 @@ public class AdminService {
 		return new BCryptPasswordEncoder();
 	}
 
-	public void registerAdmin(Admin admin) {
-		// save to admin table
+	public StandardDTO<String> registerAdmin(Admin admin) {
+
 		String encryptedPassword = passwordEncoder().encode(admin.getPassword());
-		admin.setPassword(encryptedPassword);
-		adminRepo.save(admin);
-		// save to user table
+
 		MyUser user = new MyUser();
 		user.setEmail(admin.getEmailId());
-		// encrypt password
 		user.setPassword(encryptedPassword);
 		user.setRole("ADMIN");
 		user.setEnabled(true);
-		// from long to string
-		String userId = Long.toString(admin.getAdminId());
-//		user.setUserId(userId);
 		userRepo.save(user);
-//		System.out.println(user.getId());
+
+		admin.setPassword(encryptedPassword);
+		adminRepo.save(admin);
+
+		return new StandardDTO<>(HttpStatus.OK.value(), "Admin created successfully", null, null);
 	}
 
 	public List<Admin> getAdmin() {

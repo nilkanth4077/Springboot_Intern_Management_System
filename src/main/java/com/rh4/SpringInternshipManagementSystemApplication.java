@@ -71,7 +71,7 @@ public class SpringInternshipManagementSystemApplication {
 				user.setPassword(passwordEncoder.encode("IMS@123"));
 				user.setEnabled(true);
 				user.setRole("SUPERADMIN");
-//				user.setUserId(Long.toString(s1.getSuperAdminId()));
+				user.setUserId(s1.getSuperAdminId());
 
 				userRepo.save(user);
 
