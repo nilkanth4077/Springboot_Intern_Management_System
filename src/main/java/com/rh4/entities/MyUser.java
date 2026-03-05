@@ -14,10 +14,11 @@ public class MyUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "user_id")
+	private Long userId;
 
 	@Column(unique = true, nullable = false)
-	private String username;
+	private String email;
 
 	@Column(nullable = false)
 	private String password;
@@ -28,23 +29,20 @@ public class MyUser {
 	@Column(nullable = false)
 	private boolean enabled;
 
-	@Column(name = "userId", unique = true)
-	private String userId;
-
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -69,13 +67,5 @@ public class MyUser {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 }

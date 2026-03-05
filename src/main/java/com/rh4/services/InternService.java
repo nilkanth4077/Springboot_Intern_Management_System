@@ -76,14 +76,14 @@ public class InternService {
 		String role = "UNDERPROCESSINTERN";
 		userRepo.deleteByUsername(email, role);
 		MyUser user = new MyUser();
-		user.setUsername(intern.getEmail());
+		user.setEmail(intern.getEmail());
 		//encrypt password
 		user.setPassword(encryptedPassword);
 		user.setRole("INTERN");
 		user.setEnabled(true);
 		//from long to string
-		String userId = intern.getInternId();
-		user.setUserId(userId);
+//		Long userId = intern.getInternId();
+//		user.setUserId(userId);
 		userRepo.save(user);
 	}
 
@@ -116,7 +116,7 @@ public class InternService {
 
 	public void cancelInternApplication(Optional<InternApplication> intern) {
 		
-		intern.get().setIsActive(false);
+		intern.get().setActive(false);
 		cancelled.setCancelId(Long.toString(intern.get().getId()));
 		cancelled.setTableName("internapplication");
 		cancelledRepo.save(cancelled);

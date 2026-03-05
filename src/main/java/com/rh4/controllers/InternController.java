@@ -53,7 +53,7 @@ import com.rh4.services.WeeklyReportService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/bisag/intern")
+@RequestMapping("/intern")
 public class InternController {
 
 //    @Value("${app.storage.base-dir}")
@@ -376,14 +376,14 @@ public class InternController {
         Intern inetrn = getSignedInIntern();
         GroupEntity group = inetrn.getGroup();
         WeeklyReport report = weeklyReportService.getReportByWeekNoAndGroupId(weekNo, group);
-        MyUser user = myUserService.getUserByUsername(report.getReplacedBy().getUsername());
+        MyUser user = myUserService.getUserByUsername(report.getReplacedBy().getEmail());
         if (user.getRole().equals("GUIDE")) {
-            Guide guide = guideService.getGuideByUsername(user.getUsername());
+            Guide guide = guideService.getGuideByUsername(user.getEmail());
             String status = "Your Current Weekly report is required some modifications given by guide. Please check it out.";
             mv.addObject("status", status);
             mv.addObject("replacedBy", guide.getName());
         } else if (user.getRole().equals("INTERN")) {
-            Intern intern = internService.getInternByUsername(user.getUsername());
+            Intern intern = internService.getInternByUsername(user.getEmail());
             mv.addObject("replacedBy", intern.getFirstName() + " " + intern.getLastName());
             mv.addObject("status",
                     "Your current weekly report is accepted and if any changes are required then you will be notified.");

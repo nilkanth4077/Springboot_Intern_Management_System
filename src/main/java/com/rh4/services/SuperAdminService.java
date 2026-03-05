@@ -32,14 +32,14 @@ public class SuperAdminService {
 		superAdminRepo.save(superAdmin);		
 		//save to user table
 		MyUser user = new MyUser();
-		user.setUsername(superAdmin.getEmailId());
+		user.setEmail(superAdmin.getEmailId());
 		//encrypt password
 		user.setPassword(encryptedPassword);
 		user.setRole("ADMIN");
 		user.setEnabled(true);
 		//from long to string
 		String userId = Long.toString(superAdmin.getSuperAdminId());
-		user.setUserId(userId);
+//		user.setUserId(userId);
 		userRepo.save(user);
 	}
 

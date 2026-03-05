@@ -40,7 +40,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Path;
 
 @Controller
-@RequestMapping("/bisag/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -915,7 +915,7 @@ public class AdminController {
             intern.get().setContactNo(internApplication.getContactNo());
 
             MyUser user = myUserService.getUserByUsername(intern.get().getEmail());
-            user.setUsername(internApplication.getEmail());
+            user.setEmail(internApplication.getEmail());
             userRepo.save(user);
 
             intern.get().setEmail(internApplication.getEmail());
@@ -959,7 +959,7 @@ public class AdminController {
             intern.get().setContactNo(internApplication.getContactNo());
 
             MyUser user = myUserService.getUserByUsername(intern.get().getEmail());
-            user.setUsername(internApplication.getEmail());
+            user.setEmail(internApplication.getEmail());
             userRepo.save(user);
 
             InternApplication internA = internService.getInternApplicationByUsername(intern.get().getEmail());
@@ -1469,7 +1469,7 @@ public class AdminController {
             mv.addObject("replacedBy", name);
 
         } else if (user.getRole().equals("INTERN")) {
-            Intern intern = internService.getInternByUsername(user.getUsername());
+            Intern intern = internService.getInternByUsername(user.getEmail());
             mv.addObject("replacedBy", intern.getFirstName() + intern.getLastName());
         } else {
         }

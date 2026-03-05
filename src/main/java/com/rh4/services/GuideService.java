@@ -37,16 +37,16 @@ public class GuideService {
 		guideRepo.save(guide);		
 		//save to user table
 		MyUser user = new MyUser();
-		user.setUsername(guide.getEmailId());
+		user.setEmail(guide.getEmailId());
 		//encrypt password
 		user.setPassword(encryptedPassword);
 		user.setRole("GUIDE");
 		user.setEnabled(true);
 		//from long to string
 		String userId = Long.toString(guide.getGuideId());
-		user.setUserId(userId);
+//		user.setUserId(userId);
 		userRepo.save(user);
-		System.out.println(user.getId());
+//		System.out.println(user.getId());
 	}
 
 	public List<Guide> getGuide() {

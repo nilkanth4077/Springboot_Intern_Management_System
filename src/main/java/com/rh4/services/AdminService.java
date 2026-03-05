@@ -36,16 +36,16 @@ public class AdminService {
 		adminRepo.save(admin);
 		// save to user table
 		MyUser user = new MyUser();
-		user.setUsername(admin.getEmailId());
+		user.setEmail(admin.getEmailId());
 		// encrypt password
 		user.setPassword(encryptedPassword);
 		user.setRole("ADMIN");
 		user.setEnabled(true);
 		// from long to string
 		String userId = Long.toString(admin.getAdminId());
-		user.setUserId(userId);
+//		user.setUserId(userId);
 		userRepo.save(user);
-		System.out.println(user.getId());
+//		System.out.println(user.getId());
 	}
 
 	public List<Admin> getAdmin() {

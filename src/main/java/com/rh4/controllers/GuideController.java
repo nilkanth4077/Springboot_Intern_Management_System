@@ -39,7 +39,7 @@ import com.rh4.services.WeeklyReportService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/bisag/guide")
+@RequestMapping("/guide")
 public class GuideController {
 
     @Autowired
@@ -221,7 +221,7 @@ public class GuideController {
             mv.addObject("replacedBy", name);
 
         } else if (user.getRole().equals("INTERN")) {
-            Intern intern = internService.getInternByUsername(user.getUsername());
+            Intern intern = internService.getInternByUsername(user.getEmail());
             mv.addObject("replacedBy", intern.getFirstName() + intern.getLastName());
         } else {
         }
